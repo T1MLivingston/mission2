@@ -12,8 +12,8 @@ and the image-export library.
 | --- | --- |
 | **01 Start here** | Five step cards, the "done means" chips, and the standards table |
 | **02 Build** | Bot name, Student 1–4, and who uploads — then spend a 20-point budget across five color-coded specs, each with its own chief |
-| **03 File types** | JPEG / PNG / PDF compared, what Google Drive is, states of data, then an 8-question pop-up test |
-| **04 Indexing** | Four lesson cards, the live **Index Lab** (the list is the bot roster: `crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]`), a **Slicing lab** with start/stop steppers, a **Data types** reference (int, float, str, bool, list), then a 12-question pop-up test |
+| **03 File types** | JPEG / PNG / PDF compared, what Google Drive is, states of data |
+| **04 Indexing** | Four lesson cards, the live **Index Lab** (the list is the bot roster: `crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]`), a **Slicing lab** with start/stop steppers, and a **Data types** reference (int, float, str, bool, list) |
 | **05 Turn it in** | The generated report, PDF/PNG/JPEG export, the exact folder and file names, and two sets of directions — one for every student, one for the organizer |
 
 The header carries the whole team identity: the chassis on the left under **Team leader** with ‹ › arrows to
@@ -63,6 +63,10 @@ details are filled in (1), all five parts are picked (2), every file-types quest
 indexing question is answered (4), and the report exists with all of Mission Check ticked (5). One definition,
 `stageDone()`, drives all of it.
 
+Both pop-up tests live in one **Extra points** round at the very bottom, under the upload directions, with a
+running total of points earned. Keeping them together — and last — means the page reads as *learn, then turn
+it in, then earn extra* rather than scattering the scoring through the lesson.
+
 **Mission Check** — the end-of-class checklist — lives behind the ✓ button in the sticky rail, not on the page,
 so the page itself stays uncluttered. It saves per device, and splits into "everyone" and "organizer only".
 
@@ -109,7 +113,9 @@ Everything a teacher would want to change sits in named arrays at the top of the
 - `CREW` — the five bots used in the indexing lesson and lab
 - `CHIEFS` — which chassis hosts each spec box
 - `DEFAULT_COLOR` — the starting team color, `#FAE74C`
-- `--g1` … `--g5` — the grey spectrum, light to dark, that runs the five spec boxes and the five steps
+- `--g1` … `--g5` — the grey spectrum, light to dark, that runs the five spec boxes
+- `--num-bg` / `--num-fg` / `--stroke` — the orange-on-blue number chips and the black outline they share
+  with the color plates
 - `FILE_VAULT` — the easter-egg file type reference
 - `STANDARDS` — five benchmarks from the 6th Grade Computer Science Standards Map, tagged by stage;
   they show as chips under each stage heading and print on the student's report. Deliberately five, not
