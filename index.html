@@ -33,11 +33,16 @@
   --btn-fg:#FFF8EC;
   --grid:rgba(10,28,38,.055);
   --shadow:0 1px 0 rgba(10,28,38,.04), 0 14px 34px -24px rgba(10,28,38,.55);
-  --c-mem:#6A45C0; --c-mem-s:rgba(106,69,192,.12);
-  --c-sty:#0B6F68; --c-sty-s:rgba(11,111,104,.12);
-  --c-cap:#186896; --c-cap-s:rgba(24,104,150,.12);
-  --c-por:#2C7A45; --c-por-s:rgba(44,122,69,.12);
-  --c-spc:#A2356E; --c-spc-s:rgba(162,53,110,.12);
+  --g1:#71808A; --g1-s:rgba(113,128,138,.10);
+  --g2:#5B6A75; --g2-s:rgba(91,106,117,.10);
+  --g3:#465561; --g3-s:rgba(70,85,97,.10);
+  --g4:#32414C; --g4-s:rgba(50,65,76,.10);
+  --g5:#1E2C36; --g5-s:rgba(30,44,54,.10);
+  --c-mem:var(--g1); --c-mem-s:var(--g1-s);
+  --c-sty:var(--g2); --c-sty-s:var(--g2-s);
+  --c-cap:var(--g3); --c-cap-s:var(--g3-s);
+  --c-por:var(--g4); --c-por-s:var(--g4-s);
+  --c-spc:var(--g5); --c-spc-s:var(--g5-s);
   --sea-1:#BBD0DC; --sea-2:#8FB2C6; --sea-3:#5E8AA6; --sea-ray:#31556C;
   --step:clamp(14px,1.6vw,18px);
 }
@@ -63,17 +68,27 @@
     --btn-fg:#0A1C26;
     --grid:rgba(96,196,196,.05);
     --shadow:0 1px 0 rgba(0,0,0,.2), 0 18px 40px -26px #000;
-  --c-mem:#B7A2FF; --c-mem-s:rgba(183,162,255,.15);
-  --c-sty:#4FD1C5; --c-sty-s:rgba(79,209,197,.15);
-  --c-cap:#6FBFEC; --c-cap-s:rgba(111,191,236,.15);
-  --c-por:#7BD494; --c-por-s:rgba(123,212,148,.15);
-  --c-spc:#F293C4; --c-spc-s:rgba(242,147,196,.15);
+  --g1:#E7EEF3; --g1-s:rgba(231,238,243,.13);
+  --g2:#CBD9E2; --g2-s:rgba(203,217,226,.12);
+  --g3:#AEC2CE; --g3-s:rgba(174,194,206,.12);
+  --g4:#93AAB9; --g4-s:rgba(147,170,185,.12);
+  --g5:#7A93A4; --g5-s:rgba(122,147,164,.12);
+  --c-mem:var(--g1); --c-mem-s:var(--g1-s);
+  --c-sty:var(--g2); --c-sty-s:var(--g2-s);
+  --c-cap:var(--g3); --c-cap-s:var(--g3-s);
+  --c-por:var(--g4); --c-por-s:var(--g4-s);
+  --c-spc:var(--g5); --c-spc-s:var(--g5-s);
   --sea-1:#0D2331; --sea-2:#123246; --sea-3:#1A4459; --sea-ray:#38708C;
-    --c-mem:#B7A2FF; --c-mem-s:rgba(183,162,255,.15);
-    --c-sty:#4FD1C5; --c-sty-s:rgba(79,209,197,.15);
-    --c-cap:#6FBFEC; --c-cap-s:rgba(111,191,236,.15);
-    --c-por:#7BD494; --c-por-s:rgba(123,212,148,.15);
-    --c-spc:#F293C4; --c-spc-s:rgba(242,147,196,.15);
+    --g1:#E7EEF3; --g1-s:rgba(231,238,243,.13);
+    --g2:#CBD9E2; --g2-s:rgba(203,217,226,.12);
+    --g3:#AEC2CE; --g3-s:rgba(174,194,206,.12);
+    --g4:#93AAB9; --g4-s:rgba(147,170,185,.12);
+    --g5:#7A93A4; --g5-s:rgba(122,147,164,.12);
+    --c-mem:var(--g1); --c-mem-s:var(--g1-s);
+    --c-sty:var(--g2); --c-sty-s:var(--g2-s);
+    --c-cap:var(--g3); --c-cap-s:var(--g3-s);
+    --c-por:var(--g4); --c-por-s:var(--g4-s);
+    --c-spc:var(--g5); --c-spc-s:var(--g5-s);
     --sea-1:#0D2331; --sea-2:#123246; --sea-3:#1A4459; --sea-ray:#38708C;
   }
 }
@@ -184,15 +199,17 @@ p:last-child{margin-bottom:0;}
 .botnav .name small{display:block;font-size:10px;letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase;font-weight:400;}
 
 /* stage + category colour chunks */
-.stage{--stage-c:var(--amber);}
-.stage[data-c="sty"]{--stage-c:var(--c-sty);}
-.stage[data-c="mem"]{--stage-c:var(--c-mem);}
-.stage[data-c="cap"]{--stage-c:var(--c-cap);}
-.stage[data-c="por"]{--stage-c:var(--c-por);}
-.rail-nav a[data-c="sty"] i{color:var(--c-sty);}
-.rail-nav a[data-c="mem"] i{color:var(--c-mem);}
-.rail-nav a[data-c="cap"] i{color:var(--c-cap);}
-.rail-nav a[data-c="por"] i{color:var(--c-por);}
+.stage{--stage-c:var(--g1);}
+.stage[data-c="g1"]{--stage-c:var(--g1);}
+.stage[data-c="g2"]{--stage-c:var(--g2);}
+.stage[data-c="g3"]{--stage-c:var(--g3);}
+.stage[data-c="g4"]{--stage-c:var(--g4);}
+.stage[data-c="g5"]{--stage-c:var(--g5);}
+.rail-nav a[data-c="g1"] i{color:var(--g1);}
+.rail-nav a[data-c="g2"] i{color:var(--g2);}
+.rail-nav a[data-c="g3"] i{color:var(--g3);}
+.rail-nav a[data-c="g4"] i{color:var(--g4);}
+.rail-nav a[data-c="g5"] i{color:var(--g5);}
 .rail-btn{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;cursor:pointer;display:flex;gap:7px;align-items:center;white-space:nowrap;}
 .rail-btn:hover{border-color:var(--c-por);color:var(--c-por);}
 .rail-btn.theme:hover{border-color:var(--amber);color:var(--amber);}
@@ -261,13 +278,12 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
 .stage + .stage{border-top:1px dashed var(--rule);}
 .stage-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:26px;}
 .marker{
-  font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#fff;background:var(--stage-c,var(--amber));
-  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--stage-c,var(--g1));border:1px solid currentColor;border-radius:5px;padding:7px 11px;
+  white-space:nowrap;flex:none;margin-top:4px;
 }
-.stage .eyebrow{color:var(--stage-c,var(--teal));}
-.marker.done::after{content:"✓";}
-.marker.done{font-size:0;}
-.marker.done::after{font-size:16px;}
+.marker.done::after{content:" \2713";}
+.stage .eyebrow{color:var(--stage-c,var(--g1));}
 .stage-head h2{font-size:clamp(24px,3vw,34px);line-height:1.1;margin-bottom:6px;}
 .stage-head .eyebrow{margin-bottom:6px;}
 
@@ -475,6 +491,7 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
 .ftype .good{color:var(--teal);font-weight:600;}
 .ftype .bad{color:var(--flare);font-weight:600;}
 .swatch{height:74px;border-radius:6px;border:1px solid var(--rule);overflow:hidden;position:relative;background:var(--panel);}
+.swatch.photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:7px;}
 table.cmp{border-collapse:collapse;width:100%;min-width:520px;font-size:14px;}
 table.cmp th,table.cmp td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--rule-soft);}
@@ -572,6 +589,11 @@ table.cmp td:first-child{font-family:'IBM Plex Mono',monospace;font-size:13px;}
 .checklist{display:grid;gap:8px;margin:0;padding:0;list-style:none;}
 .checklist li{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--rule);border-radius:6px;background:var(--panel-2);padding:11px 14px;font-size:14.5px;cursor:pointer;}
 .checklist li:hover{border-color:var(--amber);}
+.checklist li.head{
+  border:none;background:none;padding:14px 0 2px;cursor:default;font-family:'IBM Plex Mono',monospace;
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);
+}
+.checklist li.head:hover{border:none;}
 .checklist li.on{border-color:var(--teal);background:var(--teal-soft);}
 .box{
   width:19px;height:19px;border:1.5px solid var(--rule);border-radius:4px;flex:none;margin-top:2px;
@@ -687,12 +709,12 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 .bot .cap{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-2);letter-spacing:.05em;}
 .bot.on .cap{color:var(--amber);}
 .crew{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:12px;}
-.seat{border:1px solid var(--rule);border-left:4px solid var(--c-cap);border-radius:8px;background:var(--panel-2);padding:11px 13px;}
+.seat{border:1px solid var(--rule);border-left:4px solid var(--g3);border-radius:8px;background:var(--panel-2);padding:11px 13px;}
 .seat span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;}
 .seat input{width:100%;background:var(--panel);border:1px solid var(--rule);color:var(--ink);border-radius:5px;padding:9px 11px;font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;}
-.seat input:focus{outline:2px solid var(--c-cap);outline-offset:1px;}
+.seat input:focus{outline:2px solid var(--amber);outline-offset:1px;}
 .rcrew{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin-bottom:20px;}
-.rseat{border:1px solid var(--rule);border-left:4px solid var(--c-cap);border-radius:7px;background:var(--panel-2);padding:9px 12px;}
+.rseat{border:1px solid var(--rule);border-left:4px solid var(--g3);border-radius:7px;background:var(--panel-2);padding:9px 12px;}
 .rseat .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);}
 .rseat .v{font-size:14.5px;font-weight:600;}
 .portrait{display:flex;gap:18px;align-items:center;margin-bottom:18px;}
@@ -797,11 +819,11 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 <nav class="rail" aria-label="Mission stages">
   <div class="rail-in">
     <div class="rail-nav" id="railNav">
-      <a href="#briefing" data-stage="briefing" data-c="sty"><i>01</i>Start Here</a>
-      <a href="#build" data-stage="build" data-c="amb"><i>02</i>Build</a>
-      <a href="#files" data-stage="files" data-c="cap"><i>03</i>File Types</a>
-      <a href="#indexing" data-stage="indexing" data-c="mem"><i>04</i>Indexing</a>
-      <a href="#submit" data-stage="submit" data-c="por"><i>05</i>Turn It In</a>
+      <a href="#briefing" data-stage="briefing" data-c="g1"><i>01</i>Start Here</a>
+      <a href="#build" data-stage="build" data-c="g2"><i>02</i>Build</a>
+      <a href="#files" data-stage="files" data-c="g3"><i>03</i>File Types</a>
+      <a href="#indexing" data-stage="indexing" data-c="g4"><i>04</i>Indexing</a>
+      <a href="#submit" data-stage="submit" data-c="g5"><i>05</i>Turn It In</a>
     </div>
     <div class="rail-score">
       <span class="readout" title="Extra build points from the two checks">POINTS <b id="railCredits">+0</b>/8</span>
@@ -814,9 +836,9 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 <main>
 
 <!-- ========================= 01 START HERE ========================= -->
-<section class="stage" id="briefing" data-c="sty">
+<section class="stage" id="briefing" data-c="g1">
   <div class="stage-head">
-    <span class="marker" data-marker="briefing">01</span>
+    <span class="marker" data-marker="briefing">Step 1</span>
     <div>
       <p class="eyebrow">Start here</p>
       <h2>Five steps. One file at the end.</h2>
@@ -824,23 +846,23 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
   </div>
 
   <div class="steps-strip" style="margin-bottom:20px;">
-    <div class="step-card" style="--sc:var(--amber);">
+    <div class="step-card" style="--sc:var(--g1);">
       <span class="n">STEP 1</span><h4>Name your team</h4>
       <p>Team, bot, and who is Student 1 through 4.</p>
     </div>
-    <div class="step-card" style="--sc:var(--amber);">
+    <div class="step-card" style="--sc:var(--g2);">
       <span class="n">STEP 2</span><h4>Spend 20 points</h4>
-      <p>Pick one part in each of the five colored boxes.</p>
+      <p>Pick one part in each of the five boxes.</p>
     </div>
-    <div class="step-card" style="--sc:var(--c-cap);">
+    <div class="step-card" style="--sc:var(--g3);">
       <span class="n">STEP 3</span><h4>Learn the file types</h4>
       <p>JPEG, PNG, PDF. Right answers earn more points.</p>
     </div>
-    <div class="step-card" style="--sc:var(--c-mem);">
+    <div class="step-card" style="--sc:var(--g4);">
       <span class="n">STEP 4</span><h4>Learn indexing</h4>
       <p>How Python finds one bot in a list. More points.</p>
     </div>
-    <div class="step-card" style="--sc:var(--c-por);">
+    <div class="step-card" style="--sc:var(--g5);">
       <span class="n">STEP 5</span><h4>Turn it in</h4>
       <p>Assess, save as a PDF, drop it in Drive.</p>
     </div>
@@ -867,13 +889,13 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 </section>
 
 <!-- ========================= 02 BUILD ========================= -->
-<section class="stage" id="build">
+<section class="stage" id="build" data-c="g2">
   <div class="stage-head">
-    <span class="marker" data-marker="build">02</span>
+    <span class="marker" data-marker="build">Step 2</span>
     <div>
       <p class="eyebrow">Spec check</p>
       <h2>Give your bot its hardware</h2>
-      <p class="lede">You have <strong>20 points</strong>. Pick one part in each colored box. Better parts cost more,
+      <p class="lede">You have <strong>20 points</strong>. Pick one part in each box. Better parts cost more,
         and you cannot go over. Need more points? Earn them in Stage 03 and 04.</p>
       <div class="std-chips" data-chips="build"></div>
     </div>
@@ -884,6 +906,14 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     <div class="panel-body">
       <div class="idfields" style="margin-bottom:18px;">
         <label class="field"><span>Your bot's name</span><input id="robotName" type="text" placeholder="the name you gave it in Mission 1" autocomplete="off"></label>
+        <label class="field"><span>Class period</span>
+          <select id="period">
+            <option value="1">Period 1</option><option value="2">Period 2</option>
+            <option value="3">Period 3</option><option value="4">Period 4</option>
+            <option value="5">Period 5</option><option value="6">Period 6</option>
+            <option value="7">Period 7</option><option value="8">Period 8</option>
+          </select>
+        </label>
       </div>
       <p class="strip-label">Crew &mdash; who is who</p>
       <div class="crew">
@@ -919,9 +949,9 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 </section>
 
 <!-- ========================= 03 FILE TYPES ========================= -->
-<section class="stage" id="files" data-c="cap">
+<section class="stage" id="files" data-c="g3">
   <div class="stage-head">
-    <span class="marker" data-marker="files">03</span>
+    <span class="marker" data-marker="files">Step 3</span>
     <div class="chief" data-chief="Sierra"></div>
     <div>
       <p class="eyebrow">File types + Google Drive</p>
@@ -934,7 +964,10 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 
   <div class="grid3">
     <div class="ftype">
-      <div class="swatch" aria-hidden="true" style="background:linear-gradient(135deg,#2a6f97,#e8a33d 45%,#c2472b);"></div>
+      <div class="swatch photo" aria-hidden="true" style="background:linear-gradient(135deg,#2a6f97,#e8a33d 45%,#c2472b);">
+        <img id="jpegSample" src="https://photographyproject.uk/wp-content/uploads/2024/03/public-domain-images-bailey-zindel.jpg"
+             alt="A photograph — the kind of picture JPEG was built for" loading="lazy">
+      </div>
       <h4>.jpg / .jpeg</h4>
       <p class="full">Joint Photographic Experts Group</p>
       <p>The photo format.</p>
@@ -999,6 +1032,11 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
             there. Sign in on any device with your school account and it is waiting.</p>
           <div class="note"><strong>Data has states.</strong> Sitting saved = <b>at rest</b>. Uploading =
             <b>in transit</b>. Open on screen = <b>in use</b>. Close the tab mid-upload and the file never arrives.</div>
+          <div class="note warn" style="margin-top:12px;"><strong>How Mission 2 gets turned in.</strong> Nothing is
+            emailed and nothing is dropped in a class folder. One student on your team builds a shared folder,
+            everyone uploads into their own folder inside it, and that student shares the whole thing with
+            <b>Mr. Livingston's account &mdash; the address is in the daily document</b>. Full directions are in
+            <a href="#submit">Stage 05</a>.</div>
         </div>
         <div>
           <p class="strip-label">Getting there</p>
@@ -1058,9 +1096,9 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 </section>
 
 <!-- ========================= 04 INDEXING ========================= -->
-<section class="stage" id="indexing" data-c="mem">
+<section class="stage" id="indexing" data-c="g4">
   <div class="stage-head">
-    <span class="marker" data-marker="indexing">04</span>
+    <span class="marker" data-marker="indexing">Step 4</span>
     <div class="chief" data-chief="Uniform"></div>
     <div>
       <p class="eyebrow">Python</p>
@@ -1167,9 +1205,9 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
 </section>
 
 <!-- ========================= 05 TURN IT IN ========================= -->
-<section class="stage" id="submit" data-c="por">
+<section class="stage" id="submit" data-c="g5">
   <div class="stage-head">
-    <span class="marker" data-marker="submit">05</span>
+    <span class="marker" data-marker="submit">Step 5</span>
     <div>
       <p class="eyebrow">Turn it in</p>
       <h2>Save the report, then upload it</h2>
@@ -1178,7 +1216,7 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
     </div>
   </div>
 
-  <div class="panel" id="reportPanel" style="border-top:5px solid var(--c-por);">
+  <div class="panel" id="reportPanel" style="border-top:5px solid var(--g5);">
     <div class="panel-head no-print">
       <h3>Your Mission 2 report</h3>
       <span class="q-tag">This is the file you turn in</span>
@@ -1223,6 +1261,10 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
           </table></div>
         </div>
 
+        <div class="export-row no-print" style="align-items:center;">
+          <label class="field" style="margin-right:6px;"><span>Exporting as</span>
+            <select id="exporter"></select></label>
+        </div>
         <div class="export-row no-print">
           <button class="btn primary" id="pdfBtn" type="button">Save as PDF</button>
           <button class="btn" id="pngBtn" type="button">Download PNG</button>
@@ -1230,25 +1272,53 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
           <button class="btn" id="reassessBtn" type="button">Re-assess</button>
         </div>
         <p class="small no-print" style="margin-top:10px;">
-          <b>Save as PDF</b> opens the print box &mdash; set <i>Destination</i> to <b>Save as PDF</b>, then Save.</p>
+          You need <b>all three</b> files: PDF, PNG, and JPEG. <b>Save as PDF</b> opens the print box &mdash; set
+          <i>Destination</i> to <b>Save as PDF</b>, then Save.</p>
         <div class="filepreview no-print" id="filePreview"></div>
       </section>
     </div>
   </div>
 
-  <div class="panel">
-    <div class="panel-head"><h3>Name it, then upload it</h3><span class="q-tag">Four steps</span></div>
+  <div class="panel" style="border-top:5px solid var(--g5);">
+    <div class="panel-head"><h3>Name everything exactly like this</h3><span class="q-tag">Spelling counts</span></div>
     <div class="panel-body">
-      <p class="strip-label">Rename the file to this</p>
-      <div class="pre" id="filenameDemo">TeamName_Mission2.pdf</div>
-      <ol class="steps" style="margin-top:16px;">
-        <li><div><h5>Open Drive with your school account</h5><p><span class="mono">drive.google.com</span>. Check the circle top right.</p></div></li>
-        <li><div><h5>Open the Mission 2 folder</h5><p><b>Shared with me</b> &rsaquo; class folder &rsaquo; <b>Mission 2</b>. My Drive does not count &mdash; I cannot see it.</p></div></li>
-        <li><div><h5>Upload</h5><p><b>+ New</b> &rsaquo; <b>File upload</b> &rsaquo; pick your file. Or drag it onto the folder.</p></div></li>
-        <li><div><h5>Check it landed</h5><p>Wait for <b>1 upload complete</b>, refresh, and click your file. If it opens, you are done.</p></div></li>
+      <p class="small" style="margin-bottom:12px;">This updates as you fill in your team, period, and name.
+        Copy it letter for letter &mdash; underscores, not spaces.</p>
+      <p class="strip-label">Folders</p>
+      <div class="pre" id="folderTree"></div>
+      <p class="strip-label" style="margin-top:14px;">Your three files</p>
+      <div class="pre" id="fileTree"></div>
+      <div class="note warn" style="margin-top:14px;">No spaces. No extra <span class="mono">.pdf</span> on the end.
+        Capital letters where the example has them.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h3>Everyone on the team does this</h3><span class="q-tag">All four students</span></div>
+    <div class="panel-body">
+      <ol class="steps">
+        <li><div><h5>Save your three files</h5><p>From your report above: <b>PDF</b>, <b>PNG</b>, and <b>JPEG</b>. All three, from your own Chromebook.</p></div></li>
+        <li><div><h5>Rename all three</h5><p>Files app &rsaquo; Downloads &rsaquo; right-click &rsaquo; Rename. Use the names in the box above. Keep the extension the computer gave it.</p></div></li>
+        <li><div><h5>Open the team folder</h5><p><b>Shared with me</b> &rsaquo; your team folder. Your organizer shares it with your school email &mdash; if you cannot see it, ask them, not me.</p></div></li>
+        <li><div><h5>Make your two folders</h5><p>Inside the team folder: <b>+ New &rsaquo; Folder</b> with <b>your first name</b>. Open it, and make one more inside called <b>Mission 2 Data</b>.</p></div></li>
+        <li><div><h5>Upload all three files there</h5><p><b>+ New &rsaquo; File upload</b>. Wait for <b>upload complete</b>, refresh, and click each one to be sure it opens.</p></div></li>
       </ol>
-      <div class="note warn" style="margin-top:16px;">The folder is already shared with the class. Do not change its
-        sharing settings, and do not send the link outside our class.</div>
+    </div>
+  </div>
+
+  <div class="panel" style="border-top:5px solid var(--amber);">
+    <div class="panel-head"><h3>The organizer does this</h3><span class="q-tag">One student &mdash; the one who submits</span></div>
+    <div class="panel-body">
+      <p class="small" style="margin-bottom:14px;">Whoever you picked as the uploader runs the folder. Do steps 1 and 2
+        <b>first</b> &mdash; nobody else can start until the folder is shared.</p>
+      <ol class="steps">
+        <li><div><h5>Make the team folder</h5><p>In your Drive: <b>+ New &rsaquo; Folder</b>, named <span class="mono" id="orgFolder">Period1_Alpha</span>. Exactly that.</p></div></li>
+        <li><div><h5>Share it with your team</h5><p>Right-click the folder &rsaquo; <b>Share</b>. Add all three teammates by their <b>school email</b>, set to <b>Editor</b> so they can upload.</p></div></li>
+        <li><div><h5>Wait, then inspect</h5><p>When everyone says they are done, open every teammate's folder. Three files each, named right, and they open. Anything wrong &mdash; tell that person to fix it.</p></div></li>
+        <li><div><h5>Only then, submit</h5><p>Share the team folder with <b>Mr. Livingston's account</b> &mdash; the address is in the <b>daily document</b>. Set it to <b>Editor</b>. That share is the submission.</p></div></li>
+      </ol>
+      <div class="note warn" style="margin-top:16px;"><strong>Do not share early.</strong> If a folder is missing files
+        or the names are wrong when I open it, the whole team's submission is late. Fix it first, then share.</div>
     </div>
   </div>
 </section>
@@ -1281,14 +1351,19 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
   </div>
   <div class="modal-track"><i id="chkBar"></i></div>
   <div class="modal-body">
+    <p class="strip-label">Everyone on the team</p>
     <ul class="checklist" id="checklist">
-      <li data-k="c1"><span class="box"></span><span>Team, bot, and all four students filled in</span></li>
+      <li data-k="c1"><span class="box"></span><span>Team, bot, period, and all four students filled in</span></li>
       <li data-k="c2"><span class="box"></span><span>All five parts picked, budget not blown</span></li>
       <li data-k="c3"><span class="box"></span><span>Both checks done</span></li>
-      <li data-k="c4"><span class="box"></span><span>Report saved as a file &mdash; I found it in Downloads</span></li>
-      <li data-k="c5"><span class="box"></span><span>Renamed <span class="mono" id="chkName">TeamName_Mission2</span></span></li>
-      <li data-k="c6"><span class="box"></span><span>Uploaded to the <b>Mission 2</b> folder</span></li>
-      <li data-k="c7"><span class="box"></span><span>Refreshed, saw it, opened it</span></li>
+      <li data-k="c4"><span class="box"></span><span>Saved <b>all three</b> files &mdash; PDF, PNG, JPEG</span></li>
+      <li data-k="c5"><span class="box"></span><span>Renamed all three <span class="mono" id="chkName">First_Team_Mission2</span></span></li>
+      <li data-k="c6"><span class="box"></span><span>Made my first-name folder, and <b>Mission 2 Data</b> inside it</span></li>
+      <li data-k="c7"><span class="box"></span><span>Uploaded all three, refreshed, and opened each one</span></li>
+      <li class="head" data-head="Organizer only &mdash; the student who submits"></li>
+      <li data-k="o1"><span class="box"></span><span>Made <span class="mono" id="chkFolder">Period1_Alpha</span> and shared it with my team as <b>Editor</b></span></li>
+      <li data-k="o2"><span class="box"></span><span>Checked every teammate's folder: three files, named right, they open</span></li>
+      <li data-k="o3"><span class="box"></span><span>Shared the folder with Mr. Livingston's account from the daily document</span></li>
     </ul>
   </div>
   <div class="modal-foot">
@@ -1660,7 +1735,7 @@ const ALL_Q = PY_QUESTIONS.concat(FD_QUESTIONS);
    STATE + PERSISTENCE
    ============================================================ */
 const SAVE_KEY = "mission02-speccheck-v1";
-let state = { color:DEFAULT_COLOR, robot:"", bot:"", crew:["","","",""], submitter:0, selections:{}, answers:{}, checks:{}, theme:"auto", assessed:false };
+let state = { color:DEFAULT_COLOR, robot:"", bot:"", period:"1", crew:["","","",""], submitter:0, exporter:0, selections:{}, answers:{}, checks:{}, theme:"auto", assessed:false };
 
 function save(){
   try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }catch(e){ /* storage blocked — page still works */ }
@@ -2148,7 +2223,7 @@ function updateMarkers(){
     build:    allSelected(),
     indexing: PY_QUESTIONS.every(q => state.answers[q.id] !== undefined),
     files:    FD_QUESTIONS.every(q => state.answers[q.id] !== undefined),
-    submit:   Object.keys(state.checks).filter(k=>state.checks[k]).length === 7,
+    submit:   $$("#checklist li[data-k]").every(li => state.checks[li.dataset.k]),
   };
   $$("[data-marker]").forEach(m => m.classList.toggle("done", !!done[m.dataset.marker]));
 }
@@ -2163,13 +2238,36 @@ function scrollSpy(){
 /* ============================================================
    FILENAME
    ============================================================ */
-function clean(s){ return s.replace(/[^A-Za-z0-9]/g, ""); }
-function fileBase(){
-  return currentBot() + "_Mission2";
+function clean(s){ return String(s || "").replace(/[^A-Za-z0-9]/g, ""); }
+
+/* Every name students have to type, generated from what they entered. */
+function firstNameOf(i){ return clean(state.crew[i]) || `Student${i+1}`; }
+function exporterName(){ return firstNameOf(state.exporter || 0); }
+function teamFolder(){ return `Period${clean(state.period) || "1"}_${currentBot()}`; }
+function fileBase(){ return `${exporterName()}_${currentBot()}_Mission2`; }
+
+function renderExporter(){
+  const sel = $("#exporter");
+  sel.innerHTML = [0,1,2,3].map(i=>{
+    const n = (state.crew[i] || "").trim();
+    return `<option value="${i}">${n ? n : "Student " + (i+1)}</option>`;
+  }).join("");
+  sel.value = String(state.exporter || 0);
 }
+
 function updateFilename(){
-  $("#filenameDemo").textContent = fileBase() + ".pdf";
-  $("#chkName").textContent = fileBase();
+  renderExporter();
+  const base = fileBase();
+  const notes = ["the organizer makes this one", "your own first-name folder", "your three files go in here"];
+  const plain = [teamFolder(), ` └─ ${exporterName()}`, `     └─ Mission 2 Data`];
+  const col = Math.max(...plain.map(l => l.length)) + 4;
+  $("#folderTree").innerHTML = plain
+    .map((l,i) => `${l}${" ".repeat(col - l.length)}<span class="c">&larr; ${notes[i]}</span>`)
+    .join("\n");
+  $("#fileTree").textContent = `${base}.pdf\n${base}.png\n${base}.jpg`;
+  $("#chkName").textContent  = base;
+  $("#chkFolder").textContent = teamFolder();
+  $("#orgFolder").textContent = teamFolder();
 }
 
 /* ============================================================
@@ -2323,7 +2421,8 @@ async function exportImage(type){
    CHECKLIST
    ============================================================ */
 function renderChecklist(){
-  $$("#checklist li").forEach(li=>{
+  $$("#checklist li.head").forEach(li=>{ li.textContent = li.dataset.head; });
+  $$("#checklist li[data-k]").forEach(li=>{
     const k = li.dataset.k;
     li.classList.toggle("on", !!state.checks[k]);
     li.setAttribute("role","checkbox");
@@ -2341,10 +2440,12 @@ function renderChecklist(){
   updateChecklistStatus();
 }
 function updateChecklistStatus(){
-  const n = $$("#checklist li").filter(li => state.checks[li.dataset.k]).length;
-  $("#chkStatus").textContent = `${n} / 7 checked`;
-  $("#chkBar").style.width = (n/7*100) + "%";
-  $("#chkPill").textContent = `${n}/7`;
+  const items = $$("#checklist li[data-k]");
+  const n = items.filter(li => state.checks[li.dataset.k]).length;
+  const total = items.length;
+  $("#chkStatus").textContent = `${n} / ${total} checked`;
+  $("#chkBar").style.width = (n / total * 100) + "%";
+  $("#chkPill").textContent = `${n}/${total}`;
 }
 
 /* ============================================================
@@ -2352,7 +2453,13 @@ function updateChecklistStatus(){
    ============================================================ */
 $("#robotName").addEventListener("input", e => { state.robot = e.target.value; save(); refresh(); });
 [1,2,3,4].forEach(n => $("#s"+n).addEventListener("input", e => { state.crew[n-1] = e.target.value; save(); refresh(); }));
-$("#submitter").addEventListener("change", e => { state.submitter = parseInt(e.target.value,10) || 0; save(); refresh(); });
+$("#submitter").addEventListener("change", e => {
+  state.submitter = parseInt(e.target.value,10) || 0;
+  state.exporter  = state.submitter;   /* the organiser is usually the one at this screen first */
+  save(); refresh();
+});
+$("#period").addEventListener("change", e => { state.period = e.target.value; save(); refresh(); });
+$("#exporter").addEventListener("change", e => { state.exporter = parseInt(e.target.value,10) || 0; save(); refresh(); });
 
 /* Mission Check lives in the rail so the page stays uncluttered */
 $("#openCheck").addEventListener("click", ()=> $("#checkModal").showModal());
@@ -2403,6 +2510,13 @@ $("#typesBtn").addEventListener("click", ()=> $("#typesModal").showModal());
 $("#typesClose").addEventListener("click", ()=> $("#typesModal").close());
 $("#typesDone").addEventListener("click", ()=> $("#typesModal").close());
 
+/* The JPEG card shows a real photograph. If the network or the host blocks it,
+   drop the img and let the gradient behind it stand in. */
+(function jpegSample(){
+  const img = $("#jpegSample");
+  if(img) img.addEventListener("error", ()=> img.remove());
+})();
+
 /* chassis picker */
 $("#botPrev").addEventListener("click", ()=> stepBot(-1));
 $("#botNext").addEventListener("click", ()=> stepBot(1));
@@ -2425,7 +2539,7 @@ $("#exprInput").addEventListener("keydown", e => { if(e.key === "Enter") runExpr
 
 $("#resetAll").addEventListener("click", ()=>{
   if(!confirm("Clear your build, your check answers, and your checklist on this device? This cannot be undone.")) return;
-  state = { color:DEFAULT_COLOR, robot:"", bot:"", crew:["","","",""], submitter:0, selections:{}, answers:{}, checks:{}, theme:state.theme, assessed:false };
+  state = { color:DEFAULT_COLOR, robot:"", bot:"", period:"1", crew:["","","",""], submitter:0, exporter:0, selections:{}, answers:{}, checks:{}, theme:state.theme, assessed:false };
   save();
   location.reload();
 });
@@ -2445,6 +2559,7 @@ applyTheme();
 $("#robotName").value = state.robot || "";
 [1,2,3,4].forEach(n => { $("#s"+n).value = (state.crew && state.crew[n-1]) || ""; });
 $("#submitter").value = String(state.submitter || 0);
+$("#period").value = state.period || "1";
 renderColorControl();
 renderTeamPicker();
 renderChiefs();

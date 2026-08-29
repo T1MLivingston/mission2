@@ -14,7 +14,7 @@ and the image-export library.
 | **02 Build** | Bot name, Student 1–4, and who uploads — then spend a 20-point budget across five color-coded specs, each with its own chief |
 | **03 File types** | JPEG / PNG / PDF compared, what Google Drive is, states of data, then an 8-question pop-up test |
 | **04 Indexing** | Four lesson cards, the live **Index Lab** (the list is the bot roster: `crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]`), a **Slicing lab** with start/stop steppers, a **Data types** reference (int, float, str, bool, list), then a 12-question pop-up test |
-| **05 Turn it in** | The generated report, PDF/PNG/JPEG export, the naming convention, and the four upload steps |
+| **05 Turn it in** | The generated report, PDF/PNG/JPEG export, the exact folder and file names, and two sets of directions — one for every student, one for the organizer |
 
 The header carries the whole team identity: the chassis on the left under **Team leader** with ‹ › arrows to
 flip through all 26, and the **Team** dropdown top right. The two are the same choice — picking Team Sierra
@@ -35,8 +35,27 @@ Stage 04 are the ones running Stage 02. The two training stages are hosted by un
 file types, Uniform over indexing. Set in `CHIEFS` and the two `data-chief` attributes in the markup, so
 reassign them whenever the draft changes.
 
+### How Mission 2 is turned in
+
+One student per team is the **organizer** (set by "Who uploads the file?"). They build the shared folder;
+everyone fills their own corner of it:
+
+```
+Period3_Sierra              ← organizer makes this, shares it with the team as Editor
+ └─ Ada                     ← each student's own first-name folder
+     └─ Mission 2 Data      ← that student's three files
+         ├─ Ada_Sierra_Mission2.pdf
+         ├─ Ada_Sierra_Mission2.png
+         └─ Ada_Sierra_Mission2.jpg
+```
+
+Every name on that tree is generated live on the page from the team, period, and student, so students copy
+rather than invent. When every folder is complete and correctly named, the organizer shares the team folder
+with the teacher's account — **the address lives in the daily document, not on this page** — and that share
+is the submission. The page says plainly not to share early.
+
 **Mission Check** — the end-of-class checklist — lives behind the ✓ button in the sticky rail, not on the page,
-so the page itself stays uncluttered. It saves per device.
+so the page itself stays uncluttered. It saves per device, and splits into "everyone" and "organizer only".
 
 The Index Lab's output clears itself every fifth run, so nobody can spam it into a mile-long page.
 
@@ -81,6 +100,7 @@ Everything a teacher would want to change sits in named arrays at the top of the
 - `CREW` — the five bots used in the indexing lesson and lab
 - `CHIEFS` — which chassis hosts each spec box
 - `DEFAULT_COLOR` — the starting team color, `#FAE74C`
+- `--g1` … `--g5` — the grey spectrum, light to dark, that runs the five spec boxes and the five steps
 - `FILE_VAULT` — the easter-egg file type reference
 - `STANDARDS` — five benchmarks from the 6th Grade Computer Science Standards Map, tagged by stage;
   they show as chips under each stage heading and print on the student's report. Deliberately five, not
