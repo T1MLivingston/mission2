@@ -2022,6 +2022,20 @@ function buildReport(){
 /* ============================================================
    EXPORT
    ============================================================ */
+/* When this page runs as a published Artifact the viewer mediates saving, so a
+   plain download link does nothing. Ask for the host saver first and fall back
+   to a normal download everywhere else (local file, GitHub Pages, Classroom). */
+let hostSaver, hostSaverChecked = false;
+async function getSaver(){
+  if(hostSaverChecked) return hostSaver;
+  hostSaverChecked = true;
+  try{
+    hostSaver = (window.claude && typeof window.claude.use === "function")
+      ? await window.claude.use("downloads") : null;
+  }catch(e){ hostSaver = null; }
+  return hostSaver;
+}
+
 function sheetBackground(){
   const c = getComputedStyle($("#reportSheet")).backgroundColor;
   return (c && c !== "rgba(0, 0, 0, 0)") ? c : "#ffffff";
@@ -2038,22 +2052,35 @@ async function exportImage(type){
     const dataUrl = canvas.toDataURL(type, 0.92);
     const blob = await new Promise(res => canvas.toBlob(res, type, 0.92));
 
-    let started = false;
-    try{
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url; a.download = name;
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(()=>URL.revokeObjectURL(url), 4000);
-      started = true;
-    }catch(e){ started = false; }
+    let note;
+    const saver = await getSaver();
+    if(saver){
+      try{
+        await saver.save({ filename: name, data: blob });
+        note = `<b>${name}</b> &mdash; saved. Look in your <b>Downloads</b> folder.`;
+      }catch(err){
+        note = (err && err.code === "declined")
+          ? `You closed the save box, so nothing was downloaded. Press <b>Download ${ext.toUpperCase()}</b> again, or save the image below by hand.`
+          : `This viewer would not save the file. Save the image below by hand: press and hold (or right-click) it, choose <b>Save image as…</b>, and name it <span class="mono">${name}</span>.`;
+      }
+    }else{
+      let started = false;
+      try{
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url; a.download = name;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(()=>URL.revokeObjectURL(url), 4000);
+        started = true;
+      }catch(e){ started = false; }
+      note = `<b>${name}</b> &mdash; ${started ? "check your <b>Downloads</b> folder." : "your browser blocked the automatic download."}
+        If it is not there, press and hold (or right-click) the image below and choose <b>Save image as…</b>, then name it
+        <span class="mono">${name}</span>.`;
+    }
 
     const prev = $("#filePreview");
     prev.classList.add("show");
-    prev.innerHTML =
-      `<p class="small"><b>${name}</b> &mdash; ${started ? "check your <b>Downloads</b> folder." : "your browser blocked the automatic download."}
-       If it is not there, press and hold (or right-click) the image below and choose <b>Save image as…</b>, then name it
-       <span class="mono">${name}</span>.</p>`;
+    prev.innerHTML = `<p class="small">${note}</p>`;
     const img = new Image();
     img.src = dataUrl; img.alt = "Your Mission 2 report as an image";
     prev.appendChild(img);
