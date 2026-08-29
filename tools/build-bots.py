@@ -19,15 +19,18 @@ COLORS = 48
 
 
 def optimize():
+    """Downscale each bot, keeping the transparent background.
+
+    Transparency matters: the page paints the team's chosen colour behind every
+    bot, so a flattened white background would hide it.
+    """
     from PIL import Image
     os.makedirs(WEB, exist_ok=True)
     for src in sorted(glob.glob(os.path.join(ORIG, "*.png"))):
         im = Image.open(src).convert("RGBA")
-        flat = Image.new("RGBA", im.size, (255, 255, 255, 255))
-        flat.alpha_composite(im)
-        im = flat.convert("L")
         im.thumbnail((SIZE, SIZE), Image.LANCZOS)
-        im.quantize(colors=COLORS, method=Image.MEDIANCUT).save(
+        # FASTOCTREE is the one Pillow quantizer that carries alpha through.
+        im.quantize(colors=COLORS, method=Image.FASTOCTREE).save(
             os.path.join(WEB, os.path.basename(src)), optimize=True)
 
 

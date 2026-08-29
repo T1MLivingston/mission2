@@ -11,13 +11,25 @@ and the image-export library.
 | Stage | What happens |
 | --- | --- |
 | **01 Start here** | Five step cards, the "done means" chips, and the standards table |
-| **02 Build** | Bot name, Student 1–4, and who uploads — then spend a 20-point budget across five color-coded specs |
+| **02 Build** | Bot name, Student 1–4, and who uploads — then spend a 20-point budget across five color-coded specs, each with its own chief |
 | **03 File types** | JPEG / PNG / PDF compared, what Google Drive is, states of data, then an 8-question pop-up test |
 | **04 Indexing** | Four lesson cards, the live **Index Lab** (the list is the bot roster: `crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]`), a **Slicing lab** with start/stop steppers, a **Data types** reference (int, float, str, bool, list), then a 12-question pop-up test |
 | **05 Turn it in** | The generated report, PDF/PNG/JPEG export, the naming convention, and the four upload steps |
 
 The header carries the whole team identity: the chassis on the left under **Team leader** with ‹ › arrows to
-flip through all 26, and the **Team** name field top right.
+flip through all 26, and the **Team** dropdown top right. The two are the same choice — picking Team Sierra
+swings the banner to Sierra, and arrowing to Sierra sets the team. The call sign also becomes the filename
+(`Sierra_Mission2.pdf`), so no two teams can collide.
+
+Under the dropdown, **Team color** sets the plate behind every bot on the page, the band across the top of
+the report, and therefore the exported file. Eight presets plus a full color picker; it prints, too.
+
+### Section chiefs
+
+The five spec boxes and the two training stages are each hosted by one of the chassis no group drafted —
+Charlie on memory, Hotel on storage type, Golf on capacity, Romeo on ports, Zulu on specialty function,
+Sierra over file types, Uniform over indexing. They are set in `CHIEFS` and the two `data-chief` attributes
+in the markup, so reassign them whenever the draft changes.
 
 **Mission Check** — the end-of-class checklist — lives behind the ✓ button in the sticky rail, not on the page,
 so the page itself stays uncluttered. It saves per device.
@@ -43,6 +55,7 @@ uploader marked, the five specs with stars, the rank, the training score, and th
 - `assets/bots/web/` — 320px grayscale copies used on the page
 - The web copies are **inlined into `index.html` as data URIs**, which is why the page is one file that still
   works from a Chromebook's Downloads folder with no assets folder next to it.
+- They keep their **transparent background** on purpose — the team's chosen color is painted behind them.
 
 To change or add art, drop PNGs into `assets/bots/original/`, update the `BOTS` array in `index.html`
 to match the filenames, and run:
@@ -62,6 +75,8 @@ Everything a teacher would want to change sits in named arrays at the top of the
 - `BASE_BUDGET` / `CREDIT_CAP` — the 20-point budget and the 8-credit cap
 - `PY_QUESTIONS` / `FD_QUESTIONS` — the two tests (prompt, options, correct index, explanation)
 - `CREW` — the five bots used in the indexing lesson and lab
+- `CHIEFS` — which chassis hosts each spec box
+- `TEAM_COLORS` — the eight preset team colors (the first one is the default)
 - `FILE_VAULT` — the easter-egg file type reference
 - `STANDARDS` — five benchmarks from the 6th Grade Computer Science Standards Map, tagged by stage;
   they show as chips under each stage heading and print on the student's report. Deliberately five, not
