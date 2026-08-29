@@ -132,11 +132,10 @@ p:last-child{margin-bottom:0;}
    MASTHEAD
    ============================================================ */
 .masthead{border-bottom:1px solid var(--rule);background:linear-gradient(180deg,var(--panel-2),transparent);}
-.masthead-in{max-width:1120px;margin:0 auto;padding:26px 20px 26px;display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;}
+.masthead-in{max-width:1120px;margin:0 auto;padding:26px 20px 26px;display:grid;grid-template-columns:auto 1fr auto;gap:34px;align-items:center;}
 .hero-bot{width:214px;flex:none;}
 .hero-bot .plate{width:214px;height:214px;border-radius:12px;}
-.hero-bot .cap{display:block;text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);}
-.hero-bot .cap b{color:var(--amber);}
+.hero-bot .cap{display:block;text-align:center;margin-bottom:9px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);}
 .mission-line{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-bottom:8px;}
 .mission-line .m{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--btn-fg);background:var(--amber);border-radius:5px;padding:5px 11px;}
 .mission-line .who{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);}
@@ -147,15 +146,24 @@ p:last-child{margin-bottom:0;}
 .back-link em{font-style:normal;color:var(--ink-2);font-size:13px;}
 
 /* sea band */
-.seaband{position:relative;width:100%;height:132px;overflow:hidden;}
-.seaband .waves{position:absolute;inset:0;width:100%;height:100%;}
-.seaband .ray{position:absolute;top:14px;left:0;opacity:.72;animation:glide 38s linear infinite;}
-@keyframes glide{
-  0%{transform:translate(-170px,8px) rotate(-3deg)}
-  35%{transform:translate(38vw,-6px) rotate(2deg)}
-  70%{transform:translate(72vw,10px) rotate(-2deg)}
-  100%{transform:translate(105vw,0) rotate(1deg)}
+/* team badge, top right of the header */
+.team-badge{justify-self:end;align-self:start;border:1px solid var(--rule);border-radius:10px;background:var(--panel);padding:12px 15px;min-width:230px;}
+.team-badge span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:7px;}
+.team-badge input{width:100%;background:var(--panel-2);border:1px solid var(--rule);color:var(--ink);border-radius:6px;padding:9px 11px;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;}
+.team-badge input:focus{outline:2px solid var(--amber);outline-offset:1px;}
+
+/* bot picker: one chassis at a time */
+.botnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;}
+.botnav button{
+  border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:7px;
+  width:38px;height:38px;font-size:19px;line-height:1;cursor:pointer;font-family:'IBM Plex Mono',monospace;
 }
+.botnav button:hover{border-color:var(--amber);color:var(--amber);}
+.botnav .name{
+  flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;
+  color:var(--amber);letter-spacing:.06em;
+}
+.botnav .name small{display:block;font-size:10px;letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase;font-weight:400;}
 
 /* stage + category colour chunks */
 .stage{--stage-c:var(--amber);}
@@ -669,6 +677,18 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 .portrait .pmeta .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);}
 .portrait .pmeta .v{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:20px;}
 
+/* slice lab + data types */
+.slice-ctl{display:flex;gap:18px;flex-wrap:wrap;margin:16px 0 14px;}
+.stepper{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);border-radius:8px;background:var(--panel-2);padding:8px 11px;}
+.stepper span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);}
+.stepper button{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:6px;width:30px;height:30px;font-size:16px;line-height:1;cursor:pointer;}
+.stepper button:hover{border-color:var(--amber);color:var(--amber);}
+.stepper b{font-family:'IBM Plex Mono',monospace;font-size:17px;min-width:22px;text-align:center;}
+.type-card{border:1px solid var(--rule);border-left:4px solid var(--tc,var(--amber));border-radius:8px;background:var(--panel-2);padding:13px 15px;margin-bottom:10px;}
+.type-card h4{font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--tc,var(--amber));margin:0 0 4px;}
+.type-card p{margin:0 0 8px;font-size:14px;color:var(--ink-2);}
+.type-card .pre{margin:0;font-size:13px;}
+
 /* Extension reference (easter egg) */
 .ext-group{margin-bottom:18px;}
 .ext-group h4{font-size:15px;margin:0 0 8px;color:var(--amber);}
@@ -682,9 +702,9 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
    ============================================================ */
 @media (max-width:760px){
   .masthead-in{grid-template-columns:1fr;gap:18px;}
+  .team-badge{justify-self:stretch;min-width:0;}
   .hero-bot{width:150px;}
   .hero-bot .plate{width:150px;height:150px;}
-  .seaband{height:88px;}
   .rail-in{flex-wrap:wrap;gap:0;}
   .rail-nav{order:2;width:100%;}
   .rail-score{order:1;width:100%;justify-content:flex-start;padding:9px 0 2px;flex-wrap:wrap;}
@@ -713,27 +733,18 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 </style>
 </head>
 <body>
-<div class="seaband" aria-hidden="true">
-  <svg class="waves" viewBox="0 0 1440 132" preserveAspectRatio="none">
-    <rect width="1440" height="132" fill="var(--sea-1)"/>
-    <path fill="var(--sea-2)" d="M0 52 C 180 30 300 78 480 70 C 660 62 780 24 960 36 C 1140 48 1260 84 1440 66 L1440 132 L0 132 Z"/>
-    <path fill="var(--sea-3)" d="M0 96 C 200 76 340 116 520 110 C 700 104 820 74 1000 86 C 1180 98 1300 122 1440 106 L1440 132 L0 132 Z"/>
-  </svg>
-  <svg class="ray" viewBox="0 0 220 132" width="132" height="79">
-    <g fill="var(--sea-ray)">
-      <path d="M110 18 C 78 13 40 26 10 52 C 47 49 83 60 100 74 L110 81 L120 74 C 137 60 173 49 210 52 C 180 26 142 13 110 18 Z"/>
-      <path d="M101 21 C 97 10 88 7 83 12 C 90 14 97 17 101 24 Z"/>
-      <path d="M119 21 C 123 10 132 7 137 12 C 130 14 123 17 119 24 Z"/>
-      <path d="M110 81 C 113 97 115 113 108 128" stroke="var(--sea-ray)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-    </g>
-  </svg>
-</div>
+
 
 <header class="masthead">
   <div class="masthead-in">
     <div class="hero-bot">
+      <span class="cap">Team leader</span>
       <div class="plate" id="mastBot"></div>
-      <span class="cap" id="mastCap">Pick your bot below</span>
+      <div class="botnav">
+        <button id="botPrev" type="button" aria-label="Previous chassis">&lsaquo;</button>
+        <span class="name" id="botName">Alpha<small>1 of 26</small></span>
+        <button id="botNext" type="button" aria-label="Next chassis">&rsaquo;</button>
+      </div>
     </div>
     <div>
       <div class="mission-line">
@@ -741,13 +752,17 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
         <span class="who">6th Grade Computer Science</span>
       </div>
       <h1 class="title">Spec Check</h1>
-      <p class="lede">In Mission 1 you built your bot. Now you give it real hardware &mdash;
-        and you only get 20 points to spend.</p>
+      <p class="lede">Mission 1 was the drawing. Now you give your bot real hardware, learn the code that
+        runs it, and you only get 20 points to spend.</p>
       <a class="back-link" id="missionOne" href="#">
         <span class="arw">&larr;</span>
-        <span><b>Mission 01 &middot; Build Your Bot</b><em>You designed it. This mission calibrates the specs.</em></span>
+        <span><b>Mission 01 &middot; Build Your Bot</b><em>You drew it. Now you program it and upgrade it.</em></span>
       </a>
     </div>
+    <label class="team-badge">
+      <span>Team</span>
+      <input id="teamName" type="text" placeholder="Team name" autocomplete="off">
+    </label>
   </div>
 </header>
 
@@ -837,15 +852,12 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
   </div>
 
   <div class="panel" style="margin-bottom:18px;border-top:5px solid var(--amber);">
-    <div class="panel-head"><h3>Your team</h3><span class="q-tag">All of this goes on your report</span></div>
+    <div class="panel-head"><h3>Your crew</h3><span class="q-tag">All of this goes on your report</span></div>
     <div class="panel-body">
       <div class="idfields" style="margin-bottom:18px;">
-        <label class="field"><span>Team name</span><input id="teamName" type="text" placeholder="e.g. Circuit Breakers" autocomplete="off"></label>
         <label class="field"><span>Your bot's name</span><input id="robotName" type="text" placeholder="the name you gave it in Mission 1" autocomplete="off"></label>
       </div>
-      <p class="strip-label">Team leader &mdash; pick your bot</p>
-      <div class="bot-grid" id="botGrid"></div>
-      <p class="strip-label" style="margin-top:20px;">Crew &mdash; who is who</p>
+      <p class="strip-label">Crew &mdash; who is who</p>
       <div class="crew">
         <label class="seat"><span>Student 1</span><input id="s1" type="text" placeholder="Name" autocomplete="off"></label>
         <label class="seat"><span>Student 2</span><input id="s2" type="text" placeholder="Name" autocomplete="off"></label>
@@ -1024,7 +1036,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
       <p class="eyebrow">Python</p>
       <h2>Indexing: finding one bot in a list</h2>
       <p class="lede">A list holds many bots. An <strong>index</strong> is the address of one of them.
-        Read the four cards, play in the lab, then take the check.</p>
+        Read the cards, play in the lab, then take the check.</p>
       <div class="std-chips" data-chips="indexing"></div>
     </div>
   </div>
@@ -1089,6 +1101,10 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
         </div>
         <div class="tries" id="tries"></div>
         <div class="repl" id="repl" aria-live="polite"></div>
+        <div class="export-row" style="margin-top:14px;">
+          <button class="btn" id="sliceBtn" type="button">Slicing lab</button>
+          <button class="btn" id="typesBtn" type="button">Data types</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1104,9 +1120,9 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
     <div class="panel-body">
       <div class="check">
         <div class="check-left">
-          <div class="check-dial" id="pyDial">0/10</div>
+          <div class="check-dial" id="pyDial">0/12</div>
           <div>
-            <h4>Ten questions</h4>
+            <h4>Twelve questions</h4>
             <p>One try each. Every right answer = <strong>+1 build point</strong> (up to 8 total).</p>
           </div>
         </div>
@@ -1250,6 +1266,84 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
   </div>
 </dialog>
 
+<dialog class="modal" id="sliceModal" aria-labelledby="sliceTitle">
+  <div class="modal-head">
+    <div>
+      <p class="eyebrow">Index Lab</p>
+      <h3 id="sliceTitle">Slicing</h3>
+    </div>
+    <button class="modal-x" id="sliceClose" type="button" aria-label="Close">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="small">A slice takes a <b>piece</b> of the list. Move start and stop and watch what comes back.
+      The stop number never comes along.</p>
+    <p class="strip-label code" style="margin-top:14px;">crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]</p>
+    <div class="strip" id="sliceStrip"></div>
+    <div class="slice-ctl">
+      <div class="stepper"><span>start</span><button type="button" data-s="start" data-d="-1">&minus;</button><b id="sliceStart">1</b><button type="button" data-s="start" data-d="1">+</button></div>
+      <div class="stepper"><span>stop</span><button type="button" data-s="stop" data-d="-1">&minus;</button><b id="sliceStop">3</b><button type="button" data-s="stop" data-d="1">+</button></div>
+    </div>
+    <div class="repl" id="sliceOut"></div>
+  </div>
+  <div class="modal-foot">
+    <span class="mono">crew[start:stop]</span>
+    <button class="btn" id="sliceDone" type="button">Close</button>
+  </div>
+</dialog>
+
+<dialog class="modal" id="typesModal" aria-labelledby="typesTitle">
+  <div class="modal-head">
+    <div>
+      <p class="eyebrow">Python</p>
+      <h3 id="typesTitle">Data Types</h3>
+    </div>
+    <button class="modal-x" id="typesClose" type="button" aria-label="Close">&times;</button>
+  </div>
+  <div class="modal-body">
+    <p class="small">Every value in Python is <b>some type</b>. The type decides what you are allowed to do with it.
+      You will use all five of these when you start programming your bot.</p>
+    <div style="margin-top:16px;">
+      <div class="type-card" style="--tc:var(--c-cap);">
+        <h4>int &mdash; whole numbers</h4>
+        <p>Counting things. No decimal point.</p>
+        <div class="pre">points = <span class="k">20</span>
+ports  = <span class="k">4</span></div>
+      </div>
+      <div class="type-card" style="--tc:var(--c-mem);">
+        <h4>float &mdash; decimal numbers</h4>
+        <p>Measuring things. The dot makes it a float, even <code>2.0</code>.</p>
+        <div class="pre">speed  = <span class="k">2.5</span>
+volts  = <span class="k">3.3</span></div>
+      </div>
+      <div class="type-card" style="--tc:var(--c-sty);">
+        <h4>str &mdash; text (a "string")</h4>
+        <p>Letters, in quotes. Each letter has an index, exactly like a list.</p>
+        <div class="pre">name = <span class="s">"Alpha"</span>
+name[<span class="k">0</span>]   <span class="c"># "A"</span></div>
+      </div>
+      <div class="type-card" style="--tc:var(--c-por);">
+        <h4>bool &mdash; True or False</h4>
+        <p>Answers a yes-or-no question. Capital T, capital F.</p>
+        <div class="pre">charged = <span class="k">True</span>
+online  = <span class="k">False</span></div>
+      </div>
+      <div class="type-card" style="--tc:var(--c-spc);">
+        <h4>list &mdash; many values in order</h4>
+        <p>Square brackets, commas between. Indexed from 0. A list can hold any of the types above.</p>
+        <div class="pre">crew  = [<span class="s">"Alpha"</span>, <span class="s">"Beta"</span>]
+specs = [<span class="k">16</span>, <span class="k">512</span>, <span class="k">2.5</span>]</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:6px;"><strong>Quotes change everything.</strong> <code>7</code> is an int you
+      can do math with. <code>"7"</code> is a string &mdash; text that happens to look like a number.
+      Ask Python which one you have with <code>type(7)</code>.</div>
+  </div>
+  <div class="modal-foot">
+    <span class="mono">int &middot; float &middot; str &middot; bool &middot; list</span>
+    <button class="btn" id="typesDone" type="button">Close</button>
+  </div>
+</dialog>
+
 <dialog class="modal" id="extModal" aria-labelledby="extTitle">
   <div class="modal-head">
     <div>
@@ -1286,36 +1380,16 @@ const BASE_BUDGET = 20;
 const CREDIT_CAP  = 8;
 
 const STANDARDS = [
-  { bok:"Computing Components", idea:"Implement Foundational Computer Literacy Fluency",
-    text:"Identify multiple file format types.", stages:["files"] },
-  { bok:"Computing Components", idea:"Implement Foundational Computer Literacy Fluency",
-    text:"Identify applications that have different desktop and online versions.", stages:["files"] },
-  { bok:"Cyber Security", idea:"Explore the Physical Security of Devices",
-    text:"Define the states of data.", stages:["files"] },
-  { bok:"Cyber Security", idea:"Explore the Physical Security of Devices",
-    text:"Illustrate the concept of access control and how to limit access to authorized users.", stages:["submit"] },
-  { bok:"Cyber Security", idea:"Explore the Physical Security of Devices",
-    text:"Recognize the importance of digital identity.", stages:["submit"] },
   { bok:"Programming and Software Engineering", idea:"Develop Code Segments to Solve a Problem",
     text:"Index selected items within a list.", stages:["indexing"] },
   { bok:"Programming and Software Engineering", idea:"Develop Code Segments to Solve a Problem",
-    text:"Develop a program using a string data type.", stages:["indexing"] },
-  { bok:"Programming and Software Engineering", idea:"Develop Code Segments to Solve a Problem",
     text:"Identify the types of operations that can be performed on different data types.", stages:["indexing"] },
-  { bok:"Programming and Software Engineering", idea:"Relate Problem-Solving Strategies to Computational Thinking",
-    text:"Create a visual representation of a solution to a problem.", stages:["build"] },
+  { bok:"Computing Components", idea:"Implement Foundational Computer Literacy Fluency",
+    text:"Identify multiple file format types.", stages:["files"] },
   { bok:"Emerging Technologies", idea:"Identify Characteristics of Robots",
     text:"Describe how humans and machines interact to accomplish tasks that neither can accomplish alone.", stages:["build"] },
-  { bok:"Emerging Technologies", idea:"Identify Emerging Technologies",
-    text:"Identify technology used to support specialized forms of human-computer interaction (HCI).", stages:["build"] },
-  { bok:"Emerging Technologies", idea:"Identify Artificial Intelligence and its Applications",
-    text:"Identify the characteristics of Artificial Intelligence (AI).", stages:["build"] },
   { bok:"Communication and Collaboration", idea:"Apply Information Collected Using Digital Resources",
     text:"Create a digital product individually and collaboratively.", stages:["submit"] },
-  { bok:"Communication and Collaboration", idea:"Apply Effective Communication Digitally",
-    text:"Demonstrate an ability to communicate through various online tools.", stages:["submit"] },
-  { bok:"Technological Impact", idea:"Introduce the Regulations Surrounding the Use of Information",
-    text:"Demonstrate compliance with the school's Acceptable Use Policy.", stages:["submit"] },
 ];
 
 const STAGE_LABEL = { briefing:"01", build:"02", files:"03", indexing:"04", submit:"05" };
@@ -1501,6 +1575,14 @@ const PY_QUESTIONS = [
     prompt:'<code>word = "PYTHON"</code><br>What is <code>word[3]</code>?',
     opts:['"T"','"H"','"O"','"P"'], correct:1,
     why:'Letters have spots too: P=0, Y=1, T=2, <b>H=3</b>.' },
+  { id:"p11", tag:"Data types", code:false,
+    prompt:'What data type is the value <code>3.14</code>?',
+    opts:['int','float','str','bool'], correct:1,
+    why:'A number with a decimal point is a <b>float</b>. Whole numbers with no dot are ints.' },
+  { id:"p12", tag:"Data types", code:true,
+    prompt:'<code>crew = ["Alpha", "Beta", "Charlie"]</code><br>What data type is <code>crew</code>?',
+    opts:['str','int','list','bool'], correct:2,
+    why:'Square brackets with values inside make a <b>list</b> &mdash; many values in order, each with an index.' },
 ];
 
 const FD_QUESTIONS = [
@@ -1764,46 +1846,29 @@ function runExpr(){
     `<div class="line in">&gt;&gt;&gt; ${raw.trim().replace(/</g,"&lt;")}</div>` +
     `<div class="line ${r.err?"bad":"out"}">${(r.err || r.out).replace(/</g,"&lt;")}</div>` +
     `<div class="why">${r.why}</div>`;
+  if(repl.children.length >= 5) repl.innerHTML = "";
   repl.appendChild(line);
-  while(repl.children.length > 5) repl.removeChild(repl.firstChild);
   repl.scrollTop = repl.scrollHeight;
 }
 
 /* ============================================================
-   THE HANGAR — 26 bots
+   THE HANGAR — 26 chassis, one shown at a time
    ============================================================ */
 function plateHTML(name){
   const src = BOT_IMG[name];
   if(src) return `<img src="${src}" alt="Chassis ${name}">`;
   return `<span class="ph"><b>${(name||"??").slice(0,2).toUpperCase()}</b>${name||"unassigned"}</span>`;
 }
-function renderBots(){
-  const grid = $("#botGrid");
-  grid.innerHTML = "";
-  BOTS.forEach(name=>{
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "bot";
-    b.setAttribute("aria-pressed","false");
-    b.innerHTML = `<span class="plate">${plateHTML(name)}</span><span class="cap">${name}</span>`;
-    b.addEventListener("click", ()=>{
-      state.bot = (state.bot === name) ? "" : name;
-      save(); paintBots(); refresh();
-    });
-    grid.appendChild(b);
-  });
-  paintBots();
+function currentBot(){ return state.bot || BOTS[0]; }
+function stepBot(delta){
+  const i = BOTS.indexOf(currentBot());
+  state.bot = BOTS[(i + delta + BOTS.length) % BOTS.length];
+  save(); paintBots(); refresh();
 }
 function paintBots(){
-  Array.from($("#botGrid").children).forEach((b,i)=>{
-    const on = BOTS[i] === state.bot;
-    b.classList.toggle("on", on);
-    b.setAttribute("aria-pressed", on ? "true" : "false");
-  });
-  $("#mastBot").innerHTML = plateHTML(state.bot || "Alpha");
-  const cap = $("#mastCap");
-  if(state.bot) cap.innerHTML = `Team leader &middot; <b>${state.bot}</b>`;
-  else cap.textContent = "Pick your bot below";
+  const name = currentBot();
+  $("#mastBot").innerHTML = plateHTML(name);
+  $("#botName").innerHTML = `${name}<small>${BOTS.indexOf(name)+1} of ${BOTS.length}</small>`;
 }
 
 /* ============================================================
@@ -1940,6 +2005,38 @@ function mqAdvance(){
 }
 
 /* ============================================================
+   SLICING LAB — drag start and stop, watch the piece change
+   ============================================================ */
+let slice = { start:1, stop:3 };
+
+function paintSlice(){
+  const { start, stop } = slice;
+  const piece = CREW.slice(start, stop);
+  const inRange = i => i >= start && i < stop;
+  $("#sliceStrip").innerHTML = CREW.map((v,i)=>`
+    <div class="cell ${inRange(i) ? "hot" : ""}">
+      <span class="pos">[${i}]</span>
+      <span class="plate">${plateHTML(v)}</span>
+      <span class="val">"${v}"</span>
+    </div>`).join("");
+  $("#sliceStart").textContent = start;
+  $("#sliceStop").textContent  = stop;
+  const why = piece.length === 0
+    ? `Start and stop are in the same place (or crossed over), so the slice comes back <b>empty</b>.`
+    : `Starts at <b>${start}</b>, stops just before <b>${stop}</b> &mdash; index ${stop} is left out. That is ${piece.length} bot${piece.length===1?"":"s"}.`;
+  $("#sliceOut").innerHTML =
+    `<div class="line in">&gt;&gt;&gt; crew[${start}:${stop}]</div>` +
+    `<div class="line out">${repr(piece)}</div>` +
+    `<div class="why">${why}</div>`;
+}
+
+function nudgeSlice(which, delta){
+  const next = Math.min(CREW.length, Math.max(0, slice[which] + delta));
+  slice[which] = next;
+  paintSlice();
+}
+
+/* ============================================================
    THE EXTENSION VAULT — triple-tap the Stage 04 headline
    ============================================================ */
 function openVault(){
@@ -2009,9 +2106,9 @@ function buildReport(){
   badge.textContent = rank.label;
   badge.style.color = rank.color;
 
-  $("#rBotPlate").innerHTML = plateHTML(state.bot);
+  $("#rBotPlate").innerHTML = plateHTML(currentBot());
   $("#rTeam").textContent    = team;
-  $("#rBotName").textContent = robot + (state.bot ? ` (${state.bot})` : "");
+  $("#rBotName").textContent = `${robot} (${currentBot()})`;
   $("#rCrew").innerHTML = state.crew.map((n,i)=>`
     <div class="rseat">
       <div class="k">Student ${i+1}${i === state.submitter ? " &middot; uploads" : ""}</div>
@@ -2215,6 +2312,21 @@ mqEl.dlg.addEventListener("keydown", e=>{
   }
 });
 
+/* slicing lab + data types */
+$("#sliceBtn").addEventListener("click", ()=>{ paintSlice(); $("#sliceModal").showModal(); });
+$("#sliceClose").addEventListener("click", ()=> $("#sliceModal").close());
+$("#sliceDone").addEventListener("click", ()=> $("#sliceModal").close());
+$$("#sliceModal .stepper button").forEach(b=>{
+  b.addEventListener("click", ()=> nudgeSlice(b.dataset.s === "start" ? "start" : "stop", parseInt(b.dataset.d,10)));
+});
+$("#typesBtn").addEventListener("click", ()=> $("#typesModal").showModal());
+$("#typesClose").addEventListener("click", ()=> $("#typesModal").close());
+$("#typesDone").addEventListener("click", ()=> $("#typesModal").close());
+
+/* chassis picker */
+$("#botPrev").addEventListener("click", ()=> stepBot(-1));
+$("#botNext").addEventListener("click", ()=> stepBot(1));
+
 /* hidden extension reference */
 $("#extClose").addEventListener("click", ()=> $("#extModal").close());
 $("#extDone").addEventListener("click", ()=> $("#extModal").close());
@@ -2258,7 +2370,7 @@ renderStandards();
 renderCategories();
 renderStrip();
 renderTries();
-renderBots();
+paintBots();
 renderChecklist();
 refresh();
 scrollSpy();

@@ -11,13 +11,18 @@ and the image-export library.
 | Stage | What happens |
 | --- | --- |
 | **01 Start here** | Five step cards, the "done means" chips, and the standards table |
-| **02 Build** | Team name, bot name, the 26-bot leader picker, Student 1–4 and who uploads — then spend a 20-point budget across five color-coded specs |
+| **02 Build** | Bot name, Student 1–4, and who uploads — then spend a 20-point budget across five color-coded specs |
 | **03 File types** | JPEG / PNG / PDF compared, what Google Drive is, states of data, then an 8-question pop-up test |
-| **04 Indexing** | Four lesson cards + the live **Index Lab** (the list is the bot roster: `crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]`), then a 10-question pop-up test |
+| **04 Indexing** | Four lesson cards, the live **Index Lab** (the list is the bot roster: `crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]`), a **Slicing lab** with start/stop steppers, a **Data types** reference (int, float, str, bool, list), then a 12-question pop-up test |
 | **05 Turn it in** | The generated report, PDF/PNG/JPEG export, the naming convention, and the four upload steps |
+
+The header carries the whole team identity: the chassis on the left under **Team leader** with ‹ › arrows to
+flip through all 26, and the **Team** name field top right.
 
 **Mission Check** — the end-of-class checklist — lives behind the ✓ button in the sticky rail, not on the page,
 so the page itself stays uncluttered. It saves per device.
+
+The Index Lab's output clears itself every fifth run, so nobody can spam it into a mile-long page.
 
 Correct answers on the two tests earn **build points** (+1 each, capped at 8) that raise the budget in
 Stage 02 — so the checks are worth doing before the build is final. Max budget is 28 points against 33 points
@@ -44,12 +49,6 @@ Leave it empty and the button stays put; fill it in and it points at Mission 1.
 
 **Triple-tap (or triple-click) the Stage 04 headline** — "JPEG, PNG, PDF — and where your file goes" —
 to open **The Extension Vault**, a reference of all ~30 file types the course covers, grouped by kind.
-
-## Artwork
-
-The wave band with the gliding manta ray at the top is inline SVG drawn for this page — no stock photo, no
-license to track, and it recolors itself for light and dark. It holds still for anyone with reduced motion
-turned on. Swap it for a photo if you would rather have one.
 
 ## The bots
 
@@ -79,8 +78,9 @@ Everything a teacher would want to change sits in named arrays at the top of the
 - `PY_QUESTIONS` / `FD_QUESTIONS` — the two tests (prompt, options, correct index, explanation)
 - `CREW` — the five bots used in the indexing lesson and lab
 - `FILE_VAULT` — the easter-egg file type reference
-- `STANDARDS` — benchmarks from the 6th Grade Computer Science Standards Map, tagged by stage;
-  they show as chips under each stage heading and print on the student's report
+- `STANDARDS` — five benchmarks from the 6th Grade Computer Science Standards Map, tagged by stage;
+  they show as chips under each stage heading and print on the student's report. Deliberately five, not
+  fifteen — these are the ones this mission actually assesses
 - `RANKS` — Bronze / Silver / Gold / Platinum thresholds
 
 ## Hosting
