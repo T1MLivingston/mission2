@@ -149,14 +149,18 @@ p:last-child{margin-bottom:0;}
   padding:9px 11px;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;cursor:pointer;
 }
 .team-badge input:focus-visible{outline:2px solid var(--amber);outline-offset:1px;}
-.swatches{display:flex;gap:6px;align-items:center;margin-top:11px;flex-wrap:wrap;}
+.hexrow{display:flex;gap:8px;align-items:center;margin-top:8px;}
 .swatch-dot{
-  width:24px;height:24px;border-radius:6px;border:1px solid var(--rule);cursor:pointer;padding:0;
-  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  width:34px;height:34px;border-radius:7px;border:1px solid var(--rule);cursor:pointer;padding:0;flex:none;
+  background:var(--plate-bg,#FAE74C);-webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
-.swatch-dot.on{box-shadow:0 0 0 2px var(--amber);border-color:var(--amber);}
-.swatch-dot.custom{position:relative;overflow:hidden;background:linear-gradient(135deg,#ff8a8a,#ffd76e 35%,#8fe3a8 68%,#8ab6ff);}
+.swatch-dot.custom{position:relative;overflow:hidden;display:block;}
 .swatch-dot.custom input{position:absolute;inset:-6px;opacity:0;cursor:pointer;width:200%;height:200%;border:0;padding:0;}
+#hexInput{
+  flex:1;min-width:0;background:var(--panel-2);border:1px solid var(--rule);color:var(--ink);border-radius:6px;
+  padding:8px 10px;font-family:'IBM Plex Mono',monospace;font-size:14px;text-transform:uppercase;
+}
+#hexInput.bad{border-color:var(--flare);color:var(--flare);}
 
 /* section chiefs — the bots nobody drafted */
 .chief{display:flex;flex-direction:column;align-items:center;gap:5px;width:66px;flex:none;}
@@ -779,7 +783,13 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
       <label><span>Team</span>
         <select id="teamName"></select></label>
       <span style="margin-top:12px;">Team color</span>
-      <div class="swatches" id="swatches"></div>
+      <div class="hexrow">
+        <span class="swatch-dot custom" title="Or pick one and the code fills in">
+          <input type="color" id="colorPicker" value="#FAE74C" aria-label="Pick a team color">
+        </span>
+        <input type="text" id="hexInput" value="#FAE74C" maxlength="7" spellcheck="false"
+               autocomplete="off" aria-label="Team color hex code">
+      </div>
     </div>
   </div>
 </header>
@@ -1470,11 +1480,10 @@ const RANKS = [
 const CREW = ["Alpha","Beta","Charlie","Delta","Echo"];
 
 /* Section chiefs — the chassis no group drafted, put to work running a section. */
-const CHIEFS = { ram:"Charlie", storagetype:"Hotel", storagecap:"Golf", ports:"Romeo", capability:"Zulu" };
+const CHIEFS = { ram:"Delta", storagetype:"Beta", storagecap:"Alpha", ports:"Echo", capability:"Charlie" };
 
 /* Team colour: the plate behind every bot, and the band on the report. */
-const TEAM_COLORS = ["#F6EFD2","#FBE3E3","#E4F0DC","#DDEAF6","#EFE2F5","#FFF6E0","#E6F2F1","#FFFFFF"];
-const DEFAULT_COLOR = TEAM_COLORS[0];
+const DEFAULT_COLOR = "#FAE74C";
 
 /* ---- The hangar: 26 chassis, one per call sign ---------------------------
    Artwork is inlined as data URIs by tools/build-bots.py, which rewrites the
@@ -1693,26 +1702,34 @@ themeBtn.addEventListener("click", ()=>{
 /* ============================================================
    TEAM COLOUR
    ============================================================ */
-function applyColor(){
-  document.documentElement.style.setProperty("--plate-bg", state.color || DEFAULT_COLOR);
-  const custom = $("#customColor");
-  if(custom) custom.value = state.color || DEFAULT_COLOR;
-  $$("#swatches .swatch-dot[data-color]").forEach(d=>{
-    d.classList.toggle("on", d.dataset.color.toLowerCase() === (state.color||"").toLowerCase());
-  });
+/* Accepts fae74c, #fae74c, or the three-digit shorthand. Returns null for anything else. */
+function readHex(raw){
+  let v = String(raw || "").trim().replace(/^#/, "");
+  if(/^[0-9a-f]{3}$/i.test(v)) v = v.split("").map(c => c + c).join("");
+  return /^[0-9a-f]{6}$/i.test(v) ? "#" + v.toUpperCase() : null;
 }
-function renderSwatches(){
-  const wrap = $("#swatches");
-  wrap.innerHTML = TEAM_COLORS.map(c=>
-    `<button type="button" class="swatch-dot" data-color="${c}" style="background:${c}" aria-label="Team color ${c}"></button>`
-  ).join("") +
-  `<span class="swatch-dot custom" title="Any color you like">
-     <input type="color" id="customColor" value="${DEFAULT_COLOR}" aria-label="Pick any team color">
-   </span>`;
-  $$("#swatches .swatch-dot[data-color]").forEach(d=>{
-    d.addEventListener("click", ()=>{ state.color = d.dataset.color; save(); applyColor(); });
+function applyColor(){
+  const color = state.color || DEFAULT_COLOR;
+  document.documentElement.style.setProperty("--plate-bg", color);
+  const picker = $("#colorPicker");
+  if(picker) picker.value = color;
+  const hex = $("#hexInput");
+  if(hex && document.activeElement !== hex) hex.value = color;
+}
+function setColor(color){
+  state.color = color;
+  save();
+  applyColor();
+}
+function renderColorControl(){
+  $("#colorPicker").addEventListener("input", e => { setColor(e.target.value.toUpperCase()); $("#hexInput").value = state.color; });
+  const hex = $("#hexInput");
+  hex.addEventListener("input", ()=>{
+    const parsed = readHex(hex.value);
+    hex.classList.toggle("bad", parsed === null && hex.value.trim() !== "");
+    if(parsed) setColor(parsed);
   });
-  $("#customColor").addEventListener("input", e=>{ state.color = e.target.value; save(); applyColor(); });
+  hex.addEventListener("blur", ()=>{ hex.classList.remove("bad"); applyColor(); });
   applyColor();
 }
 
@@ -2428,7 +2445,7 @@ applyTheme();
 $("#robotName").value = state.robot || "";
 [1,2,3,4].forEach(n => { $("#s"+n).value = (state.crew && state.crew[n-1]) || ""; });
 $("#submitter").value = String(state.submitter || 0);
-renderSwatches();
+renderColorControl();
 renderTeamPicker();
 renderChiefs();
 renderStandards();

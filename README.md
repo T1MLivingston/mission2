@@ -21,15 +21,19 @@ flip through all 26, and the **Team** dropdown top right. The two are the same c
 swings the banner to Sierra, and arrowing to Sierra sets the team. The call sign also becomes the filename
 (`Sierra_Mission2.pdf`), so no two teams can collide.
 
-Under the dropdown, **Team color** sets the plate behind every bot on the page, the band across the top of
-the report, and therefore the exported file. Eight presets plus a full color picker; it prints, too.
+Under the dropdown, **Team color** is a hex code the team types in — it starts at `#FAE74C`. It accepts
+`fae74c`, `#fae74c`, or the three-digit shorthand, turns red on anything else, and keeps the last good value.
+The swatch beside it opens the system color picker and fills the code in. That color paints the plate behind
+every bot on the page — banner, section chiefs, both labs, the report portrait — plus the band across the top
+of the report, so it rides into the downloaded file and survives Save as PDF.
 
 ### Section chiefs
 
-The five spec boxes and the two training stages are each hosted by one of the chassis no group drafted —
-Charlie on memory, Hotel on storage type, Golf on capacity, Romeo on ports, Zulu on specialty function,
-Sierra over file types, Uniform over indexing. They are set in `CHIEFS` and the two `data-chief` attributes
-in the markup, so reassign them whenever the draft changes.
+The five spec boxes are hosted by the crew from the indexing lesson — Delta on memory, Beta on storage type,
+Alpha on capacity, Echo on ports, Charlie on specialty function — so the same five bots students index in
+Stage 04 are the ones running Stage 02. The two training stages are hosted by undrafted chassis: Sierra over
+file types, Uniform over indexing. Set in `CHIEFS` and the two `data-chief` attributes in the markup, so
+reassign them whenever the draft changes.
 
 **Mission Check** — the end-of-class checklist — lives behind the ✓ button in the sticky rail, not on the page,
 so the page itself stays uncluttered. It saves per device.
@@ -76,7 +80,7 @@ Everything a teacher would want to change sits in named arrays at the top of the
 - `PY_QUESTIONS` / `FD_QUESTIONS` — the two tests (prompt, options, correct index, explanation)
 - `CREW` — the five bots used in the indexing lesson and lab
 - `CHIEFS` — which chassis hosts each spec box
-- `TEAM_COLORS` — the eight preset team colors (the first one is the default)
+- `DEFAULT_COLOR` — the starting team color, `#FAE74C`
 - `FILE_VAULT` — the easter-egg file type reference
 - `STANDARDS` — five benchmarks from the 6th Grade Computer Science Standards Map, tagged by stage;
   they show as chips under each stage heading and print on the student's report. Deliberately five, not
