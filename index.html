@@ -38,6 +38,7 @@
   --g3:#465561; --g3-s:rgba(70,85,97,.10);
   --g4:#32414C; --g4-s:rgba(50,65,76,.10);
   --g5:#1E2C36; --g5-s:rgba(30,44,54,.10);
+  --y:#FAE74C; --y-soft:#F7EFC4; --y-line:#EBDC9C; --y-ink:#2B2506;
   --c-mem:var(--g1); --c-mem-s:var(--g1-s);
   --c-sty:var(--g2); --c-sty-s:var(--g2-s);
   --c-cap:var(--g3); --c-cap-s:var(--g3-s);
@@ -73,6 +74,7 @@
   --g3:#AEC2CE; --g3-s:rgba(174,194,206,.12);
   --g4:#93AAB9; --g4-s:rgba(147,170,185,.12);
   --g5:#7A93A4; --g5-s:rgba(122,147,164,.12);
+  --y:#FAE74C; --y-soft:rgba(250,231,76,.17); --y-line:rgba(250,231,76,.36); --y-ink:#2B2506;
   --c-mem:var(--g1); --c-mem-s:var(--g1-s);
   --c-sty:var(--g2); --c-sty-s:var(--g2-s);
   --c-cap:var(--g3); --c-cap-s:var(--g3-s);
@@ -84,6 +86,7 @@
     --g3:#AEC2CE; --g3-s:rgba(174,194,206,.12);
     --g4:#93AAB9; --g4-s:rgba(147,170,185,.12);
     --g5:#7A93A4; --g5-s:rgba(122,147,164,.12);
+    --y:#FAE74C; --y-soft:rgba(250,231,76,.17); --y-line:rgba(250,231,76,.36); --y-ink:#2B2506;
     --c-mem:var(--g1); --c-mem-s:var(--g1-s);
     --c-sty:var(--g2); --c-sty-s:var(--g2-s);
     --c-cap:var(--g3); --c-cap-s:var(--g3-s);
@@ -215,8 +218,13 @@ p:last-child{margin-bottom:0;}
 .rail-btn.theme:hover{border-color:var(--amber);color:var(--amber);}
 .rail-btn b{color:var(--c-por);}
 .steps-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:12px;}
-.step-card{border:1px solid var(--rule);border-top:5px solid var(--sc,var(--amber));border-radius:9px;background:var(--panel);padding:14px 15px;}
-.step-card .n{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--sc,var(--amber));display:block;margin-bottom:6px;}
+.step-card{
+  border:1px solid var(--rule);border-top:5px solid var(--y-soft);border-radius:9px;background:var(--panel);
+  padding:14px 15px;transition:border-top-color .25s ease;
+}
+.step-card.done{border-top-color:var(--y);}
+.step-card.done .n::after{content:" \2713";color:var(--ink);}
+.step-card .n{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--ink-2);display:block;margin-bottom:6px;}
 .step-card h4{font-size:16.5px;margin:0 0 4px;line-height:1.2;}
 .step-card p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.45;}
 .done-chips{display:flex;gap:9px;flex-wrap:wrap;}
@@ -258,10 +266,15 @@ h1.title em{font-style:normal;color:var(--amber);}
   font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--ink-2);text-decoration:none;padding:14px 12px;border-bottom:2px solid transparent;white-space:nowrap;
 }
-.rail-nav a i{font-style:normal;color:var(--ink-3);margin-right:6px;}
+.rail-nav a i{
+  font-style:normal;color:var(--ink-2);margin-right:7px;background:var(--y-soft);
+  border:1px solid var(--y-line);border-radius:4px;padding:1px 5px;transition:background .25s ease,color .25s ease;
+}
+.rail-nav a[data-done="1"] i{background:var(--y);border-color:var(--y);color:var(--y-ink);}
+.rail-progress{height:3px;background:var(--rule-soft);}
+.rail-progress i{display:block;height:100%;width:0;background:var(--y);transition:width .35s ease;}
 .rail-nav a:hover{color:var(--ink);}
 .rail-nav a.active{color:var(--amber);border-bottom-color:var(--amber);}
-.rail-nav a.active i{color:var(--amber);}
 .rail-score{display:flex;gap:8px;align-items:center;white-space:nowrap;}
 .readout{
   font-family:'IBM Plex Mono',monospace;font-size:11.5px;border:1px solid var(--rule);border-radius:5px;
@@ -279,9 +292,11 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
 .stage-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:26px;}
 .marker{
   font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--stage-c,var(--g1));border:1px solid currentColor;border-radius:5px;padding:7px 11px;
-  white-space:nowrap;flex:none;margin-top:4px;
+  color:var(--ink-2);background:var(--y-soft);border:1px solid var(--y-line);border-radius:5px;padding:7px 11px;
+  white-space:nowrap;flex:none;margin-top:4px;transition:background .25s ease,color .25s ease;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
+.marker.done{background:var(--y);border-color:var(--y);color:var(--y-ink);}
 .marker.done::after{content:" \2713";}
 .stage .eyebrow{color:var(--stage-c,var(--g1));}
 .stage-head h2{font-size:clamp(24px,3vw,34px);line-height:1.1;margin-bottom:6px;}
@@ -831,6 +846,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
       <button class="rail-btn theme" id="themeToggle" type="button">Theme: Auto</button>
     </div>
   </div>
+  <div class="rail-progress"><i id="railProgress"></i></div>
 </nav>
 
 <main>
@@ -846,23 +862,23 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
   </div>
 
   <div class="steps-strip" style="margin-bottom:20px;">
-    <div class="step-card" style="--sc:var(--g1);">
+    <div class="step-card" data-step="briefing">
       <span class="n">STEP 1</span><h4>Name your team</h4>
       <p>Team, bot, and who is Student 1 through 4.</p>
     </div>
-    <div class="step-card" style="--sc:var(--g2);">
+    <div class="step-card" data-step="build">
       <span class="n">STEP 2</span><h4>Spend 20 points</h4>
       <p>Pick one part in each of the five boxes.</p>
     </div>
-    <div class="step-card" style="--sc:var(--g3);">
+    <div class="step-card" data-step="files">
       <span class="n">STEP 3</span><h4>Learn the file types</h4>
       <p>JPEG, PNG, PDF. Right answers earn more points.</p>
     </div>
-    <div class="step-card" style="--sc:var(--g4);">
+    <div class="step-card" data-step="indexing">
       <span class="n">STEP 4</span><h4>Learn indexing</h4>
       <p>How Python finds one bot in a list. More points.</p>
     </div>
-    <div class="step-card" style="--sc:var(--g5);">
+    <div class="step-card" data-step="submit">
       <span class="n">STEP 5</span><h4>Turn it in</h4>
       <p>Assess, save as a PDF, drop it in Drive.</p>
     </div>
@@ -2217,15 +2233,24 @@ function openVault(){
 /* ============================================================
    MARKERS + SCROLLSPY
    ============================================================ */
-function updateMarkers(){
-  const done = {
-    briefing: false,
+/* One definition of "this stage is finished", used by the step markers, the
+   briefing cards and the progress bar in the rail. */
+function stageDone(){
+  return {
+    briefing: !!(state.robot.trim() && state.period && state.crew.every(n => n.trim())),
     build:    allSelected(),
-    indexing: PY_QUESTIONS.every(q => state.answers[q.id] !== undefined),
     files:    FD_QUESTIONS.every(q => state.answers[q.id] !== undefined),
-    submit:   $$("#checklist li[data-k]").every(li => state.checks[li.dataset.k]),
+    indexing: PY_QUESTIONS.every(q => state.answers[q.id] !== undefined),
+    submit:   state.assessed && $$("#checklist li[data-k]").every(li => state.checks[li.dataset.k]),
   };
+}
+function updateMarkers(){
+  const done = stageDone();
   $$("[data-marker]").forEach(m => m.classList.toggle("done", !!done[m.dataset.marker]));
+  $$(".step-card[data-step]").forEach(c => c.classList.toggle("done", !!done[c.dataset.step]));
+  $$("#railNav a").forEach(a => a.dataset.done = done[a.dataset.stage] ? "1" : "0");
+  const n = Object.values(done).filter(Boolean).length;
+  $("#railProgress").style.width = (n / 5 * 100) + "%";
 }
 
 function scrollSpy(){

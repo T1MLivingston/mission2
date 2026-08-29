@@ -54,6 +54,15 @@ rather than invent. When every folder is complete and correctly named, the organ
 with the teacher's account — **the address lives in the daily document, not on this page** — and that share
 is the submission. The page says plainly not to share early.
 
+### Progress
+
+Each of the five steps starts in a soft yellow and fills to solid `#FAE74C` with a check when it is finished —
+the marker beside the heading, the card in the briefing strip, and the number in the sticky rail all flip
+together, and a yellow bar under the rail fills a fifth at a time. A step counts as done when: the team
+details are filled in (1), all five parts are picked (2), every file-types question is answered (3), every
+indexing question is answered (4), and the report exists with all of Mission Check ticked (5). One definition,
+`stageDone()`, drives all of it.
+
 **Mission Check** — the end-of-class checklist — lives behind the ✓ button in the sticky rail, not on the page,
 so the page itself stays uncluttered. It saves per device, and splits into "everyone" and "organizer only".
 
