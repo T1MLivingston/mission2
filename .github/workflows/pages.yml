@@ -1,7 +1,7 @@
 name: Deploy to GitHub Pages
 
-# The site is one static page plus its assets, so there is nothing to build —
-# the repository root is published as-is.
+# index.html is self-contained — the bot art is inlined as data URIs — so the
+# published site is that one file. The originals in assets/ stay out of it.
 on:
   push:
     branches: [claude/mission-two-learning-module-4aihp8]
@@ -12,7 +12,6 @@ permissions:
   pages: write
   id-token: write
 
-# Let a run finish rather than cancelling it, so a deploy is never half-applied.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -26,15 +25,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Turn Pages on if it is not already
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      - name: Collect the site
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          touch _site/.nojekyll
 
-      - name: Package the site
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - id: deployment
         uses: actions/deploy-pages@v4
