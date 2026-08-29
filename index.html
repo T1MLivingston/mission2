@@ -139,11 +139,6 @@ p:last-child{margin-bottom:0;}
 .mission-line{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-bottom:8px;}
 .mission-line .m{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--btn-fg);background:var(--amber);border-radius:5px;padding:5px 11px;}
 .mission-line .who{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);}
-.back-link{display:inline-flex;align-items:center;gap:12px;text-decoration:none;border:1px solid var(--rule);border-radius:9px;padding:11px 16px;background:var(--panel);color:var(--ink);margin-top:4px;}
-.back-link:hover{border-color:var(--amber);}
-.back-link .arw{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:17px;}
-.back-link b{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:15.5px;display:block;}
-.back-link em{font-style:normal;color:var(--ink-2);font-size:13px;}
 
 /* sea band */
 /* team badge, top right of the header */
@@ -754,10 +749,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
       <h1 class="title">Spec Check</h1>
       <p class="lede">Mission 1 was the drawing. Now you give your bot real hardware, learn the code that
         runs it, and you only get 20 points to spend.</p>
-      <a class="back-link" id="missionOne" href="#">
-        <span class="arw">&larr;</span>
-        <span><b>Mission 01 &middot; Build Your Bot</b><em>You drew it. Now you program it and upgrade it.</em></span>
-      </a>
+      <p class="small" style="margin-top:2px;">Work top to bottom. Everything you need is on this page.</p>
     </div>
     <label class="team-badge">
       <span>Team</span>
@@ -1373,9 +1365,6 @@ specs = [<span class="k">16</span>, <span class="k">512</span>, <span class="k">
 /* ============================================================
    DATA
    ============================================================ */
-/* Paste the Mission 1 page link here and the button at the top will point at it. */
-const MISSION_ONE_URL = "";
-
 const BASE_BUDGET = 20;
 const CREDIT_CAP  = 8;
 
@@ -2269,15 +2258,6 @@ $("#submitter").addEventListener("change", e => { state.submitter = parseInt(e.t
 $("#openCheck").addEventListener("click", ()=> $("#checkModal").showModal());
 $("#checkClose").addEventListener("click", ()=> $("#checkModal").close());
 
-/* Mission 01 back-link */
-(function missionOne(){
-  const a = $("#missionOne");
-  if(MISSION_ONE_URL){ a.href = MISSION_ONE_URL; }
-  else{
-    a.href = "#briefing";
-    a.title = "Mission 1 link not set yet";
-  }
-})();
 
 $("#assessBtn").addEventListener("click", ()=>{
   buildReport();

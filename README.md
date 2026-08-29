@@ -35,21 +35,6 @@ those use the links in the daily document.
 The report carries the team name, the bot's name and call sign, its portrait, all four students with the
 uploader marked, the five specs with stars, the rank, the training score, and the standards demonstrated.
 
-## Set the Mission 1 link
-
-The **Mission 01 · Build Your Bot** button at the top is wired to a constant near the top of the script:
-
-```js
-const MISSION_ONE_URL = "";   // paste the Mission 1 page link here
-```
-
-Leave it empty and the button stays put; fill it in and it points at Mission 1.
-
-### Easter egg
-
-**Triple-tap (or triple-click) the Stage 04 headline** — "JPEG, PNG, PDF — and where your file goes" —
-to open **The Extension Vault**, a reference of all ~30 file types the course covers, grouped by kind.
-
 ## The bots
 
 26 chassis, one per call sign (Alpha → Zulu), used for team selection, the masthead, and the report portrait.
