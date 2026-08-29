@@ -33,6 +33,12 @@
   --btn-fg:#FFF8EC;
   --grid:rgba(10,28,38,.055);
   --shadow:0 1px 0 rgba(10,28,38,.04), 0 14px 34px -24px rgba(10,28,38,.55);
+  --c-mem:#6A45C0; --c-mem-s:rgba(106,69,192,.12);
+  --c-sty:#0B6F68; --c-sty-s:rgba(11,111,104,.12);
+  --c-cap:#186896; --c-cap-s:rgba(24,104,150,.12);
+  --c-por:#2C7A45; --c-por-s:rgba(44,122,69,.12);
+  --c-spc:#A2356E; --c-spc-s:rgba(162,53,110,.12);
+  --sea-1:#BBD0DC; --sea-2:#8FB2C6; --sea-3:#5E8AA6; --sea-ray:#31556C;
   --step:clamp(14px,1.6vw,18px);
 }
 :root:not([data-theme="light"]) { }
@@ -57,6 +63,18 @@
     --btn-fg:#0A1C26;
     --grid:rgba(96,196,196,.05);
     --shadow:0 1px 0 rgba(0,0,0,.2), 0 18px 40px -26px #000;
+  --c-mem:#B7A2FF; --c-mem-s:rgba(183,162,255,.15);
+  --c-sty:#4FD1C5; --c-sty-s:rgba(79,209,197,.15);
+  --c-cap:#6FBFEC; --c-cap-s:rgba(111,191,236,.15);
+  --c-por:#7BD494; --c-por-s:rgba(123,212,148,.15);
+  --c-spc:#F293C4; --c-spc-s:rgba(242,147,196,.15);
+  --sea-1:#0D2331; --sea-2:#123246; --sea-3:#1A4459; --sea-ray:#38708C;
+    --c-mem:#B7A2FF; --c-mem-s:rgba(183,162,255,.15);
+    --c-sty:#4FD1C5; --c-sty-s:rgba(79,209,197,.15);
+    --c-cap:#6FBFEC; --c-cap-s:rgba(111,191,236,.15);
+    --c-por:#7BD494; --c-por-s:rgba(123,212,148,.15);
+    --c-spc:#F293C4; --c-spc-s:rgba(242,147,196,.15);
+    --sea-1:#0D2331; --sea-2:#123246; --sea-3:#1A4459; --sea-ray:#38708C;
   }
 }
 :root[data-theme="dark"]{
@@ -114,7 +132,53 @@ p:last-child{margin-bottom:0;}
    MASTHEAD
    ============================================================ */
 .masthead{border-bottom:1px solid var(--rule);background:linear-gradient(180deg,var(--panel-2),transparent);}
-.masthead-in{max-width:1120px;margin:0 auto;padding:34px 20px 30px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;}
+.masthead-in{max-width:1120px;margin:0 auto;padding:26px 20px 26px;display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;}
+.hero-bot{width:214px;flex:none;}
+.hero-bot .plate{width:214px;height:214px;border-radius:12px;}
+.hero-bot .cap{display:block;text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);}
+.hero-bot .cap b{color:var(--amber);}
+.mission-line{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-bottom:8px;}
+.mission-line .m{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--btn-fg);background:var(--amber);border-radius:5px;padding:5px 11px;}
+.mission-line .who{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);}
+.back-link{display:inline-flex;align-items:center;gap:12px;text-decoration:none;border:1px solid var(--rule);border-radius:9px;padding:11px 16px;background:var(--panel);color:var(--ink);margin-top:4px;}
+.back-link:hover{border-color:var(--amber);}
+.back-link .arw{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:17px;}
+.back-link b{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:15.5px;display:block;}
+.back-link em{font-style:normal;color:var(--ink-2);font-size:13px;}
+
+/* sea band */
+.seaband{position:relative;width:100%;height:132px;overflow:hidden;}
+.seaband .waves{position:absolute;inset:0;width:100%;height:100%;}
+.seaband .ray{position:absolute;top:14px;left:0;opacity:.72;animation:glide 38s linear infinite;}
+@keyframes glide{
+  0%{transform:translate(-170px,8px) rotate(-3deg)}
+  35%{transform:translate(38vw,-6px) rotate(2deg)}
+  70%{transform:translate(72vw,10px) rotate(-2deg)}
+  100%{transform:translate(105vw,0) rotate(1deg)}
+}
+
+/* stage + category colour chunks */
+.stage{--stage-c:var(--amber);}
+.stage[data-c="sty"]{--stage-c:var(--c-sty);}
+.stage[data-c="mem"]{--stage-c:var(--c-mem);}
+.stage[data-c="cap"]{--stage-c:var(--c-cap);}
+.stage[data-c="por"]{--stage-c:var(--c-por);}
+.rail-nav a[data-c="sty"] i{color:var(--c-sty);}
+.rail-nav a[data-c="mem"] i{color:var(--c-mem);}
+.rail-nav a[data-c="cap"] i{color:var(--c-cap);}
+.rail-nav a[data-c="por"] i{color:var(--c-por);}
+.rail-btn{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;cursor:pointer;display:flex;gap:7px;align-items:center;white-space:nowrap;}
+.rail-btn:hover{border-color:var(--c-por);color:var(--c-por);}
+.rail-btn.theme:hover{border-color:var(--amber);color:var(--amber);}
+.rail-btn b{color:var(--c-por);}
+.steps-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:12px;}
+.step-card{border:1px solid var(--rule);border-top:5px solid var(--sc,var(--amber));border-radius:9px;background:var(--panel);padding:14px 15px;}
+.step-card .n{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--sc,var(--amber));display:block;margin-bottom:6px;}
+.step-card h4{font-size:16.5px;margin:0 0 4px;line-height:1.2;}
+.step-card p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.45;}
+.done-chips{display:flex;gap:9px;flex-wrap:wrap;}
+.done-chip{display:flex;gap:9px;align-items:center;border:1px solid var(--rule);border-radius:999px;padding:8px 15px;background:var(--panel);font-size:13.5px;}
+.done-chip b{color:var(--c-por);font-size:15px;}
 .stamp{
   font-family:'IBM Plex Mono',monospace;border:1.5px solid var(--amber);color:var(--amber);
   border-radius:6px;padding:10px 12px;text-align:center;line-height:1.15;min-width:104px;
@@ -171,9 +235,10 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
 .stage + .stage{border-top:1px dashed var(--rule);}
 .stage-head{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;margin-bottom:26px;}
 .marker{
-  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--btn-fg);background:var(--amber);
-  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none;
+  font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#fff;background:var(--stage-c,var(--amber));
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none;
 }
+.stage .eyebrow{color:var(--stage-c,var(--teal));}
 .marker.done::after{content:"✓";}
 .marker.done{font-size:0;}
 .marker.done::after{font-size:16px;}
@@ -215,7 +280,8 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
   background:var(--panel-2);border:1px solid var(--rule);color:var(--ink);border-radius:5px;
   padding:10px 12px;font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;min-width:230px;
 }
-.field input:focus{outline:2px solid var(--amber);outline-offset:1px;}
+.field input:focus,.field select:focus{outline:2px solid var(--amber);outline-offset:1px;}
+.field select{background:var(--panel-2);border:1px solid var(--rule);color:var(--ink);border-radius:5px;padding:10px 12px;font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;min-width:230px;}
 
 .budget{
   position:sticky;top:47px;z-index:30;background:var(--panel);border:1px solid var(--rule);
@@ -236,9 +302,9 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
 .assess:hover:not(:disabled){filter:brightness(1.08);}
 .assess:disabled{background:transparent;color:var(--ink-3);border-color:var(--rule);cursor:not-allowed;}
 
-.cat{border:1px solid var(--rule);border-radius:8px;background:var(--panel);margin-bottom:16px;overflow:hidden;}
+.cat{border:1px solid var(--rule);border-top:5px solid var(--cat-c,var(--amber));border-radius:9px;background:var(--panel);margin-bottom:16px;overflow:hidden;}
 .cat-head{padding:15px 18px 12px;}
-.cat-head .cat-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin:0 0 4px;}
+.cat-head .cat-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cat-c,var(--amber));margin:0 0 4px;}
 .cat-head h4{font-size:17px;margin-bottom:5px;}
 .cat-head p{font-size:14px;color:var(--ink-2);margin:0;max-width:74ch;}
 .options{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:9px;padding:0 18px 18px;}
@@ -247,13 +313,14 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
   border-radius:6px;padding:10px 12px;font-family:'IBM Plex Sans',sans-serif;
   transition:border-color .14s,background .14s,transform .1s;
 }
-.opt:hover{border-color:var(--amber);}
-.opt.selected{border-color:var(--amber);background:var(--amber-soft);box-shadow:inset 0 0 0 1px var(--amber);}
+.opt:hover{border-color:var(--cat-c,var(--amber));}
+.opt.selected{border-color:var(--cat-c,var(--amber));background:var(--cat-s,var(--amber-soft));box-shadow:inset 0 0 0 1px var(--cat-c,var(--amber));}
 .opt.locked{opacity:.42;cursor:not-allowed;}
 .opt-name{display:block;font-size:14px;font-weight:600;margin-bottom:6px;}
 .opt-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;}
-.opt-cost{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber);font-variant-numeric:tabular-nums;}
-.opt-stars{font-size:11px;letter-spacing:1.5px;color:var(--teal);}
+.opt-cost{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;}
+.opt.selected .opt-cost{color:var(--cat-c,var(--amber));}
+.opt-stars{font-size:11px;letter-spacing:1.5px;color:var(--cat-c,var(--teal));}
 .shake{animation:shake .32s ease;}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
 @media (prefers-reduced-motion: reduce){
@@ -303,7 +370,8 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
 }
 .cell:hover{border-color:var(--amber);transform:translateY(-2px);}
 .cell .pos{font-size:11px;color:var(--ink-3);display:block;}
-.cell .val{font-size:14px;font-weight:600;color:var(--ink);display:block;padding:6px 0;}
+.cell .val{font-size:13px;font-weight:600;color:var(--ink);display:block;padding:3px 0 2px;}
+.cell .plate{width:100%;aspect-ratio:1;margin:4px 0 2px;}
 .cell .neg{font-size:11px;color:var(--teal);display:block;}
 .cell.hot{background:var(--amber-soft);border-color:var(--amber);box-shadow:inset 0 0 0 1px var(--amber);}
 .cell.hot .pos{color:var(--amber);}
@@ -587,8 +655,17 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 .plate .ph b{display:block;font-size:19px;color:#4E6371;}
 .bot .cap{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-2);letter-spacing:.05em;}
 .bot.on .cap{color:var(--amber);}
-.portrait{display:flex;gap:16px;align-items:center;margin-bottom:18px;}
-.portrait .plate{width:104px;height:104px;flex:none;}
+.crew{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:12px;}
+.seat{border:1px solid var(--rule);border-left:4px solid var(--c-cap);border-radius:8px;background:var(--panel-2);padding:11px 13px;}
+.seat span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;}
+.seat input{width:100%;background:var(--panel);border:1px solid var(--rule);color:var(--ink);border-radius:5px;padding:9px 11px;font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;}
+.seat input:focus{outline:2px solid var(--c-cap);outline-offset:1px;}
+.rcrew{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin-bottom:20px;}
+.rseat{border:1px solid var(--rule);border-left:4px solid var(--c-cap);border-radius:7px;background:var(--panel-2);padding:9px 12px;}
+.rseat .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);}
+.rseat .v{font-size:14.5px;font-weight:600;}
+.portrait{display:flex;gap:18px;align-items:center;margin-bottom:18px;}
+.portrait .plate{width:132px;height:132px;flex:none;}
 .portrait .pmeta .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);}
 .portrait .pmeta .v{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:20px;}
 
@@ -604,7 +681,15 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
    RESPONSIVE + PRINT
    ============================================================ */
 @media (max-width:760px){
-  .masthead-in{grid-template-columns:1fr;gap:16px;}
+  .masthead-in{grid-template-columns:1fr;gap:18px;}
+  .hero-bot{width:150px;}
+  .hero-bot .plate{width:150px;height:150px;}
+  .seaband{height:88px;}
+  .rail-in{flex-wrap:wrap;gap:0;}
+  .rail-nav{order:2;width:100%;}
+  .rail-score{order:1;width:100%;justify-content:flex-start;padding:9px 0 2px;flex-wrap:wrap;}
+  .field select,.field input{min-width:0;width:100%;}
+  .field{width:100%;}
   .stage-head{grid-template-columns:1fr;gap:10px;}
   .drive-body{grid-template-columns:1fr;}
   .drive-side{border-right:none;border-bottom:1px solid var(--rule);}
@@ -628,25 +713,40 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 </style>
 </head>
 <body>
+<div class="seaband" aria-hidden="true">
+  <svg class="waves" viewBox="0 0 1440 132" preserveAspectRatio="none">
+    <rect width="1440" height="132" fill="var(--sea-1)"/>
+    <path fill="var(--sea-2)" d="M0 52 C 180 30 300 78 480 70 C 660 62 780 24 960 36 C 1140 48 1260 84 1440 66 L1440 132 L0 132 Z"/>
+    <path fill="var(--sea-3)" d="M0 96 C 200 76 340 116 520 110 C 700 104 820 74 1000 86 C 1180 98 1300 122 1440 106 L1440 132 L0 132 Z"/>
+  </svg>
+  <svg class="ray" viewBox="0 0 220 132" width="132" height="79">
+    <g fill="var(--sea-ray)">
+      <path d="M110 18 C 78 13 40 26 10 52 C 47 49 83 60 100 74 L110 81 L120 74 C 137 60 173 49 210 52 C 180 26 142 13 110 18 Z"/>
+      <path d="M101 21 C 97 10 88 7 83 12 C 90 14 97 17 101 24 Z"/>
+      <path d="M119 21 C 123 10 132 7 137 12 C 130 14 123 17 119 24 Z"/>
+      <path d="M110 81 C 113 97 115 113 108 128" stroke="var(--sea-ray)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+</div>
 
 <header class="masthead">
   <div class="masthead-in">
-    <div>
-      <div class="stamp"><b>02</b><span>Mission</span></div>
-      <div class="plate" id="mastBot" style="width:104px;height:104px;margin-top:12px;" aria-hidden="true"></div>
+    <div class="hero-bot">
+      <div class="plate" id="mastBot"></div>
+      <span class="cap" id="mastCap">Pick your bot below</span>
     </div>
     <div>
-      <p class="eyebrow">Computer Science &middot; Grade 6 &middot; Directions + Build Module</p>
-      <h1 class="title">Spec Check: <em>Build Your Robot</em></h1>
-      <p class="lede">This page <strong>is</strong> your Mission 2 directions. Build a robot inside a fixed hardware
-        budget, train up on Python indexing and file types to earn extra budget, then export your report and drop it
-        in the class Google Drive folder. Everything you need is on this page &mdash; work top to bottom.</p>
-      <div class="head-meta">
-        <span class="chip">Time: <b>one class period</b></span>
-        <span class="chip">Turn in: <b>1 file, in Drive</b></span>
-        <span class="chip">Work: <b>solo or with a partner</b></span>
-        <button class="theme-toggle" id="themeToggle" type="button">Theme: Auto</button>
+      <div class="mission-line">
+        <span class="m">Mission 02</span>
+        <span class="who">6th Grade Computer Science</span>
       </div>
+      <h1 class="title">Spec Check</h1>
+      <p class="lede">In Mission 1 you built your bot. Now you give it real hardware &mdash;
+        and you only get 20 points to spend.</p>
+      <a class="back-link" id="missionOne" href="#">
+        <span class="arw">&larr;</span>
+        <span><b>Mission 01 &middot; Build Your Bot</b><em>You designed it. This mission calibrates the specs.</em></span>
+      </a>
     </div>
   </div>
 </header>
@@ -654,77 +754,67 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 <nav class="rail" aria-label="Mission stages">
   <div class="rail-in">
     <div class="rail-nav" id="railNav">
-      <a href="#briefing" data-stage="briefing"><i>01</i>Briefing</a>
-      <a href="#build" data-stage="build"><i>02</i>Build</a>
-      <a href="#indexing" data-stage="indexing"><i>03</i>Indexing</a>
-      <a href="#files" data-stage="files"><i>04</i>Files &amp; Drive</a>
-      <a href="#submit" data-stage="submit"><i>05</i>Turn It In</a>
+      <a href="#briefing" data-stage="briefing" data-c="sty"><i>01</i>Start Here</a>
+      <a href="#build" data-stage="build" data-c="amb"><i>02</i>Build</a>
+      <a href="#files" data-stage="files" data-c="cap"><i>03</i>File Types</a>
+      <a href="#indexing" data-stage="indexing" data-c="mem"><i>04</i>Indexing</a>
+      <a href="#submit" data-stage="submit" data-c="por"><i>05</i>Turn It In</a>
     </div>
     <div class="rail-score">
-      <span class="readout" title="Extra build points earned from the training checks">CREDITS <b id="railCredits">+0</b>/8</span>
-      <span class="readout teal" title="Correct answers across both training checks">TRAINING <b id="railTraining">0</b>/18</span>
+      <span class="readout" title="Extra build points from the two checks">POINTS <b id="railCredits">+0</b>/8</span>
+      <button class="rail-btn" id="openCheck" type="button"><b>&#10003;</b> Mission Check <span id="chkPill">0/7</span></button>
+      <button class="rail-btn theme" id="themeToggle" type="button">Theme: Auto</button>
     </div>
   </div>
 </nav>
 
 <main>
 
-<!-- ========================= 01 BRIEFING ========================= -->
-<section class="stage" id="briefing">
+<!-- ========================= 01 START HERE ========================= -->
+<section class="stage" id="briefing" data-c="sty">
   <div class="stage-head">
     <span class="marker" data-marker="briefing">01</span>
     <div>
-      <p class="eyebrow">Stage 01 &middot; Briefing</p>
-      <h2>What you are doing today</h2>
-      <p class="lede">Engineers never get everything they want. They get a budget, and they spend it where it matters
-        most. That is the whole mission: make smart trade-offs, prove you understand the parts, and turn the work in
-        the right way, in the right place, in the right format.</p>
+      <p class="eyebrow">Start here</p>
+      <h2>Five steps. One file at the end.</h2>
     </div>
   </div>
 
-  <div class="grid2">
-    <div class="panel">
-      <div class="panel-head"><h3>Your objectives</h3><span class="q-tag">Do these in order</span></div>
-      <div class="panel-body">
-        <ul class="objectives">
-          <li data-n="01"><span><strong>Build a robot</strong> inside a 20-point hardware budget. Every part costs points; better parts cost more.</span></li>
-          <li data-n="02"><span><strong>Earn extra budget</strong> &mdash; up to 8 bonus credits &mdash; by passing the Python indexing check and the files &amp; Drive check.</span></li>
-          <li data-n="03"><span><strong>Assess your build</strong> to generate your Mission 2 report. It gets a star score, a rank, and your training results.</span></li>
-          <li data-n="04"><span><strong>Export the report</strong> as a PDF, PNG, or JPEG &mdash; you choose, and you have to know the difference.</span></li>
-          <li data-n="05"><span><strong>Upload it to Google Drive</strong>, in the Mission 2 folder, named correctly. That upload is your grade.</span></li>
-        </ul>
-      </div>
+  <div class="steps-strip" style="margin-bottom:20px;">
+    <div class="step-card" style="--sc:var(--amber);">
+      <span class="n">STEP 1</span><h4>Name your team</h4>
+      <p>Team, bot, and who is Student 1 through 4.</p>
     </div>
-
-    <div class="panel">
-      <div class="panel-head"><h3>What counts as done</h3><span class="q-tag">Grading</span></div>
-      <div class="panel-body">
-        <div class="note">
-          <strong>One file, in the right folder, named the right way.</strong> A perfect robot in the wrong place is a
-          zero, and a Bronze robot uploaded correctly still earns credit. Getting the submission right is part of the
-          skill being graded.
-        </div>
-        <table class="cmp" style="margin-top:14px;min-width:0;">
-          <thead><tr><th>Checked</th><th>What I look for</th></tr></thead>
-          <tbody>
-            <tr><td>Build</td><td>All five categories chosen, budget not blown</td></tr>
-            <tr><td>Training</td><td>Both checks attempted &mdash; score shows on the report</td></tr>
-            <tr><td>File</td><td>PDF, PNG, or JPEG &mdash; opens when I click it</td></tr>
-            <tr><td>Name</td><td><span class="mono">Lastname_Firstname_Mission2</span></td></tr>
-            <tr><td>Place</td><td>The <b>Mission 2</b> folder in the class Drive</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="step-card" style="--sc:var(--amber);">
+      <span class="n">STEP 2</span><h4>Spend 20 points</h4>
+      <p>Pick one part in each of the five colored boxes.</p>
+    </div>
+    <div class="step-card" style="--sc:var(--c-cap);">
+      <span class="n">STEP 3</span><h4>Learn the file types</h4>
+      <p>JPEG, PNG, PDF. Right answers earn more points.</p>
+    </div>
+    <div class="step-card" style="--sc:var(--c-mem);">
+      <span class="n">STEP 4</span><h4>Learn indexing</h4>
+      <p>How Python finds one bot in a list. More points.</p>
+    </div>
+    <div class="step-card" style="--sc:var(--c-por);">
+      <span class="n">STEP 5</span><h4>Turn it in</h4>
+      <p>Assess, save as a PDF, drop it in Drive.</p>
     </div>
   </div>
 
-  <details class="panel" style="margin-top:18px;" id="stdPanel">
-    <summary style="padding:16px 20px;cursor:pointer;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:19px;">
-      Standards this mission covers <span class="q-tag" style="margin-left:8px;">6th Grade Computer Science Standards Map &mdash; click to open</span>
+  <div class="done-chips">
+    <span class="done-chip"><b>&#10003;</b> All 5 parts picked</span>
+    <span class="done-chip"><b>&#10003;</b> Both checks done</span>
+    <span class="done-chip"><b>&#10003;</b> Report saved as a file</span>
+    <span class="done-chip"><b>&#10003;</b> One person uploaded it</span>
+  </div>
+
+  <details class="panel" style="margin-top:20px;" id="stdPanel">
+    <summary style="padding:15px 20px;cursor:pointer;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;">
+      Standards covered <span class="q-tag" style="margin-left:8px;">6th Grade CS Standards Map</span>
     </summary>
     <div class="panel-body" style="padding-top:0;">
-      <p class="small">Every stage below is tied to a benchmark from the course standards map. The same list is printed
-        on your exported report, so the file you turn in shows exactly what it demonstrates.</p>
       <div class="tablewrap"><table class="std" id="stdTable">
         <thead><tr><th>Body of Knowledge</th><th>Big Idea</th><th>Benchmark</th><th>Stage</th></tr></thead>
         <tbody></tbody>
@@ -738,36 +828,41 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
   <div class="stage-head">
     <span class="marker" data-marker="build">02</span>
     <div>
-      <p class="eyebrow">Stage 02 &middot; Spec Check</p>
-      <h2>Build your robot to spec</h2>
-      <p class="lede">You have <strong>20 build points</strong>. Pick one option in each of the five categories. Stronger
-        parts earn more stars but cost more points, and you cannot go over budget &mdash; options you can no longer
-        afford dim out. Earn more points in Stages 03 and 04; they are added here automatically.</p>
+      <p class="eyebrow">Spec check</p>
+      <h2>Give your bot its hardware</h2>
+      <p class="lede">You have <strong>20 points</strong>. Pick one part in each colored box. Better parts cost more,
+        and you cannot go over. Need more points? Earn them in Stage 03 and 04.</p>
       <div class="std-chips" data-chips="build"></div>
     </div>
   </div>
 
-  <div class="panel" style="margin-bottom:18px;">
+  <div class="panel" style="margin-bottom:18px;border-top:5px solid var(--amber);">
+    <div class="panel-head"><h3>Your team</h3><span class="q-tag">All of this goes on your report</span></div>
     <div class="panel-body">
-      <div class="idfields">
-        <label class="field"><span>Pilot name (first + last)</span><input id="pilotName" type="text" placeholder="e.g. Ada Lovelace" autocomplete="off"></label>
-        <label class="field"><span>Robot name</span><input id="robotName" type="text" placeholder="e.g. UNIT-7" autocomplete="off"></label>
+      <div class="idfields" style="margin-bottom:18px;">
+        <label class="field"><span>Team name</span><input id="teamName" type="text" placeholder="e.g. Circuit Breakers" autocomplete="off"></label>
+        <label class="field"><span>Your bot's name</span><input id="robotName" type="text" placeholder="the name you gave it in Mission 1" autocomplete="off"></label>
       </div>
-      <p class="small" style="margin-top:12px;">Your pilot name builds the filename you will upload. Use your real
-        name, spelled the way it is in the gradebook.</p>
-    </div>
-  </div>
-
-  <div class="panel" style="margin-bottom:18px;">
-    <div class="panel-head">
-      <h3>Pick your unit</h3>
-      <span class="q-tag">Hangar &middot; 26 chassis, call signs A&ndash;Z</span>
-    </div>
-    <div class="panel-body">
-      <p class="small" style="margin-bottom:14px;">Every team runs a different chassis. Choose the one you are
-        building today &mdash; it rides along on your report, so pick one nobody else has claimed.
-        <span id="botPicked" class="mono" style="color:var(--amber);"></span></p>
+      <p class="strip-label">Team leader &mdash; pick your bot</p>
       <div class="bot-grid" id="botGrid"></div>
+      <p class="strip-label" style="margin-top:20px;">Crew &mdash; who is who</p>
+      <div class="crew">
+        <label class="seat"><span>Student 1</span><input id="s1" type="text" placeholder="Name" autocomplete="off"></label>
+        <label class="seat"><span>Student 2</span><input id="s2" type="text" placeholder="Name" autocomplete="off"></label>
+        <label class="seat"><span>Student 3</span><input id="s3" type="text" placeholder="Name" autocomplete="off"></label>
+        <label class="seat"><span>Student 4</span><input id="s4" type="text" placeholder="Name" autocomplete="off"></label>
+      </div>
+      <label class="field" style="display:block;margin-top:16px;">
+        <span>Who uploads the file?</span>
+        <select id="submitter">
+          <option value="0">Student 1</option>
+          <option value="1">Student 2</option>
+          <option value="2">Student 3</option>
+          <option value="3">Student 4</option>
+        </select>
+      </label>
+      <p class="small" style="margin-top:10px;">One person uploads for the whole team. Side quests are separate &mdash;
+        turn those in from the links in the daily document.</p>
     </div>
   </div>
 
@@ -775,23 +870,161 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     <span class="budget-label">Build budget<span id="creditNote" style="color:var(--teal);"></span></span>
     <div class="gauge"><div class="gauge-fill" id="gaugeFill"></div></div>
     <span class="budget-num mono" id="budgetNum">0 / 20 pts</span>
-    <button class="assess" id="assessBtn" disabled>Assess my robot</button>
+    <button class="assess" id="assessBtn" disabled>Assess my bot</button>
   </div>
 
   <div id="categories"></div>
 
-  <div class="note" id="buildHint">Pick one option in every category to unlock <strong>Assess my robot</strong>.</div>
+  <div class="note" id="buildHint">Pick one part in every box to unlock <strong>Assess my bot</strong>.</div>
 </section>
 
-<!-- ========================= 03 INDEXING ========================= -->
-<section class="stage" id="indexing">
+<!-- ========================= 03 FILE TYPES ========================= -->
+<section class="stage" id="files" data-c="cap">
   <div class="stage-head">
-    <span class="marker" data-marker="indexing">03</span>
+    <span class="marker" data-marker="files">03</span>
     <div>
-      <p class="eyebrow">Stage 03 &middot; Training &middot; Python</p>
-      <h2>Indexing: how Python finds one item in a list</h2>
-      <p class="lede">A list holds many values. An <strong>index</strong> is the address of one of them. Read the four
-        cards, play with the index lab until the pattern clicks, then pass the check to earn build credits.</p>
+      <p class="eyebrow">File types + Google Drive</p>
+      <h2>JPEG, PNG, PDF &mdash; and where your file goes</h2>
+      <p class="lede">The letters after the dot tell every device what kind of file it is.
+        Pick the wrong one and your work shows up blurry.</p>
+      <div class="std-chips" data-chips="files"></div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="ftype">
+      <div class="swatch" aria-hidden="true" style="background:linear-gradient(135deg,#2a6f97,#e8a33d 45%,#c2472b);"></div>
+      <h4>.jpg / .jpeg</h4>
+      <p class="full">Joint Photographic Experts Group</p>
+      <p>The photo format.</p>
+      <ul>
+        <li><span class="good">Use for:</span> photographs</li>
+        <li><span class="bad">Not for:</span> screenshots or text</li>
+        <li><b>Lossy</b> &mdash; throws away detail to get small, and never gets it back.</li>
+      </ul>
+    </div>
+
+    <div class="ftype">
+      <div class="swatch" aria-hidden="true" style="background-image:linear-gradient(45deg,var(--rule-soft) 25%,transparent 25%),linear-gradient(-45deg,var(--rule-soft) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--rule-soft) 75%),linear-gradient(-45deg,transparent 75%,var(--rule-soft) 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;"></div>
+      <h4>.png</h4>
+      <p class="full">Portable Network Graphics</p>
+      <p>The screenshot format.</p>
+      <ul>
+        <li><span class="good">Use for:</span> screenshots, text, logos</li>
+        <li><span class="bad">Not for:</span> huge photos</li>
+        <li><b>Lossless</b>, and it can be see-through. The checkerboard means no background.</li>
+      </ul>
+    </div>
+
+    <div class="ftype">
+      <div class="swatch" aria-hidden="true" style="background:var(--panel-2);display:grid;align-content:center;gap:6px;padding:14px;">
+        <span style="height:6px;background:var(--rule);border-radius:3px;width:80%;"></span>
+        <span style="height:6px;background:var(--rule-soft);border-radius:3px;"></span>
+        <span style="height:6px;background:var(--rule-soft);border-radius:3px;width:64%;"></span>
+      </div>
+      <h4>.pdf</h4>
+      <p class="full">Portable Document Format</p>
+      <p>The turn-it-in format.</p>
+      <ul>
+        <li><span class="good">Use for:</span> reports, anything graded</li>
+        <li><span class="bad">Not for:</span> work someone else must edit</li>
+        <li>Locks the page. Your Chromebook, my laptop, a phone &mdash; same page.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-body">
+      <div class="tablewrap">
+        <table class="cmp">
+          <thead><tr><th>Format</th><th>Detail kept</th><th>See-through</th><th>Pages</th><th>Use it when&hellip;</th></tr></thead>
+          <tbody>
+            <tr><td>.jpg</td><td class="n">Lossy</td><td class="n">No</td><td>1</td><td>It is a photo</td></tr>
+            <tr><td>.png</td><td class="y">Lossless</td><td class="y">Yes</td><td>1</td><td>There is text or sharp detail</td></tr>
+            <tr><td>.pdf</td><td class="y">Exact</td><td>n/a</td><td>Many</td><td>You are turning it in</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:14px;"><strong>For this mission: use PDF.</strong> It stays sharp and prints clean.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h3>Google Drive</h3><span class="q-tag">Where your file lives</span></div>
+    <div class="panel-body">
+      <div class="grid2">
+        <div>
+          <p>Drive is storage on <strong>Google's computers, not yours</strong>. Upload a file and a copy travels
+            there. Sign in on any device with your school account and it is waiting.</p>
+          <div class="note"><strong>Data has states.</strong> Sitting saved = <b>at rest</b>. Uploading =
+            <b>in transit</b>. Open on screen = <b>in use</b>. Close the tab mid-upload and the file never arrives.</div>
+        </div>
+        <div>
+          <p class="strip-label">Getting there</p>
+          <ul class="objectives" style="margin-bottom:14px;">
+            <li data-n="A"><span>Go to <code>drive.google.com</code>, or the 9-dot grid &rsaquo; <b>Drive</b>.</span></li>
+            <li data-n="B"><span>Check the circle top right &mdash; it must be your <b>school account</b>.</span></li>
+            <li data-n="C"><span><b>Shared with me</b> &rsaquo; class folder &rsaquo; <b>Mission 2</b>.</span></li>
+          </ul>
+          <div class="drive-ui" aria-hidden="true">
+            <div class="drive-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="urlbar">drive.google.com</span></div>
+            <div class="drive-body">
+              <div class="drive-side">
+                <span class="newbtn"><b>+</b> New</span>
+                <a href="#files">My Drive</a>
+                <a href="#files" class="here">Shared with me</a>
+                <a href="#files">Recent</a>
+              </div>
+              <div class="drive-main">
+                <div class="menu-pop">
+                  <span>New folder</span>
+                  <span class="hi">File upload &nbsp;&larr; this one</span>
+                  <span>Folder upload</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h3>File types check</h3>
+      <div class="quiz-status">
+        <span id="fdStatus">not started</span>
+        <span class="bar" style="width:120px;flex:none;"><i id="fdBar"></i></span>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="check">
+        <div class="check-left">
+          <div class="check-dial" id="fdDial">0/8</div>
+          <div>
+            <h4>Eight questions</h4>
+            <p>One try each. Every right answer = <strong>+1 build point</strong>.</p>
+          </div>
+        </div>
+        <button class="btn primary" id="fdStart" type="button">Test yourself</button>
+      </div>
+      <details style="margin-top:16px;" id="fdReviewWrap" hidden>
+        <summary class="strip-label" style="cursor:pointer;">Review my answers</summary>
+        <div class="quiz" id="fdQuiz" style="margin-top:12px;"></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= 04 INDEXING ========================= -->
+<section class="stage" id="indexing" data-c="mem">
+  <div class="stage-head">
+    <span class="marker" data-marker="indexing">04</span>
+    <div>
+      <p class="eyebrow">Python</p>
+      <h2>Indexing: finding one bot in a list</h2>
+      <p class="lede">A list holds many bots. An <strong>index</strong> is the address of one of them.
+        Read the four cards, play in the lab, then take the check.</p>
       <div class="std-chips" data-chips="indexing"></div>
     </div>
   </div>
@@ -801,53 +1034,43 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
       <details class="lesson" open>
         <summary><span class="n">01</span> Counting starts at zero</summary>
         <div class="lesson-body">
-          <p>Python does not count <em>1, 2, 3</em>. It counts <strong>how far from the start</strong> an item is. The
-            first item is zero steps from the start, so its index is <code>0</code>.</p>
-          <div class="pre"><span class="c"># a list of five crew robots</span>
-crew = [<span class="s">"Nova"</span>, <span class="s">"Byte"</span>, <span class="s">"Piston"</span>, <span class="s">"Quark"</span>, <span class="s">"Echo"</span>]
+          <p>Python counts <strong>how far from the start</strong> something is. The first bot is zero steps in.</p>
+          <div class="pre">crew = [<span class="s">"Alpha"</span>, <span class="s">"Beta"</span>, <span class="s">"Charlie"</span>, <span class="s">"Delta"</span>, <span class="s">"Echo"</span>]
 
-crew[<span class="k">0</span>]   <span class="c"># "Nova"   &larr; first item, zero steps in</span>
-crew[<span class="k">1</span>]   <span class="c"># "Byte"</span>
-crew[<span class="k">2</span>]   <span class="c"># "Piston"</span></div>
-          <p>Square brackets after the list name mean &ldquo;go get the item at this address.&rdquo;</p>
+crew[<span class="k">0</span>]   <span class="c"># "Alpha"</span>
+crew[<span class="k">1</span>]   <span class="c"># "Beta"</span>
+crew[<span class="k">2</span>]   <span class="c"># "Charlie"</span></div>
         </div>
       </details>
 
       <details class="lesson">
-        <summary><span class="n">02</span> Negative indexes count back from the end</summary>
+        <summary><span class="n">02</span> Negative numbers count backward</summary>
         <div class="lesson-body">
-          <p>You often want the <strong>last</strong> item without counting the whole list. Negative indexes start at
-            the end: <code>-1</code> is the last item, <code>-2</code> is the one before it.</p>
+          <p><code>-1</code> is the last one. No counting the whole list.</p>
           <div class="pre">crew[<span class="k">-1</span>]  <span class="c"># "Echo"   &larr; last</span>
-crew[<span class="k">-2</span>]  <span class="c"># "Quark"</span></div>
-          <p>There is no <code>-0</code>, because <code>0</code> already means the first item.</p>
+crew[<span class="k">-2</span>]  <span class="c"># "Delta"</span></div>
         </div>
       </details>
 
       <details class="lesson">
-        <summary><span class="n">03</span> len() and the last legal address</summary>
+        <summary><span class="n">03</span> len() and the last legal spot</summary>
         <div class="lesson-body">
-          <p><code>len(crew)</code> counts the items &mdash; it counts like a human, starting at 1. So a 5-item list has
-            <code>len</code> of <strong>5</strong>, but its highest index is <strong>4</strong>.</p>
-          <div class="pre">len(crew)   <span class="c"># 5   &larr; how many items</span>
-crew[<span class="k">4</span>]     <span class="c"># "Echo"   &larr; last legal index</span>
-crew[<span class="k">5</span>]     <span class="c"># IndexError: list index out of range</span></div>
-          <p><strong>Last index = len(list) &minus; 1.</strong> Asking for an index that does not exist crashes the
-            program with an <code>IndexError</code>. That error is not a bug in Python &mdash; it is Python telling you
-            that you asked for an address that was never built.</p>
+          <p>5 bots means <code>len</code> is <strong>5</strong> &mdash; but the highest index is <strong>4</strong>.</p>
+          <div class="pre">len(crew)   <span class="c"># 5</span>
+crew[<span class="k">4</span>]     <span class="c"># "Echo"   &larr; last legal spot</span>
+crew[<span class="k">5</span>]     <span class="c"># IndexError</span></div>
+          <p><strong>Last index = len &minus; 1.</strong></p>
         </div>
       </details>
 
       <details class="lesson">
-        <summary><span class="n">04</span> Slicing takes a range &mdash; and stops early</summary>
+        <summary><span class="n">04</span> Slices stop early</summary>
         <div class="lesson-body">
-          <p>Two numbers with a colon takes a <strong>slice</strong>: <code>crew[start:stop]</code>. It begins at
-            <code>start</code> and stops <em>just before</em> <code>stop</code>. The stop index is never included.</p>
-          <div class="pre">crew[<span class="k">1</span>:<span class="k">3</span>]  <span class="c"># ["Byte", "Piston"]   &larr; 3 is NOT included</span>
-crew[:<span class="k">2</span>]   <span class="c"># ["Nova", "Byte"]     &larr; empty start = from 0</span>
-crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; empty stop = to the end</span></div>
-          <p>Strings work the same way &mdash; a string is a list of characters:
-            <code>"PYTHON"[0]</code> is <code>"P"</code> and <code>"PYTHON"[-1]</code> is <code>"N"</code>.</p>
+          <p><code>crew[start:stop]</code> stops <em>just before</em> stop. The stop number never comes along.</p>
+          <div class="pre">crew[<span class="k">1</span>:<span class="k">3</span>]  <span class="c"># ["Beta", "Charlie"]  &larr; 3 left out</span>
+crew[:<span class="k">2</span>]   <span class="c"># ["Alpha", "Beta"]</span>
+crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></div>
+          <p>Words work the same way: <code>"PYTHON"[0]</code> is <code>"P"</code>.</p>
         </div>
       </details>
     </div>
@@ -855,10 +1078,10 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
     <div class="lab">
       <div class="lab-head">
         <h4>Index Lab</h4>
-        <p>Click a robot to look it up, or type your own expression and run it.</p>
+        <p>Click a bot, or type an expression and run it.</p>
       </div>
       <div class="lab-body">
-        <p class="strip-label code">crew = ["Nova", "Byte", "Piston", "Quark", "Echo"]</p>
+        <p class="strip-label code">crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]</p>
         <div class="strip" id="strip"></div>
         <div class="expr-row">
           <input id="exprInput" class="mono" value="crew[0]" spellcheck="false" aria-label="Python expression">
@@ -874,7 +1097,7 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
     <div class="panel-head">
       <h3>Indexing check</h3>
       <div class="quiz-status">
-        <span id="pyStatus">0 / 10 correct</span>
+        <span id="pyStatus">not started</span>
         <span class="bar" style="width:120px;flex:none;"><i id="pyBar"></i></span>
       </div>
     </div>
@@ -883,8 +1106,8 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
         <div class="check-left">
           <div class="check-dial" id="pyDial">0/10</div>
           <div>
-            <h4>Ten questions, one try each</h4>
-            <p>Opens in a pop-up window. Every correct answer is <strong>+1 build credit</strong>, up to the 8-credit cap.</p>
+            <h4>Ten questions</h4>
+            <p>One try each. Every right answer = <strong>+1 build point</strong> (up to 8 total).</p>
           </div>
         </div>
         <button class="btn primary" id="pyStart" type="button">Test yourself</button>
@@ -897,216 +1120,26 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
   </div>
 </section>
 
-<!-- ========================= 04 FILES & DRIVE ========================= -->
-<section class="stage" id="files">
-  <div class="stage-head">
-    <span class="marker" data-marker="files">04</span>
-    <div>
-      <p class="eyebrow">Stage 04 &middot; Training &middot; File Types + Google Drive</p>
-      <h2>JPEG, PNG, PDF &mdash; and where your file goes</h2>
-      <p class="lede">The three letters after the dot in a filename are the <strong>extension</strong>, and they tell
-        every device what kind of file it is opening. Pick the wrong one and your work opens blurry, or does not open
-        at all. Then: what Google Drive actually is, and how to get a file into it.</p>
-      <div class="std-chips" data-chips="files"></div>
-    </div>
-  </div>
-
-  <div class="grid3">
-    <div class="ftype">
-      <div class="swatch" aria-hidden="true" style="background:linear-gradient(135deg,#2a6f97,#e8a33d 45%,#c2472b);"></div>
-      <h4>.jpg / .jpeg</h4>
-      <p class="full">Joint Photographic Experts Group</p>
-      <p>The photo format. Built to make pictures of the real world small enough to send.</p>
-      <ul>
-        <li><span class="good">Best for:</span> photographs, camera shots, big colorful images</li>
-        <li><span class="bad">Avoid for:</span> screenshots, text, sharp lines, logos</li>
-        <li><b>Lossy</b> &mdash; it permanently throws away detail to shrink the file. Save it over and over and it
-          slowly turns to mush.</li>
-        <li>No transparency. Every JPEG is a solid rectangle.</li>
-      </ul>
-    </div>
-
-    <div class="ftype">
-      <div class="swatch" aria-hidden="true" style="background-image:linear-gradient(45deg,var(--rule-soft) 25%,transparent 25%),linear-gradient(-45deg,var(--rule-soft) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--rule-soft) 75%),linear-gradient(-45deg,transparent 75%,var(--rule-soft) 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;"></div>
-      <h4>.png</h4>
-      <p class="full">Portable Network Graphics</p>
-      <p>The screenshot format. Keeps every pixel exactly as it was.</p>
-      <ul>
-        <li><span class="good">Best for:</span> screenshots, code, diagrams, logos, anything with text in it</li>
-        <li><span class="bad">Avoid for:</span> huge photos when file size matters</li>
-        <li><b>Lossless</b> &mdash; nothing is thrown away, so small text stays sharp. Files are bigger.</li>
-        <li>Supports <b>transparency</b> &mdash; that checkerboard means &ldquo;no background here.&rdquo;</li>
-      </ul>
-    </div>
-
-    <div class="ftype">
-      <div class="swatch" aria-hidden="true" style="background:var(--panel-2);display:grid;align-content:center;gap:6px;padding:14px;">
-        <span style="height:6px;background:var(--rule);border-radius:3px;width:80%;"></span>
-        <span style="height:6px;background:var(--rule-soft);border-radius:3px;"></span>
-        <span style="height:6px;background:var(--rule-soft);border-radius:3px;width:64%;"></span>
-      </div>
-      <h4>.pdf</h4>
-      <p class="full">Portable Document Format</p>
-      <p>The turn-it-in format. A frozen page that looks identical everywhere.</p>
-      <ul>
-        <li><span class="good">Best for:</span> reports, multi-page documents, anything being printed or graded</li>
-        <li><span class="bad">Avoid for:</span> work someone else needs to edit</li>
-        <li>Locks in <b>layout, fonts, and page breaks</b>. Your Chromebook, my laptop, a phone &mdash; same page.</li>
-        <li>Can hold many pages; a JPEG or PNG is always exactly one image.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head"><h3>Choosing between them</h3><span class="q-tag">Identify multiple file format types</span></div>
-    <div class="panel-body">
-      <div class="tablewrap">
-        <table class="cmp">
-          <thead><tr><th>Format</th><th>Detail kept</th><th>Transparency</th><th>Pages</th><th>Reach for it when&hellip;</th></tr></thead>
-          <tbody>
-            <tr><td>.jpg</td><td class="n">Lossy</td><td class="n">No</td><td>1</td><td>It is a photograph and the file must be small</td></tr>
-            <tr><td>.png</td><td class="y">Lossless</td><td class="y">Yes</td><td>1</td><td>There is text or sharp detail that must stay crisp</td></tr>
-            <tr><td>.pdf</td><td class="y">Exact</td><td>n/a</td><td>Many</td><td>It is a document being turned in or printed</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="note" style="margin-top:14px;"><strong>For this mission:</strong> PDF is the safest choice for your
-        report &mdash; it stays sharp and prints clean. PNG is a fine second choice. JPEG will work, but the small text
-        on your report will look slightly fuzzy, and now you know why.</div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head"><h3>Google Drive: what it actually is</h3><span class="q-tag">Desktop vs. online versions</span></div>
-    <div class="panel-body">
-      <div class="grid2">
-        <div>
-          <p>Google Drive is <strong>storage that lives on Google's computers instead of yours</strong>. When you upload
-            a file, a copy travels over the internet to a data center and sits there. Sign in on any device with your
-            school account and that same file is waiting &mdash; the Chromebook in this room, a laptop at home, a phone.</p>
-          <p>That is the difference between <strong>local</strong> storage (the Downloads folder on this specific
-            machine &mdash; lose the machine, lose the file) and <strong>cloud</strong> storage. It is also why Drive
-            has an online version in the browser and a desktop version that syncs a folder on your computer. Same
-            files, two front doors.</p>
-          <div class="note"><strong>States of data.</strong> Your report is <b>at rest</b> when it is sitting saved in
-            Downloads or in Drive. It is <b>in transit</b> while it is uploading across the network. It is <b>in use</b>
-            while it is open on your screen. Closing the tab mid-upload interrupts data in transit &mdash; which is
-            exactly why a half-uploaded file never shows up.</div>
-        </div>
-        <div>
-          <p class="strip-label">How to get there</p>
-          <ul class="objectives" style="margin-bottom:14px;">
-            <li data-n="A"><span>Type <code>drive.google.com</code> in the address bar &mdash; or click the <b>9-dot grid</b> (&#8942;&#8942;&#8942;) at the top right of any Google page and choose <b>Drive</b>.</span></li>
-            <li data-n="B"><span>Check the account circle in the top right. It must be your <b>school account</b>. Personal Gmail cannot see the class folder.</span></li>
-            <li data-n="C"><span>In the left sidebar open <b>Shared with me</b> (or <b>Shared drives</b>), find the class folder, then open <b>Mission 2</b>.</span></li>
-          </ul>
-          <div class="drive-ui" aria-hidden="true">
-            <div class="drive-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="urlbar">drive.google.com</span></div>
-            <div class="drive-body">
-              <div class="drive-side">
-                <span class="newbtn"><b>+</b> New</span>
-                <a href="#files">My Drive</a>
-                <a href="#files" class="here">Shared with me</a>
-                <a href="#files">Recent</a>
-                <a href="#files">Trash</a>
-              </div>
-              <div class="drive-main">
-                <div class="menu-pop">
-                  <span>New folder</span>
-                  <span class="hi">File upload &nbsp;&larr; this one</span>
-                  <span>Folder upload</span>
-                  <span>Google Docs</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head"><h3>Practice the upload</h3><span class="q-tag">Drag the file into the folder</span></div>
-    <div class="panel-body">
-      <p class="small" style="margin-bottom:14px;">This is a practice run, not the real thing &mdash; but it is the
-        exact motion you will use in Stage 05. Drag the file onto the folder window, or press <b>Upload</b>.</p>
-      <div class="grid2" style="align-items:start;">
-        <div>
-          <p class="strip-label">Your Downloads folder</p>
-          <div class="filerow" id="dragFile" draggable="true" tabindex="0" role="button" aria-label="Practice file: drag to the Drive folder">
-            <span class="ext">PDF</span>
-            <span class="mono" style="flex:1;">Lovelace_Ada_Mission2.pdf</span>
-            <span class="small mono">312 KB</span>
-          </div>
-          <button class="btn" id="uploadBtn" type="button" style="margin-top:10px;">Upload &rarr;</button>
-          <button class="btn" id="resetUpload" type="button" style="margin-top:10px;">Reset</button>
-        </div>
-        <div class="drive-ui">
-          <div class="drive-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="urlbar">drive.google.com &rsaquo; Class Folder &rsaquo; Mission 2</span></div>
-          <div class="drive-body">
-            <div class="drive-side">
-              <span class="newbtn"><b>+</b> New</span>
-              <a href="#files">My Drive</a>
-              <a href="#files" class="here">Mission 2</a>
-            </div>
-            <div class="drive-main" id="driveMain">
-              <div class="dropzone" id="dropzone">Drop files here &mdash; or use <b>+ New &rsaquo; File upload</b></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head">
-      <h3>Files &amp; Drive check</h3>
-      <div class="quiz-status">
-        <span id="fdStatus">0 / 8 correct</span>
-        <span class="bar" style="width:120px;flex:none;"><i id="fdBar"></i></span>
-      </div>
-    </div>
-    <div class="panel-body">
-      <div class="check">
-        <div class="check-left">
-          <div class="check-dial" id="fdDial">0/8</div>
-          <div>
-            <h4>Eight questions, one try each</h4>
-            <p>Also a pop-up. Formats, extensions, and getting a file into Drive without losing it.</p>
-          </div>
-        </div>
-        <button class="btn primary" id="fdStart" type="button">Test yourself</button>
-      </div>
-      <details style="margin-top:16px;" id="fdReviewWrap" hidden>
-        <summary class="strip-label" style="cursor:pointer;">Review my answers</summary>
-        <div class="quiz" id="fdQuiz" style="margin-top:12px;"></div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ========================= 05 SUBMIT ========================= -->
-<section class="stage" id="submit">
+<!-- ========================= 05 TURN IT IN ========================= -->
+<section class="stage" id="submit" data-c="por">
   <div class="stage-head">
     <span class="marker" data-marker="submit">05</span>
     <div>
-      <p class="eyebrow">Stage 05 &middot; Turn It In</p>
-      <h2>Export your report, then upload it</h2>
-      <p class="lede">This is the part that counts. Your report is generated below from your build and your training
-        score. Save it as a file, name it correctly, and put it in the Mission 2 folder in the class Drive.</p>
+      <p class="eyebrow">Turn it in</p>
+      <h2>Save the report, then upload it</h2>
+      <p class="lede">One file per team. This is the part that gets graded.</p>
       <div class="std-chips" data-chips="submit"></div>
     </div>
   </div>
 
-  <div class="panel" id="reportPanel">
+  <div class="panel" id="reportPanel" style="border-top:5px solid var(--c-por);">
     <div class="panel-head no-print">
       <h3>Your Mission 2 report</h3>
       <span class="q-tag">This is the file you turn in</span>
     </div>
     <div class="panel-body">
       <div id="reportEmpty" class="note warn no-print">
-        <strong>No report yet.</strong> Finish your build in <a href="#build">Stage 02</a> and press
-        <b>Assess my robot</b>. Your report appears right here.
+        <strong>No report yet.</strong> Finish your build in <a href="#build">Stage 02</a> and press <b>Assess my bot</b>.
       </div>
 
       <section id="report">
@@ -1115,22 +1148,25 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
           <div class="portrait">
             <div class="plate" id="rBotPlate"></div>
             <div class="pmeta">
-              <div class="k">Chassis</div>
+              <div class="k">Team</div>
+              <div class="v" id="rTeam">&mdash;</div>
+              <div class="k" style="margin-top:8px;">Bot</div>
               <div class="v" id="rBotName">&mdash;</div>
             </div>
           </div>
+          <div class="rcrew" id="rCrew"></div>
           <div class="report-top">
             <div>
-              <h3 id="rTitle">Robot Report</h3>
+              <h3 id="rTitle">Bot Report</h3>
               <p class="sub" id="rSub"></p>
             </div>
             <span class="rank" id="rRank">RANK</span>
           </div>
           <div class="scorebar">
-            <div class="scorebig"><b id="rScore">0</b><span>/ 25 build stars</span></div>
+            <div class="scorebig"><b id="rScore">0</b><span>/ 25 spec stars</span></div>
             <div class="scoremeta"><span class="k">Build percent</span><span class="v" id="rPct">0%</span></div>
             <div class="scoremeta"><span class="k">Training score</span><span class="v" id="rTraining">0 / 18</span></div>
-            <div class="scoremeta"><span class="k">Credits earned</span><span class="v" id="rCredits">+0</span></div>
+            <div class="scoremeta"><span class="k">Points earned</span><span class="v" id="rCredits">+0</span></div>
           </div>
           <div class="rgrid" id="rGrid"></div>
           <div class="note" id="rNote" style="margin-bottom:16px;"></div>
@@ -1147,61 +1183,25 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
           <button class="btn" id="reassessBtn" type="button">Re-assess</button>
         </div>
         <p class="small no-print" style="margin-top:10px;">
-          <b>Save as PDF</b> opens the print window &mdash; set <i>Destination</i> to <b>Save as PDF</b> and click Save.
-          PNG and JPEG download straight to your Downloads folder.
-        </p>
-        <div class="filepreview no-print" id="filePreview">
-          <p class="small" id="previewNote"></p>
-        </div>
+          <b>Save as PDF</b> opens the print box &mdash; set <i>Destination</i> to <b>Save as PDF</b>, then Save.</p>
+        <div class="filepreview no-print" id="filePreview"></div>
       </section>
     </div>
   </div>
 
   <div class="panel">
-    <div class="panel-head"><h3>Name it exactly like this</h3><span class="q-tag">Naming convention</span></div>
+    <div class="panel-head"><h3>Name it, then upload it</h3><span class="q-tag">Four steps</span></div>
     <div class="panel-body">
-      <p>Rename the file before you upload it. Last name first, then first name, then the mission &mdash; no spaces,
-        underscores between the parts, and keep the extension the computer gave it.</p>
-      <div class="pre" id="filenameDemo">Lastname_Firstname_Mission2.pdf</div>
-      <p class="small">On a Chromebook: open the <b>Files</b> app &rsaquo; <b>Downloads</b>, right-click the file,
-        choose <b>Rename</b>. Do not type a second <span class="mono">.pdf</span> on the end.</p>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head"><h3>Upload it to Google Drive</h3><span class="q-tag">Five steps</span></div>
-    <div class="panel-body">
-      <ol class="steps">
-        <li><div><h5>Open Drive with your school account</h5><p>Go to <span class="mono">drive.google.com</span>, or the 9-dot grid &rsaquo; Drive. Check the account circle top-right &mdash; it has to be your school account, not personal Gmail.</p></div></li>
-        <li><div><h5>Open the Mission 2 folder</h5><p><b>Shared with me</b> &rsaquo; the class folder &rsaquo; <b>Mission 2</b>. Uploading to <b>My Drive</b> instead does not turn anything in &mdash; I cannot see your My Drive.</p></div></li>
-        <li><div><h5>Upload the file</h5><p>Click <b>+ New</b> &rsaquo; <b>File upload</b>, pick your renamed file from Downloads, and press Open. Dragging the file from the Files app onto the folder window does the same thing.</p></div></li>
-        <li><div><h5>Wait for the upload to finish</h5><p>A progress box appears in the bottom corner. Wait for <b>1 upload complete</b>. Do not close the tab while it is still moving &mdash; that data is in transit, and interrupting it means no file arrives.</p></div></li>
-        <li><div><h5>Verify with your own eyes</h5><p>Refresh the folder. You should see your file, with your name on it. Click it &mdash; if it opens and looks right, you are done. If it opens blank or blurry, export it again as a PDF.</p></div></li>
+      <p class="strip-label">Rename the file to this</p>
+      <div class="pre" id="filenameDemo">TeamName_Mission2.pdf</div>
+      <ol class="steps" style="margin-top:16px;">
+        <li><div><h5>Open Drive with your school account</h5><p><span class="mono">drive.google.com</span>. Check the circle top right.</p></div></li>
+        <li><div><h5>Open the Mission 2 folder</h5><p><b>Shared with me</b> &rsaquo; class folder &rsaquo; <b>Mission 2</b>. My Drive does not count &mdash; I cannot see it.</p></div></li>
+        <li><div><h5>Upload</h5><p><b>+ New</b> &rsaquo; <b>File upload</b> &rsaquo; pick your file. Or drag it onto the folder.</p></div></li>
+        <li><div><h5>Check it landed</h5><p>Wait for <b>1 upload complete</b>, refresh, and click your file. If it opens, you are done.</p></div></li>
       </ol>
-      <div class="note warn" style="margin-top:16px;"><strong>Access control:</strong> the Mission 2 folder is already
-        shared with the class, so anything you drop in it is shared correctly the moment it lands. Do not change the
-        folder's sharing settings, and never share the folder link outside our class &mdash; that folder holds other
-        students' work.</div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head"><h3>Before you close the tab</h3><span class="q-tag">Final check &mdash; saved on this device</span></div>
-    <div class="panel-body">
-      <ul class="checklist" id="checklist">
-        <li data-k="c1"><span class="box"></span><span>All five build categories are chosen and I did not blow the budget</span></li>
-        <li data-k="c2"><span class="box"></span><span>I answered both training checks &mdash; indexing and files &amp; Drive</span></li>
-        <li data-k="c3"><span class="box"></span><span>I pressed <b>Assess my robot</b> and my report shows my name</span></li>
-        <li data-k="c4"><span class="box"></span><span>I exported the report as a PDF, PNG, or JPEG and found it in Downloads</span></li>
-        <li data-k="c5"><span class="box"></span><span>I renamed it <span class="mono" id="chkName">Lastname_Firstname_Mission2</span></span></li>
-        <li data-k="c6"><span class="box"></span><span>I uploaded it to the <b>Mission 2</b> folder in the class Drive &mdash; not My Drive</span></li>
-        <li data-k="c7"><span class="box"></span><span>I refreshed the folder, saw my file, and opened it to be sure it works</span></li>
-      </ul>
-      <div class="quiz-status" style="margin-top:14px;">
-        <span id="chkStatus">0 / 7 checked</span>
-        <span class="bar"><i id="chkBar"></i></span>
-        <button class="btn" id="resetAll" type="button">Start the whole mission over</button>
-      </div>
+      <div class="note warn" style="margin-top:16px;">The folder is already shared with the class. Do not change its
+        sharing settings, and do not send the link outside our class.</div>
     </div>
   </div>
 </section>
@@ -1224,6 +1224,32 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
   </div>
 </dialog>
 
+<dialog class="modal" id="checkModal" aria-labelledby="checkTitle">
+  <div class="modal-head">
+    <div>
+      <p class="eyebrow">Before you close this tab</p>
+      <h3 id="checkTitle">Mission Check</h3>
+    </div>
+    <button class="modal-x" id="checkClose" type="button" aria-label="Close">&times;</button>
+  </div>
+  <div class="modal-track"><i id="chkBar"></i></div>
+  <div class="modal-body">
+    <ul class="checklist" id="checklist">
+      <li data-k="c1"><span class="box"></span><span>Team, bot, and all four students filled in</span></li>
+      <li data-k="c2"><span class="box"></span><span>All five parts picked, budget not blown</span></li>
+      <li data-k="c3"><span class="box"></span><span>Both checks done</span></li>
+      <li data-k="c4"><span class="box"></span><span>Report saved as a file &mdash; I found it in Downloads</span></li>
+      <li data-k="c5"><span class="box"></span><span>Renamed <span class="mono" id="chkName">TeamName_Mission2</span></span></li>
+      <li data-k="c6"><span class="box"></span><span>Uploaded to the <b>Mission 2</b> folder</span></li>
+      <li data-k="c7"><span class="box"></span><span>Refreshed, saw it, opened it</span></li>
+    </ul>
+  </div>
+  <div class="modal-foot">
+    <span class="mono" id="chkStatus">0 / 7 checked</span>
+    <button class="btn" id="resetAll" type="button">Start over</button>
+  </div>
+</dialog>
+
 <dialog class="modal" id="extModal" aria-labelledby="extTitle">
   <div class="modal-head">
     <div>
@@ -1241,9 +1267,8 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
 
 <footer class="foot">
   <div class="foot-in">
-    <p><b>Mission 02 &middot; Spec Check.</b> Nothing on this page is submitted automatically &mdash; your work only
-      counts once the exported file is sitting in the Mission 2 folder in Drive. Your progress is saved in this
-      browser on this device only.</p>
+    <p><b>Mission 02 &middot; Spec Check.</b> Nothing here is turned in automatically. It counts once your file is in
+      the Mission 2 folder. Your work is saved in this browser, on this device only.</p>
     <p class="mono">Standards: 6th Grade Computer Science Standards Map</p>
   </div>
 </footer>
@@ -1254,6 +1279,9 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Quark", "Echo"]    &larr; 
 /* ============================================================
    DATA
    ============================================================ */
+/* Paste the Mission 1 page link here and the button at the top will point at it. */
+const MISSION_ONE_URL = "";
+
 const BASE_BUDGET = 20;
 const CREDIT_CAP  = 8;
 
@@ -1290,11 +1318,11 @@ const STANDARDS = [
     text:"Demonstrate compliance with the school's Acceptable Use Policy.", stages:["submit"] },
 ];
 
-const STAGE_LABEL = { briefing:"01", build:"02", indexing:"03", files:"04", submit:"05" };
+const STAGE_LABEL = { briefing:"01", build:"02", files:"03", indexing:"04", submit:"05" };
 
 const CATEGORIES = [
-  { key:"ram", tag:"Memory", name:"RAM (working memory)",
-    desc:"RAM is short-term memory. It holds whatever the robot is thinking about right now. More RAM means more tasks at once without slowing down — but it forgets everything the moment power is cut.",
+  { key:"ram", hue:"mem", tag:"Memory", name:"Memory (RAM)",
+    desc:"Short-term memory. More RAM means more jobs at once — but it forgets everything when the power cuts out.",
     options:[
       {label:"4 GB",  cost:1, stars:1},
       {label:"8 GB",  cost:2, stars:2},
@@ -1302,8 +1330,8 @@ const CATEGORIES = [
       {label:"32 GB", cost:6, stars:4},
       {label:"64 GB", cost:9, stars:5},
     ]},
-  { key:"storagetype", tag:"Storage", name:"Storage type",
-    desc:"How fast the robot reads and writes files that survive a shutdown. Spinning platters are cheap and slow; solid-state drives have no moving parts and are far faster.",
+  { key:"storagetype", hue:"sty", tag:"Storage", name:"Storage type",
+    desc:"How fast it saves and loads. Spinning drives are cheap and slow. Solid-state has no moving parts and is much faster.",
     options:[
       {label:"HDD",            cost:1, stars:1},
       {label:"eMMC",           cost:2, stars:2},
@@ -1311,8 +1339,8 @@ const CATEGORIES = [
       {label:"NVMe SSD",       cost:4, stars:4},
       {label:"PCIe Gen4 NVMe", cost:6, stars:5},
     ]},
-  { key:"storagecap", tag:"Storage", name:"Storage capacity",
-    desc:"How much the robot can keep permanently — programs, sensor logs, recordings. 1 TB is about 1,000 GB.",
+  { key:"storagecap", hue:"cap", tag:"Storage", name:"Storage capacity",
+    desc:"How much it can keep forever. 1 TB is about 1,000 GB.",
     options:[
       {label:"128 GB", cost:1, stars:1},
       {label:"256 GB", cost:2, stars:2},
@@ -1320,8 +1348,8 @@ const CATEGORIES = [
       {label:"1 TB",   cost:4, stars:4},
       {label:"2 TB",   cost:6, stars:5},
     ]},
-  { key:"ports", tag:"Connectivity", name:"Ports",
-    desc:"Ports are the robot's doors to the outside world — power, accessories, displays, wired networks. Every door you add costs points.",
+  { key:"ports", hue:"por", tag:"Connectivity", name:"Ports",
+    desc:"Its doors to the outside world — power, screens, accessories, networks.",
     options:[
       {label:"USB-A only",     cost:1, stars:1},
       {label:"USB-A + USB-C",  cost:2, stars:2},
@@ -1329,8 +1357,8 @@ const CATEGORIES = [
       {label:"+ Ethernet",     cost:4, stars:4},
       {label:"Full suite",     cost:5, stars:5},
     ]},
-  { key:"capability", tag:"Function", name:"Special capability",
-    desc:"The robot's superpower — what it can sense or decide beyond plain computing. Bigger capabilities lean harder on the rest of the system.",
+  { key:"capability", hue:"spc", tag:"Function", name:"Specialty function",
+    desc:"Its superpower — what it can sense or figure out on its own.",
     options:[
       {label:"Wi-Fi",                        cost:0, stars:1},
       {label:"Wi-Fi + Bluetooth",            cost:2, stars:2},
@@ -1347,7 +1375,7 @@ const RANKS = [
   {min:4,   label:"Platinum Flagship", color:"#2E9E92"},
 ];
 
-const CREW = ["Nova","Byte","Piston","Quark","Echo"];
+const CREW = ["Alpha","Beta","Charlie","Delta","Echo"];
 
 /* ---- The hangar: 26 chassis, one per call sign ---------------------------
    Artwork is inlined as data URIs by tools/build-bots.py, which rewrites the
@@ -1434,45 +1462,45 @@ const FILE_VAULT = [
 
 const PY_QUESTIONS = [
   { id:"p1", tag:"First item", code:true,
-    prompt:'<code>crew = ["Nova", "Byte", "Piston", "Quark", "Echo"]</code><br>What does <code>crew[0]</code> give you?',
-    opts:['"Nova"','"Byte"','"Echo"','IndexError'], correct:0,
-    why:'Indexing starts at <b>0</b>, so <code>crew[0]</code> is the first item — <b>"Nova"</b>.' },
+    prompt:'<code>crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]</code><br>What is <code>crew[0]</code>?',
+    opts:['"Alpha"','"Beta"','"Echo"','IndexError'], correct:0,
+    why:'Counting starts at <b>0</b>, so <code>crew[0]</code> is the first bot &mdash; <b>"Alpha"</b>.' },
   { id:"p2", tag:"Counting in", code:true,
     prompt:'Same list. What is <code>crew[2]</code>?',
-    opts:['"Byte"','"Piston"','"Quark"','"Nova"'], correct:1,
-    why:'Count from zero: Nova is 0, Byte is 1, Piston is 2. <code>crew[2]</code> is <b>"Piston"</b>.' },
+    opts:['"Beta"','"Charlie"','"Delta"','"Alpha"'], correct:1,
+    why:'Alpha is 0, Beta is 1, Charlie is 2. So <code>crew[2]</code> is <b>"Charlie"</b>.' },
   { id:"p3", tag:"Negative index", code:true,
     prompt:'Same list. What is <code>crew[-1]</code>?',
-    opts:['"Nova"','"Quark"','"Echo"','IndexError'], correct:2,
-    why:'Negative indexes count back from the end, and <code>-1</code> is the last item — <b>"Echo"</b>.' },
+    opts:['"Alpha"','"Delta"','"Echo"','IndexError'], correct:2,
+    why:'Negative numbers count backward, and <code>-1</code> is the last one &mdash; <b>"Echo"</b>.' },
   { id:"p4", tag:"Negative index", code:true,
     prompt:'Same list. What is <code>crew[-2]</code>?',
-    opts:['"Echo"','"Quark"','"Piston"','"Byte"'], correct:1,
-    why:'<code>-1</code> is "Echo", so <code>-2</code> is one further back: <b>"Quark"</b>.' },
+    opts:['"Echo"','"Delta"','"Charlie"','"Beta"'], correct:1,
+    why:'<code>-1</code> is Echo, so <code>-2</code> is one further back: <b>"Delta"</b>.' },
   { id:"p5", tag:"len()", code:true,
-    prompt:'Same list. What does <code>len(crew)</code> return?',
+    prompt:'Same list. What does <code>len(crew)</code> give you?',
     opts:['4','5','6','"Echo"'], correct:1,
-    why:'<code>len()</code> counts items the human way, starting at one. Five robots means <b>5</b>.' },
+    why:'<code>len()</code> counts like a person, starting at one. Five bots means <b>5</b>.' },
   { id:"p6", tag:"Last index", code:false,
-    prompt:'The list has 5 items. What is the <b>highest index</b> you are allowed to ask for?',
+    prompt:'The list has 5 bots. What is the <b>highest index</b> you can ask for?',
     opts:['3','4','5','6'], correct:1,
-    why:'Last index = <b>len − 1</b>. With 5 items the legal indexes are 0, 1, 2, 3, <b>4</b>.' },
+    why:'Last index = <b>len &minus; 1</b>. With 5 bots the legal spots are 0, 1, 2, 3, <b>4</b>.' },
   { id:"p7", tag:"IndexError", code:true,
     prompt:'Same list. What happens when you run <code>crew[5]</code>?',
-    opts:['Returns "Echo"','Returns None','IndexError: list index out of range','Starts over at "Nova"'], correct:2,
-    why:'There is no address 5 in a 5-item list — the last one is 4. Python raises an <b>IndexError</b>.' },
+    opts:['Gives "Echo"','Gives None','IndexError: list index out of range','Starts over at "Alpha"'], correct:2,
+    why:'There is no spot 5 in a 5-item list &mdash; the last one is 4. Python stops with an <b>IndexError</b>.' },
   { id:"p8", tag:"Slicing", code:true,
     prompt:'Same list. What is <code>crew[1:3]</code>?',
-    opts:['["Byte", "Piston"]','["Byte", "Piston", "Quark"]','["Nova", "Byte", "Piston"]','["Piston", "Quark"]'], correct:0,
-    why:'A slice starts at 1 and stops <em>just before</em> 3, so index 3 is left out: <b>["Byte", "Piston"]</b>.' },
+    opts:['["Beta", "Charlie"]','["Beta", "Charlie", "Delta"]','["Alpha", "Beta", "Charlie"]','["Charlie", "Delta"]'], correct:0,
+    why:'A slice starts at 1 and stops <em>just before</em> 3, so 3 is left out: <b>["Beta", "Charlie"]</b>.' },
   { id:"p9", tag:"Slicing", code:true,
     prompt:'Same list. What is <code>crew[:2]</code>?',
-    opts:['["Nova", "Byte"]','["Nova", "Byte", "Piston"]','["Piston", "Quark", "Echo"]','["Byte"]'], correct:0,
-    why:'An empty start means "from the beginning", and it still stops before index 2: <b>["Nova", "Byte"]</b>.' },
-  { id:"p10", tag:"Strings index too", code:true,
+    opts:['["Alpha", "Beta"]','["Alpha", "Beta", "Charlie"]','["Charlie", "Delta", "Echo"]','["Beta"]'], correct:0,
+    why:'No start means "from the beginning", and it still stops before 2: <b>["Alpha", "Beta"]</b>.' },
+  { id:"p10", tag:"Words index too", code:true,
     prompt:'<code>word = "PYTHON"</code><br>What is <code>word[3]</code>?',
     opts:['"T"','"H"','"O"','"P"'], correct:1,
-    why:'A string is a row of characters with the same addresses: P=0, Y=1, T=2, <b>H=3</b>.' },
+    why:'Letters have spots too: P=0, Y=1, T=2, <b>H=3</b>.' },
 ];
 
 const FD_QUESTIONS = [
@@ -1516,7 +1544,7 @@ const ALL_Q = PY_QUESTIONS.concat(FD_QUESTIONS);
    STATE + PERSISTENCE
    ============================================================ */
 const SAVE_KEY = "mission02-speccheck-v1";
-let state = { pilot:"", robot:"", bot:"", selections:{}, answers:{}, checks:{}, theme:"auto", assessed:false };
+let state = { team:"", robot:"", bot:"", crew:["","","",""], submitter:0, selections:{}, answers:{}, checks:{}, theme:"auto", assessed:false };
 
 function save(){
   try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }catch(e){ /* storage blocked — page still works */ }
@@ -1584,6 +1612,8 @@ function renderCategories(){
   CATEGORIES.forEach(cat=>{
     const el = document.createElement("div");
     el.className = "cat";
+    el.style.setProperty("--cat-c", `var(--c-${cat.hue})`);
+    el.style.setProperty("--cat-s", `var(--c-${cat.hue}-s)`);
     el.innerHTML = `
       <div class="cat-head">
         <p class="cat-tag">${cat.tag}</p>
@@ -1655,11 +1685,10 @@ function refresh(){
   const done = allSelected();
   $("#assessBtn").disabled = !done;
   $("#buildHint").innerHTML = done
-    ? `Every category is filled in &mdash; <strong>${spent} of ${b} points spent</strong>. Press <strong>Assess my robot</strong>, or keep tuning and earn more credits below.`
-    : `Pick one option in every category to unlock <strong>Assess my robot</strong>.`;
+    ? `All five picked &mdash; <strong>${spent} of ${b} points spent</strong>. Press <strong>Assess my bot</strong>, or earn more points in Stage 03 and 04.`
+    : `Pick one part in every box to unlock <strong>Assess my bot</strong>.`;
 
   $("#railCredits").textContent = "+" + credits();
-  $("#railTraining").textContent = correctCount();
   updateFilename();
   updateChecks();
   updateMarkers();
@@ -1677,6 +1706,7 @@ function renderStrip(hot=[], bad=false){
     <div class="cell ${hot.includes(i)?(bad?"err":"hot"):""}" data-i="${i}" role="button" tabindex="0"
          aria-label="index ${i}, value ${v}">
       <span class="pos">[${i}]</span>
+      <span class="plate">${plateHTML(v)}</span>
       <span class="val">"${v}"</span>
       <span class="neg">[${i - CREW.length}]</span>
     </div>`).join("");
@@ -1770,17 +1800,19 @@ function paintBots(){
     b.classList.toggle("on", on);
     b.setAttribute("aria-pressed", on ? "true" : "false");
   });
-  $("#botPicked").textContent = state.bot ? `Flying ${state.bot}.` : "";
   $("#mastBot").innerHTML = plateHTML(state.bot || "Alpha");
+  const cap = $("#mastCap");
+  if(state.bot) cap.innerHTML = `Team leader &middot; <b>${state.bot}</b>`;
+  else cap.textContent = "Pick your bot below";
 }
 
 /* ============================================================
    TRAINING CHECKS — read inline, tested in a pop-up
    ============================================================ */
 const QUIZZES = {
-  py: { qs:PY_QUESTIONS, kicker:"Stage 03 · Python indexing", title:"Indexing Check",
+  py: { qs:PY_QUESTIONS, kicker:"Stage 04 · Python indexing", title:"Indexing Check",
         dial:"#pyDial", mount:"#pyQuiz", wrap:"#pyReviewWrap", status:"#pyStatus", bar:"#pyBar" },
-  fd: { qs:FD_QUESTIONS, kicker:"Stage 04 · Files & Google Drive", title:"Files & Drive Check",
+  fd: { qs:FD_QUESTIONS, kicker:"Stage 03 · File types & Drive", title:"File Types Check",
         dial:"#fdDial", mount:"#fdQuiz", wrap:"#fdReviewWrap", status:"#fdStatus", bar:"#fdBar" },
 };
 
@@ -1925,7 +1957,7 @@ function openVault(){
    ============================================================ */
 function updateMarkers(){
   const done = {
-    briefing: true,
+    briefing: false,
     build:    allSelected(),
     indexing: PY_QUESTIONS.every(q => state.answers[q.id] !== undefined),
     files:    FD_QUESTIONS.every(q => state.answers[q.id] !== undefined),
@@ -1946,10 +1978,7 @@ function scrollSpy(){
    ============================================================ */
 function clean(s){ return s.replace(/[^A-Za-z0-9]/g, ""); }
 function fileBase(){
-  const parts = state.pilot.trim().split(/\s+/).filter(Boolean).map(clean).filter(Boolean);
-  if(parts.length >= 2) return `${parts[parts.length-1]}_${parts[0]}_Mission2`;
-  if(parts.length === 1) return `${parts[0]}_Mission2`;
-  return "Lastname_Firstname_Mission2";
+  return (clean(state.team.trim()) || "TeamName") + "_Mission2";
 }
 function updateFilename(){
   $("#filenameDemo").textContent = fileBase() + ".pdf";
@@ -1960,8 +1989,8 @@ function updateFilename(){
    REPORT
    ============================================================ */
 function buildReport(){
-  const pilot = state.pilot.trim() || "Unnamed Pilot";
-  const robot = state.robot.trim() || "Unnamed Unit";
+  const team  = state.team.trim()  || "Unnamed Team";
+  const robot = state.robot.trim() || "Unnamed Bot";
   const rows  = CATEGORIES.map(c=>{
     const o = c.options[state.selections[c.key]];
     return { tag:c.tag, name:c.name, choice:o.label, cost:o.cost, stars:o.stars };
@@ -1975,13 +2004,19 @@ function buildReport(){
   const answered = ALL_Q.filter(q => state.answers[q.id] !== undefined).length;
 
   $("#rTitle").textContent = `${robot} — Mission 2 Report`;
-  $("#rSub").textContent   = `Pilot: ${pilot} · Budget used: ${totalCost()} of ${budget()} pts (20 base + ${credits()} earned) · Average spec: ${avg.toFixed(1)} of 5.0`;
+  $("#rSub").textContent   = `Points spent: ${totalCost()} of ${budget()} (20 base + ${credits()} earned) · Average spec: ${avg.toFixed(1)} of 5.0`;
   const badge = $("#rRank");
   badge.textContent = rank.label;
   badge.style.color = rank.color;
 
   $("#rBotPlate").innerHTML = plateHTML(state.bot);
-  $("#rBotName").textContent = state.bot || "Unassigned";
+  $("#rTeam").textContent    = team;
+  $("#rBotName").textContent = robot + (state.bot ? ` (${state.bot})` : "");
+  $("#rCrew").innerHTML = state.crew.map((n,i)=>`
+    <div class="rseat">
+      <div class="k">Student ${i+1}${i === state.submitter ? " &middot; uploads" : ""}</div>
+      <div class="v">${((n||"").trim()) || "&mdash;"}</div>
+    </div>`).join("");
 
   $("#rScore").textContent = sum;
   $("#rPct").textContent   = pct + "%";
@@ -1997,11 +2032,11 @@ function buildReport(){
 
   let note;
   if(answered < ALL_Q.length){
-    note = `<strong>Training not finished.</strong> You have answered ${answered} of ${ALL_Q.length} check questions. Head back to Stage 03 and Stage 04 — this report updates itself, and every correct answer is another build point.`;
+    note = `<strong>Checks not finished.</strong> You answered ${answered} of ${ALL_Q.length} questions. Go back to Stage 03 and 04 — this report updates itself, and every right answer is another build point.`;
   }else if(totalCost() < budget()){
-    note = `<strong>You left ${budget()-totalCost()} point${budget()-totalCost()===1?"":"s"} unspent.</strong> Nothing wrong with that — but an engineer with leftover budget usually upgrades something. Scroll up and see what that last point buys.`;
+    note = `<strong>${budget()-totalCost()} point${budget()-totalCost()===1?"":"s"} left over.</strong> Engineers spend what they have. Scroll up and see what one more point buys.`;
   }else{
-    note = `<strong>Every point spent.</strong> You used the full ${budget()}-point budget and finished both training checks. This is a complete Mission 2 submission.`;
+    note = `<strong>Every point spent.</strong> Full ${budget()}-point budget used and both checks finished. This is a complete Mission 2 submission.`;
   }
   $("#rNote").innerHTML = note;
 
@@ -2098,51 +2133,6 @@ async function exportImage(type){
 }
 
 /* ============================================================
-   UPLOAD PRACTICE
-   ============================================================ */
-function simulateUpload(){
-  const zone = $("#dropzone");
-  if(zone.dataset.busy === "1" || zone.dataset.done === "1") return;
-  zone.dataset.busy = "1";
-  zone.classList.remove("hot");
-  let pct = 0;
-  zone.textContent = "Uploading… 0%  (data in transit — do not close the tab)";
-  const t = setInterval(()=>{
-    pct += 20;
-    if(pct < 100){
-      zone.textContent = `Uploading… ${pct}%  (data in transit — do not close the tab)`;
-    }else{
-      clearInterval(t);
-      zone.dataset.busy = "0";
-      zone.dataset.done = "1";
-      zone.classList.add("hot");
-      zone.textContent = "✓ 1 upload complete";
-      const row = document.createElement("div");
-      row.className = "filerow";
-      row.innerHTML = `<span class="ext">PDF</span><span class="mono" style="flex:1;">Lovelace_Ada_Mission2.pdf</span><span class="small">just now</span>`;
-      $("#driveMain").appendChild(row);
-      $("#dragFile").style.opacity = ".4";
-    }
-  }, 280);
-}
-(function uploadDemo(){
-  const file = $("#dragFile"), zone = $("#dropzone");
-  file.addEventListener("dragstart", e => { e.dataTransfer.setData("text/plain","report"); e.dataTransfer.effectAllowed = "copy"; });
-  file.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); simulateUpload(); } });
-  ["dragenter","dragover"].forEach(ev => zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.add("hot"); }));
-  zone.addEventListener("dragleave", ()=> zone.classList.remove("hot"));
-  zone.addEventListener("drop", e => { e.preventDefault(); simulateUpload(); });
-  $("#uploadBtn").addEventListener("click", simulateUpload);
-  $("#resetUpload").addEventListener("click", ()=>{
-    zone.dataset.done = "0"; zone.dataset.busy = "0";
-    zone.classList.remove("hot");
-    zone.innerHTML = 'Drop files here &mdash; or use <b>+ New &rsaquo; File upload</b>';
-    $$("#driveMain .filerow").forEach(r=>r.remove());
-    file.style.opacity = "1";
-  });
-})();
-
-/* ============================================================
    CHECKLIST
    ============================================================ */
 function renderChecklist(){
@@ -2167,13 +2157,30 @@ function updateChecklistStatus(){
   const n = $$("#checklist li").filter(li => state.checks[li.dataset.k]).length;
   $("#chkStatus").textContent = `${n} / 7 checked`;
   $("#chkBar").style.width = (n/7*100) + "%";
+  $("#chkPill").textContent = `${n}/7`;
 }
 
 /* ============================================================
    WIRING
    ============================================================ */
-$("#pilotName").addEventListener("input", e => { state.pilot = e.target.value; save(); refresh(); });
+$("#teamName").addEventListener("input", e => { state.team = e.target.value; save(); refresh(); });
 $("#robotName").addEventListener("input", e => { state.robot = e.target.value; save(); refresh(); });
+[1,2,3,4].forEach(n => $("#s"+n).addEventListener("input", e => { state.crew[n-1] = e.target.value; save(); refresh(); }));
+$("#submitter").addEventListener("change", e => { state.submitter = parseInt(e.target.value,10) || 0; save(); refresh(); });
+
+/* Mission Check lives in the rail so the page stays uncluttered */
+$("#openCheck").addEventListener("click", ()=> $("#checkModal").showModal());
+$("#checkClose").addEventListener("click", ()=> $("#checkModal").close());
+
+/* Mission 01 back-link */
+(function missionOne(){
+  const a = $("#missionOne");
+  if(MISSION_ONE_URL){ a.href = MISSION_ONE_URL; }
+  else{
+    a.href = "#briefing";
+    a.title = "Mission 1 link not set yet";
+  }
+})();
 
 $("#assessBtn").addEventListener("click", ()=>{
   buildReport();
@@ -2226,7 +2233,7 @@ $("#exprInput").addEventListener("keydown", e => { if(e.key === "Enter") runExpr
 
 $("#resetAll").addEventListener("click", ()=>{
   if(!confirm("Clear your build, your check answers, and your checklist on this device? This cannot be undone.")) return;
-  state = { pilot:"", robot:"", bot:"", selections:{}, answers:{}, checks:{}, theme:state.theme, assessed:false };
+  state = { team:"", robot:"", bot:"", crew:["","","",""], submitter:0, selections:{}, answers:{}, checks:{}, theme:state.theme, assessed:false };
   save();
   location.reload();
 });
@@ -2243,8 +2250,10 @@ window.addEventListener("scroll", ()=>{
    ============================================================ */
 load();
 applyTheme();
-$("#pilotName").value = state.pilot || "";
+$("#teamName").value  = state.team  || "";
 $("#robotName").value = state.robot || "";
+[1,2,3,4].forEach(n => { $("#s"+n).value = (state.crew && state.crew[n-1]) || ""; });
+$("#submitter").value = String(state.submitter || 0);
 renderStandards();
 renderCategories();
 renderStrip();

@@ -10,23 +10,46 @@ and the image-export library.
 
 | Stage | What happens |
 | --- | --- |
-| **01 Briefing** | The mission, what counts as done, and the standards table |
-| **02 Build** | Pick one of the 26 bots, then spend a 20-point hardware budget across RAM, storage type, storage capacity, ports, and special capability |
-| **03 Indexing** | Four lesson cards + a live **Index Lab** (click a list item or type `crew[-2]`, `crew[1:3]`, `len(crew)` and see the result), then a 10-question pop-up test |
-| **04 Files & Drive** | JPEG / PNG / PDF compared, what Google Drive actually is, a drag-to-upload practice window, then an 8-question pop-up test |
-| **05 Turn It In** | The generated report, PDF/PNG/JPEG export, the naming convention, the five upload steps, and a final checklist |
+| **01 Start here** | Five step cards, the "done means" chips, and the standards table |
+| **02 Build** | Team name, bot name, the 26-bot leader picker, Student 1–4 and who uploads — then spend a 20-point budget across five color-coded specs |
+| **03 File types** | JPEG / PNG / PDF compared, what Google Drive is, states of data, then an 8-question pop-up test |
+| **04 Indexing** | Four lesson cards + the live **Index Lab** (the list is the bot roster: `crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]`), then a 10-question pop-up test |
+| **05 Turn it in** | The generated report, PDF/PNG/JPEG export, the naming convention, and the four upload steps |
 
-Correct answers on the two tests earn **build credits** (+1 each, capped at 8) that raise the budget in
-Stage 02 — so training is worth doing before the build is final. Max budget is 28 points against 33 points
+**Mission Check** — the end-of-class checklist — lives behind the ✓ button in the sticky rail, not on the page,
+so the page itself stays uncluttered. It saves per device.
+
+Correct answers on the two tests earn **build points** (+1 each, capped at 8) that raise the budget in
+Stage 02 — so the checks are worth doing before the build is final. Max budget is 28 points against 33 points
 of available parts, which keeps the trade-off real: nobody can afford everything.
 
 Progress is saved in the browser's `localStorage` on that device only. Nothing is submitted from the page —
-the graded artifact is the file the student uploads to Drive.
+the graded artifact is the one file per team that gets uploaded to Drive. Side quests are not turned in here;
+those use the links in the daily document.
+
+The report carries the team name, the bot's name and call sign, its portrait, all four students with the
+uploader marked, the five specs with stars, the rank, the training score, and the standards demonstrated.
+
+## Set the Mission 1 link
+
+The **Mission 01 · Build Your Bot** button at the top is wired to a constant near the top of the script:
+
+```js
+const MISSION_ONE_URL = "";   // paste the Mission 1 page link here
+```
+
+Leave it empty and the button stays put; fill it in and it points at Mission 1.
 
 ### Easter egg
 
 **Triple-tap (or triple-click) the Stage 04 headline** — "JPEG, PNG, PDF — and where your file goes" —
 to open **The Extension Vault**, a reference of all ~30 file types the course covers, grouped by kind.
+
+## Artwork
+
+The wave band with the gliding manta ray at the top is inline SVG drawn for this page — no stock photo, no
+license to track, and it recolors itself for light and dark. It holds still for anyone with reduced motion
+turned on. Swap it for a photo if you would rather have one.
 
 ## The bots
 
@@ -54,6 +77,7 @@ Everything a teacher would want to change sits in named arrays at the top of the
 - `CATEGORIES` — the build options, their point costs, and star ratings
 - `BASE_BUDGET` / `CREDIT_CAP` — the 20-point budget and the 8-credit cap
 - `PY_QUESTIONS` / `FD_QUESTIONS` — the two tests (prompt, options, correct index, explanation)
+- `CREW` — the five bots used in the indexing lesson and lab
 - `FILE_VAULT` — the easter-egg file type reference
 - `STANDARDS` — benchmarks from the 6th Grade Computer Science Standards Map, tagged by stage;
   they show as chips under each stage heading and print on the student's report
