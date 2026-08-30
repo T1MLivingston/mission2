@@ -56,10 +56,10 @@ uploader marked, the five specs with stars, the rank, the training score, and th
 
 Section A teaches by letting students break things rather than by describing them:
 
-- **JPEG** — a quality slider re-encodes the picture live and prints the size, so *lossy* is something you
-  watch happen. It loads the landscape photo at `PHOTO_SRC`; that needs CORS to re-encode, so where the host
-  refuses it, a drawn scene stands in and the slider still works. Drop a local copy of the photo in and point
-  `PHOTO_SRC` at it to have the real one everywhere.
+- **JPEG** — a quality slider re-encodes the photograph live and prints the size, so *lossy* is something you
+  watch happen: 62 KB and crisp at 100%, 2 KB and blocky at 5%, with the caption smearing on the way down.
+  The photo travels with the page as a data URI, so it works on a blocked school network and with no assets
+  folder. `PHOTO_SRC` is still fetched and used instead when the host allows re-encoding it.
 - **PNG** — a bot on a checkerboard that drags, resizes and swaps. Nothing ever covers the background.
 - **PDF** — the same report rendered twice, as a web page and as a PDF. Switch Laptop / Tablet / Phone: the
   web page reflows, the PDF only gets smaller.
@@ -87,6 +87,20 @@ python3 tools/build-bots.py     # needs pillow: pip install pillow
 
 That regenerates `assets/bots/web/` and rewrites the `BOT_IMG` block between the `/* BOT_IMG_START */`
 and `/* BOT_IMG_END */` markers.
+
+## The landscape
+
+The JPEG demo needs pixels the browser will let us read back, so the page carries its own alpine lake —
+generated, not photographed, and deliberately full of the fine detail JPEG destroys first: ridge texture,
+broken snow, ripples, film grain.
+
+```
+python3 tools/build-photo.py    # needs pillow + numpy
+```
+
+That rewrites `assets/photo/lake.jpg` and the `PHOTO_LOCAL` data URI between the `/* PHOTO_START */` and
+`/* PHOTO_END */` markers. To use a real photograph instead, save it as `assets/photo/lake.jpg`, comment out
+the `render()` call, and re-run — or just point `PHOTO_SRC` at a host that sends CORS headers.
 
 ## Editing the content
 
