@@ -8,64 +8,15 @@ and the image-export library.
 
 ## What the page does
 
-| Stage | What happens |
+| Step | What happens |
 | --- | --- |
-| **01 Start here** | Five step cards, the "done means" chips, and the standards table |
-| **02 Build** | Bot name, Student 1–4, and who uploads — then spend a 20-point budget across five color-coded specs, each with its own chief |
-| **03 File types** | JPEG / PNG / PDF compared, what Google Drive is, states of data |
-| **04 Indexing** | Four lesson cards, the live **Index Lab** (the list is the bot roster: `crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]`), a **Slicing lab** with start/stop steppers, and a **Data types** reference (int, float, str, bool, list) |
-| **05 Turn it in** | The generated report, PDF/PNG/JPEG export, the exact folder and file names, and two sets of directions — one for every student, one for the organizer |
+| **1 Start here** | Four step cards and the standards table |
+| **2 Build** | Team, bot, crew, period, and who uploads — then a 20-point budget across five spec boxes, each hosted by one of the crew bots |
+| **3 Turn it in** | The report, PDF/PNG/JPEG export, the exact folder and file names, and two sets of directions — one for every student, one for the organizer |
+| **2.5 Extra points** | At the very bottom, after step 3: file types (JPEG/PNG/PDF + Drive), Python indexing (Index Lab, Slicing lab, Data types), and both pop-up checks |
 
-The header carries the whole team identity: the chassis on the left under **Team leader** with ‹ › arrows to
-flip through all 26, and the **Team** dropdown top right. The two are the same choice — picking Team Sierra
-swings the banner to Sierra, and arrowing to Sierra sets the team. The call sign also becomes the filename
-(`Sierra_Mission2.pdf`), so no two teams can collide.
-
-Under the dropdown, **Team color** is a hex code the team types in — it starts at `#FAE74C`. It accepts
-`fae74c`, `#fae74c`, or the three-digit shorthand, turns red on anything else, and keeps the last good value.
-The swatch beside it opens the system color picker and fills the code in. That color paints the plate behind
-every bot on the page — banner, section chiefs, both labs, the report portrait — plus the band across the top
-of the report, so it rides into the downloaded file and survives Save as PDF.
-
-### Section chiefs
-
-The five spec boxes are hosted by the crew from the indexing lesson — Delta on memory, Beta on storage type,
-Alpha on capacity, Echo on ports, Charlie on specialty function — so the same five bots students index in
-Stage 04 are the ones running Stage 02. The two training stages are hosted by undrafted chassis: Sierra over
-file types, Uniform over indexing. Set in `CHIEFS` and the two `data-chief` attributes in the markup, so
-reassign them whenever the draft changes.
-
-### How Mission 2 is turned in
-
-One student per team is the **organizer** (set by "Who uploads the file?"). They build the shared folder;
-everyone fills their own corner of it:
-
-```
-Period3_Sierra              ← organizer makes this, shares it with the team as Editor
- └─ Ada                     ← each student's own first-name folder
-     └─ Mission 2 Data      ← that student's three files
-         ├─ Ada_Sierra_Mission2.pdf
-         ├─ Ada_Sierra_Mission2.png
-         └─ Ada_Sierra_Mission2.jpg
-```
-
-Every name on that tree is generated live on the page from the team, period, and student, so students copy
-rather than invent. When every folder is complete and correctly named, the organizer shares the team folder
-with the teacher's account — **the address lives in the daily document, not on this page** — and that share
-is the submission. The page says plainly not to share early.
-
-### Progress
-
-Each of the five steps starts in a soft yellow and fills to solid `#FAE74C` with a check when it is finished —
-the marker beside the heading, the card in the briefing strip, and the number in the sticky rail all flip
-together, and a yellow bar under the rail fills a fifth at a time. A step counts as done when: the team
-details are filled in (1), all five parts are picked (2), every file-types question is answered (3), every
-indexing question is answered (4), and the report exists with all of Mission Check ticked (5). One definition,
-`stageDone()`, drives all of it.
-
-Both pop-up tests live in one **Extra points** round at the very bottom, under the upload directions, with a
-running total of points earned. Keeping them together — and last — means the page reads as *learn, then turn
-it in, then earn extra* rather than scattering the scoring through the lesson.
+Three steps carry the mission; 2.5 is the optional bonus round whose points feed back into step 2, which is
+why it sits last on the page.
 
 **Mission Check** — the end-of-class checklist — lives behind the ✓ button in the sticky rail, not on the page,
 so the page itself stays uncluttered. It saves per device, and splits into "everyone" and "organizer only".
