@@ -184,7 +184,7 @@ p:last-child{margin-bottom:0;}
 #hexInput.bad{border-color:var(--flare);color:var(--flare);}
 
 /* section chiefs — the bots nobody drafted */
-.chief{display:flex;flex-direction:column;align-items:center;gap:5px;width:66px;flex:none;}
+.chief{display:flex;flex-direction:column;align-items:center;gap:4px;width:66px;flex:none;}
 .chief .plate{width:66px;height:66px;border-radius:8px;}
 .chief b{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cat-c,var(--amber));font-weight:600;}
 .stage-head .chief b{color:var(--stage-c,var(--amber));}
@@ -374,14 +374,20 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
 
 .cat{
   border:1px solid var(--rule);border-top:5px solid var(--cat-c,var(--amber));border-radius:9px;
-  background:var(--panel);margin-bottom:16px;overflow:hidden;display:grid;grid-template-columns:170px 1fr;
+  background:var(--panel);margin-bottom:16px;overflow:hidden;display:grid;grid-template-columns:186px 1fr;
 }
 .cat > .chief{
   width:auto;background:var(--chief-bg);border-right:2px solid var(--stroke);
   padding:14px 12px;gap:8px;justify-content:center;
 }
 .cat > .chief .plate{width:100%;height:auto;aspect-ratio:1;background:transparent;border:0;border-radius:0;}
-.cat > .chief b{font-size:12px;color:var(--stroke);}
+.cat > .chief b{font-size:13px;color:var(--stroke);}
+.cat > .chief em{
+  font-style:normal;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:13px;
+  color:var(--stroke);text-align:center;line-height:1.2;
+}
+.cat > .chief .story{font-size:11.5px;line-height:1.4;color:#4A5A66;text-align:center;}
+@media (max-width:640px){ .cat > .chief .story{display:none;} }
 @media (max-width:640px){
   .cat{grid-template-columns:1fr;}
   .cat > .chief{flex-direction:row;align-items:center;border-right:0;border-bottom:2px solid var(--stroke);padding:10px 14px;}
@@ -539,10 +545,17 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
   background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;cursor:grab;touch-action:none;
 }
 .swatch.checker:active{cursor:grabbing;}
+.swatch.tall{height:190px;}
 .swatch.checker img{
-  position:absolute;top:4px;left:50%;height:66px;width:auto;user-select:none;pointer-events:none;
-  filter:drop-shadow(0 3px 3px rgba(11,16,21,.3));
+  position:absolute;top:0;left:0;height:104px;width:auto;user-select:none;pointer-events:none;
+  filter:drop-shadow(0 4px 4px rgba(11,16,21,.32));
 }
+.swap-bot{
+  position:absolute;right:7px;bottom:7px;z-index:2;border:2px solid var(--stroke);border-radius:6px;
+  background:var(--num-bg);color:var(--num-fg);font-family:'IBM Plex Mono',monospace;font-size:11px;
+  font-weight:700;padding:4px 9px;cursor:pointer;
+}
+.swap-bot:hover{filter:brightness(1.15);}
 .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:7px;}
 table.cmp{border-collapse:collapse;width:100%;min-width:520px;font-size:14px;}
 table.cmp th,table.cmp td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--rule-soft);}
@@ -660,6 +673,12 @@ table.cmp td:first-child{font-family:'IBM Plex Mono',monospace;font-size:13px;}
   border-radius:4px;padding:3px 8px;color:var(--ink-2);background:var(--panel-2);
 }
 .std-chip b{color:var(--teal);font-weight:600;}
+.std-list{list-style:none;margin:0;padding:0;display:grid;gap:8px;}
+.std-list li{
+  display:flex;gap:11px;align-items:flex-start;font-size:14.5px;border:1px solid var(--rule);
+  border-radius:7px;background:var(--panel-2);padding:10px 14px;
+}
+.std-list li::before{content:"\2713";color:var(--num-fg);font-weight:700;}
 table.std{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px;}
 table.std th,table.std td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--rule-soft);vertical-align:top;}
 table.std thead th{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);background:var(--panel-2);border-bottom:1px solid var(--rule);}
@@ -876,8 +895,8 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     <div class="rail-nav" id="railNav">
       <a href="#briefing" data-stage="briefing" data-c="g1"><i>01</i>Start Here</a>
       <a href="#build" data-stage="build" data-c="g2"><i>02</i>Build</a>
-      <a href="#submit" data-stage="submit" data-c="g3"><i>03</i>Turn It In</a>
       <a href="#learn" data-stage="learn" data-c="g4"><i>2.5</i>Extra Points</a>
+      <a href="#submit" data-stage="submit" data-c="g3"><i>03</i>Turn It In</a>
     </div>
     <div class="rail-score">
       <span class="readout" title="Extra build points from the two checks">POINTS <b id="railCredits">+0</b>/8</span>
@@ -909,13 +928,13 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
       <span class="n">STEP 2</span><h4>Spend 20 points</h4>
       <p>Pick one part in each of the five boxes.</p>
     </div>
-    <div class="step-card" data-step="submit">
-      <span class="n">STEP 3</span><h4>Turn it in</h4>
-      <p>Save, rename, upload.</p>
-    </div>
     <div class="step-card" data-step="learn">
       <span class="n">STEP 2.5</span><h4>Want more points?</h4>
-      <p>Questions at the bottom. Each is +1 point.</p>
+      <p>Answer questions. Each one is +1 point.</p>
+    </div>
+    <div class="step-card" data-step="submit">
+      <span class="n">STEP 3</span><h4>Turn it in</h4>
+      <p>Save, rename, upload, send the link.</p>
     </div>
   </div>
 
@@ -931,10 +950,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
       Standards covered <span class="q-tag" style="margin-left:8px;">6th Grade CS Standards Map</span>
     </summary>
     <div class="panel-body" style="padding-top:0;">
-      <div class="tablewrap"><table class="std" id="stdTable">
-        <thead><tr><th>Body of Knowledge</th><th>Big Idea</th><th>Benchmark</th><th>Stage</th></tr></thead>
-        <tbody></tbody>
-      </table></div>
+      <ul class="std-list" id="stdList"></ul>
     </div>
   </details>
 </section>
@@ -1001,128 +1017,6 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 <!-- ========================= 03 FILE TYPES ========================= -->
 
 
-<!-- ========================= 04 INDEXING ========================= -->
-
-
-<!-- ========================= 05 TURN IT IN ========================= -->
-<section class="stage" id="submit" data-c="g5">
-  <div class="stage-head">
-    <span class="marker" data-marker="submit">Step 3</span>
-    <div>
-      <p class="eyebrow">Turn it in</p>
-      <h2>Save the report, then upload it</h2>
-      <p class="lede">This is the part that gets graded.</p>
-      <div class="std-chips" data-chips="submit"></div>
-    </div>
-  </div>
-
-  <div class="panel" id="reportPanel" style="border-top:5px solid var(--g5);">
-    <div class="panel-head no-print">
-      <h3>Your Mission 2 report</h3>
-      <span class="q-tag">This is the file you turn in</span>
-    </div>
-    <div class="panel-body">
-      <div id="reportEmpty" class="note warn no-print">
-        <strong>No report yet.</strong> Finish your build in <a href="#build">Stage 02</a> and press <b>Assess my bot</b>.
-      </div>
-
-      <section id="report">
-        <div class="report-sheet" id="reportSheet">
-          <div class="report-band"></div>
-          <p class="printonly eyebrow" style="color:#666;">Mission 02 &middot; Spec Check &middot; 6th Grade Computer Science</p>
-          <div class="portrait">
-            <div class="plate" id="rBotPlate"></div>
-            <div class="pmeta">
-              <div class="k">Team</div>
-              <div class="v" id="rTeam">&mdash;</div>
-              <div class="k" style="margin-top:8px;">Bot</div>
-              <div class="v" id="rBotName">&mdash;</div>
-            </div>
-          </div>
-          <div class="rcrew" id="rCrew"></div>
-          <div class="report-top">
-            <div>
-              <h3 id="rTitle">Bot Report</h3>
-              <p class="sub" id="rSub"></p>
-            </div>
-            <span class="rank" id="rRank">RANK</span>
-          </div>
-          <div class="scorebar">
-            <div class="scorebig"><b id="rScore">0</b><span>/ 25 spec stars</span></div>
-            <div class="scoremeta"><span class="k">Build percent</span><span class="v" id="rPct">0%</span></div>
-            <div class="scoremeta"><span class="k">Training score</span><span class="v" id="rTraining">0 / 18</span></div>
-            <div class="scoremeta"><span class="k">Points earned</span><span class="v" id="rCredits">+0</span></div>
-          </div>
-          <div class="rgrid" id="rGrid"></div>
-          <div class="note" id="rNote" style="margin-bottom:16px;"></div>
-          <p class="strip-label">Standards demonstrated</p>
-          <div class="tablewrap"><table class="std" id="rStd">
-            <thead><tr><th>Big Idea</th><th>Benchmark</th></tr></thead><tbody></tbody>
-          </table></div>
-        </div>
-
-        <div class="export-row no-print" style="align-items:center;">
-          <label class="field" style="margin-right:6px;"><span>Exporting as</span>
-            <select id="exporter"></select></label>
-        </div>
-        <div class="export-row no-print">
-          <button class="btn primary" id="pdfBtn" type="button">Save as PDF</button>
-          <button class="btn" id="pngBtn" type="button">Download PNG</button>
-          <button class="btn" id="jpgBtn" type="button">Download JPEG</button>
-          <button class="btn" id="reassessBtn" type="button">Re-assess</button>
-        </div>
-        <p class="small no-print" style="margin-top:10px;">
-          You need <b>all three</b>. <b>Save as PDF</b> opens the print box &mdash; set <i>Destination</i> to <b>Save as PDF</b>.</p>
-        <div class="filepreview no-print" id="filePreview"></div>
-      </section>
-    </div>
-  </div>
-
-  <div class="panel" style="border-top:5px solid var(--g5);">
-    <div class="panel-head"><h3>Name everything exactly like this</h3><span class="q-tag">Spelling counts</span></div>
-    <div class="panel-body">
-      <p class="small" style="margin-bottom:12px;">Copy it letter for letter.</p>
-      <p class="strip-label">Folders</p>
-      <div class="pre" id="folderTree"></div>
-      <p class="strip-label" style="margin-top:14px;">Your three files</p>
-      <div class="pre" id="fileTree"></div>
-      <div class="note warn" style="margin-top:14px;">No spaces. No extra <span class="mono">.pdf</span> on the end.</div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head"><h3>Everyone on the team does this</h3><span class="q-tag">All four students</span></div>
-    <div class="panel-body">
-      <ol class="steps">
-        <li><div><h5>Save your three files</h5><p><b>PDF</b>, <b>PNG</b>, <b>JPEG</b> &mdash; all three.</p></div></li>
-        <li><div><h5>Rename all three</h5><p>Files app &rsaquo; Downloads &rsaquo; right-click &rsaquo; Rename. Copy the names above.</p></div></li>
-        <li><div><h5>Open the team folder</h5><p><b>Shared with me</b> &rsaquo; your team folder. Cannot see it? Ask your organizer.</p></div></li>
-        <li><div><h5>Make your two folders</h5><p><b>+ New &rsaquo; Folder</b> with <b>your first name</b>. Inside it, one more called <b>Mission 2 Data</b>.</p></div></li>
-        <li><div><h5>Upload all three there</h5><p><b>+ New &rsaquo; File upload</b>. Refresh, then click each file to be sure it opens.</p></div></li>
-      </ol>
-    </div>
-  </div>
-
-  <div class="panel" style="border-top:5px solid var(--amber);">
-    <div class="panel-head"><h3>The organizer does this</h3><span class="q-tag">One student &mdash; the one who submits</span></div>
-    <div class="panel-body">
-      <p class="small" style="margin-bottom:14px;"><b>Student 1 runs this.</b> Do steps 1 and 2 first &mdash;
-        nobody else can start until the folder is shared.</p>
-      <ol class="steps">
-        <li><div><h5>Make the team folder</h5><p><b>+ New &rsaquo; Folder</b>, named <span class="mono" id="orgFolder">Period1_Alpha</span>. Build the inside to match the picture above.</p></div></li>
-        <li><div><h5>Share it with your team</h5><p>Right-click &rsaquo; <b>Share</b>. Add teammates by <b>school email</b> as <b>Editor</b>.</p></div></li>
-        <li><div><h5>Check every folder</h5><p>Three files each, named right, and they open.</p></div></li>
-        <li><div><h5>Drop it in my folder</h5><p>Open the <b>Mr. Livingston folder link</b> in the daily document. Drag your team folder in. Done.</p></div></li>
-      </ol>
-      <div class="note warn" style="margin-top:16px;"><strong>Check before you drop.</strong> Wrong names means
-        the whole team is late.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ========================= EXTRA POINTS ========================= -->
-
-
 <!-- ========================= STEP 2.5 ========================= -->
 <section class="stage" id="learn" data-c="g4">
   <div class="stage-head">
@@ -1165,8 +1059,9 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     </div>
 
     <div class="ftype">
-      <div class="swatch checker" id="pngSwatch" title="Drag the bot around — nothing is hidden behind it">
+      <div class="swatch checker tall" id="pngSwatch" title="Drag the bot anywhere — nothing hides behind it">
         <img id="pngBot" alt="A bot with a transparent background you can drag" draggable="false">
+        <button class="swap-bot" id="pngSwap" type="button">Swap bot</button>
       </div>
       <h4>.png</h4>
       <p class="full">Portable Network Graphics</p>
@@ -1212,7 +1107,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
   </div>
 
   <div class="panel">
-    <div class="panel-head"><h3>Google Drive</h3><span class="q-tag">Where your file lives</span></div>
+    <div class="panel-head"><h3>Understanding Google Drive</h3><span class="q-tag">Where your files live</span></div>
     <div class="panel-body">
       <div class="grid2">
         <div>
@@ -1220,29 +1115,30 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
             any device you sign into.</p>
           <div class="note"><strong>Share a folder</strong> and it lands in that person's <b>Shared with me</b>.
             That is how your team reaches yours.</div>
-          <div class="note warn" style="margin-top:12px;"><strong>Where it goes.</strong> Your team folder gets
-            dropped into <b>Mr. Livingston's folder</b>. Link is in the daily document. See <a href="#submit">Step 3</a>.</div>
+          <div class="note warn" style="margin-top:12px;"><strong>Where it goes.</strong> Your team folder link
+            gets pasted into the class <b>spreadsheet</b> &mdash; it is in the daily document. See
+            <a href="#submit">Step 3</a>.</div>
         </div>
         <div>
-          <p class="strip-label">Getting there</p>
+          <p class="strip-label">Make a folder and share it</p>
           <ul class="objectives" style="margin-bottom:14px;">
-            <li data-n="A"><span>Go to <code>drive.google.com</code>, or the 9-dot grid &rsaquo; <b>Drive</b>.</span></li>
-            <li data-n="B"><span>Check the circle top right &mdash; it must be your <b>school account</b>.</span></li>
-            <li data-n="C"><span><b>Shared with me</b> &rsaquo; class folder &rsaquo; <b>Mission 2</b>.</span></li>
+            <li data-n="A"><span>Go to <code>drive.google.com</code> and sign in with your <b>school account</b>.</span></li>
+            <li data-n="B"><span><b>+ New &rsaquo; Folder</b>. Name it, click <b>Create</b>.</span></li>
+            <li data-n="C"><span>Right-click it &rsaquo; <b>Share</b>. Type a classmate's school email, set them to <b>Editor</b>, send.</span></li>
+            <li data-n="D"><span>They can now open it and add files. That is how a team works in one place.</span></li>
           </ul>
           <div class="drive-ui" aria-hidden="true">
             <div class="drive-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="urlbar">drive.google.com</span></div>
             <div class="drive-body">
               <div class="drive-side">
                 <span class="newbtn"><b>+</b> New</span>
-                <a href="#files">My Drive</a>
-                <a href="#files" class="here">Shared with me</a>
-                <a href="#files">Recent</a>
+                <a href="#learn" class="here">My Drive</a>
+                <a href="#learn">Recent</a>
               </div>
               <div class="drive-main">
                 <div class="menu-pop">
-                  <span>New folder</span>
-                  <span class="hi">File upload &nbsp;&larr; this one</span>
+                  <span class="hi">Folder &nbsp;&larr; start here</span>
+                  <span>File upload</span>
                   <span>Folder upload</span>
                 </div>
               </div>
@@ -1285,6 +1181,22 @@ crew[<span class="k">-2</span>]  <span class="c"># "Delta"</span></div>
 crew[<span class="k">4</span>]     <span class="c"># "Echo"   &larr; last legal spot</span>
 crew[<span class="k">5</span>]     <span class="c"># IndexError</span></div>
           <p><strong>Last index = len &minus; 1.</strong></p>
+        </div>
+      </details>
+
+      <details class="lesson">
+        <summary><span class="n">05</span> You can do math in the brackets</summary>
+        <div class="lesson-body">
+          <p>Python works out the math <strong>first</strong>, then goes to that address.</p>
+          <div class="pre">i = <span class="k">1</span>
+
+crew[i]      <span class="c"># "Beta"      &larr; i is 1</span>
+crew[i + <span class="k">1</span>]  <span class="c"># "Charlie"   &larr; 1 + 1 = 2</span>
+crew[i - <span class="k">1</span>]  <span class="c"># "Alpha"     &larr; 1 - 1 = 0</span>
+
+crew[len(crew) - <span class="k">1</span>]  <span class="c"># "Echo"  &larr; 5 - 1 = 4, the last one</span></div>
+          <p>Add too much and you fall off the end: <code>crew[3 + 3]</code> is <code>crew[6]</code> &mdash;
+             <strong>IndexError</strong>.</p>
         </div>
       </details>
 
@@ -1359,9 +1271,9 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
     <div class="panel-body">
       <div class="check">
         <div class="check-left">
-          <div class="check-dial" id="pyDial">0/12</div>
+          <div class="check-dial" id="pyDial">0/14</div>
           <div>
-            <h4>Twelve questions</h4>
+            <h4>Fourteen questions</h4>
             <p>One try each. Every right answer = <strong>+1 build point</strong> (up to 8 total).</p>
           </div>
         </div>
@@ -1374,6 +1286,129 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
     </div>
   </div>
 </section>
+
+<!-- ========================= 05 TURN IT IN ========================= -->
+<section class="stage" id="submit" data-c="g5">
+  <div class="stage-head">
+    <span class="marker" data-marker="submit">Step 3</span>
+    <div>
+      <p class="eyebrow">Turn it in</p>
+      <h2>Save the report, then upload it</h2>
+      <p class="lede">This is the part that gets graded.</p>
+      <div class="std-chips" data-chips="submit"></div>
+    </div>
+  </div>
+
+  <div class="panel" id="reportPanel" style="border-top:5px solid var(--g5);">
+    <div class="panel-head no-print">
+      <h3>Your Mission 2 report</h3>
+      <span class="q-tag">This is what you send Mr. Livingston</span>
+    </div>
+    <div class="panel-body">
+      <p class="small no-print" style="margin-bottom:12px;">This is what you are creating. Save it three ways,
+        put it in your folder, and your organizer sends the folder link to Mr. Livingston.</p>
+      <div id="reportEmpty" class="note warn no-print">
+        <strong>No report yet.</strong> Finish your build in <a href="#build">Stage 02</a> and press <b>Assess my bot</b>.
+      </div>
+
+      <section id="report">
+        <div class="report-sheet" id="reportSheet">
+          <div class="report-band"></div>
+          <p class="printonly eyebrow" style="color:#666;">Mission 02 &middot; Spec Check &middot; 6th Grade Computer Science</p>
+          <div class="portrait">
+            <div class="plate" id="rBotPlate"></div>
+            <div class="pmeta">
+              <div class="k">Team</div>
+              <div class="v" id="rTeam">&mdash;</div>
+              <div class="k" style="margin-top:8px;">Bot</div>
+              <div class="v" id="rBotName">&mdash;</div>
+            </div>
+          </div>
+          <div class="rcrew" id="rCrew"></div>
+          <div class="report-top">
+            <div>
+              <h3 id="rTitle">Bot Report</h3>
+              <p class="sub" id="rSub"></p>
+            </div>
+            <span class="rank" id="rRank">RANK</span>
+          </div>
+          <div class="scorebar">
+            <div class="scorebig"><b id="rScore">0</b><span>/ 25 spec stars</span></div>
+            <div class="scoremeta"><span class="k">Build percent</span><span class="v" id="rPct">0%</span></div>
+            <div class="scoremeta"><span class="k">Training score</span><span class="v" id="rTraining">0 / 18</span></div>
+            <div class="scoremeta"><span class="k">Points earned</span><span class="v" id="rCredits">+0</span></div>
+          </div>
+          <div class="rgrid" id="rGrid"></div>
+          <div class="note" id="rNote" style="margin-bottom:16px;"></div>
+          <p class="strip-label">Skills demonstrated</p>
+          <ul class="std-list" id="rStdList"></ul>
+        </div>
+
+        <div class="export-row no-print" style="align-items:center;">
+          <label class="field" style="margin-right:6px;"><span>Exporting as</span>
+            <select id="exporter"></select></label>
+        </div>
+        <div class="export-row no-print">
+          <button class="btn primary" id="pdfBtn" type="button">Save as PDF</button>
+          <button class="btn" id="pngBtn" type="button">Download PNG</button>
+          <button class="btn" id="jpgBtn" type="button">Download JPEG</button>
+          <button class="btn" id="reassessBtn" type="button">Re-assess</button>
+        </div>
+        <p class="small no-print" style="margin-top:10px;">
+          You need <b>all three</b>. <b>Save as PDF</b> opens the print box &mdash; set <i>Destination</i> to <b>Save as PDF</b>.</p>
+        <div class="filepreview no-print" id="filePreview"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="panel" style="border-top:5px solid var(--g5);">
+    <div class="panel-head"><h3>Name everything exactly like this</h3><span class="q-tag">Spelling counts</span></div>
+    <div class="panel-body">
+      <p class="small" style="margin-bottom:12px;">Copy it letter for letter.</p>
+      <p class="strip-label">The whole team folder</p>
+      <div class="pre" id="folderTree"></div>
+      <p class="strip-label" style="margin-top:16px;">Your folder, and the three files in it</p>
+      <div class="pre" id="myFolder" style="margin-bottom:6px;"></div>
+      <div class="pre" id="fileTree"></div>
+      <div class="note warn" style="margin-top:14px;">No spaces. No extra <span class="mono">.pdf</span> on the end.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h3>Everyone on the team does this</h3><span class="q-tag">All four students</span></div>
+    <div class="panel-body">
+      <ol class="steps">
+        <li><div><h5>Save your three files</h5><p><b>PDF</b>, <b>PNG</b>, <b>JPEG</b> &mdash; all three.</p></div></li>
+        <li><div><h5>Rename all three</h5><p>Files app &rsaquo; Downloads &rsaquo; right-click &rsaquo; Rename. Copy the names above.</p></div></li>
+        <li><div><h5>Open the team folder</h5><p><b>Shared with me</b> &rsaquo; your team folder. Cannot see it? Ask your organizer.</p></div></li>
+        <li><div><h5>Make your folder</h5><p>Inside the team folder: <b>+ New &rsaquo; Folder</b>, named <span class="mono" id="myFolder2">Student1_Ada</span>.</p></div></li>
+        <li><div><h5>Upload all three there</h5><p><b>+ New &rsaquo; File upload</b>. Refresh, then click each file to be sure it opens.</p></div></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="panel" style="border-top:5px solid var(--amber);">
+    <div class="panel-head"><h3>The organizer does this</h3><span class="q-tag">One student &mdash; the one who submits</span></div>
+    <div class="panel-body">
+      <p class="small" style="margin-bottom:14px;"><b>Student 1 runs this.</b> Do steps 1 and 2 first &mdash;
+        nobody else can start until the folder is shared.</p>
+      <ol class="steps">
+        <li><div><h5>Make the team folder</h5><p><b>+ New &rsaquo; Folder</b>, named <span class="mono" id="orgFolder">Period1_Alpha</span>. Build the inside to match the picture above.</p></div></li>
+        <li><div><h5>Share it with your team</h5><p>Right-click &rsaquo; <b>Share</b>. Add teammates by <b>school email</b> as <b>Editor</b>.</p></div></li>
+        <li><div><h5>Check every folder</h5><p>Three files each, named right, and they open.</p></div></li>
+        <li><div><h5>Copy the folder link</h5><p>Right-click the team folder &rsaquo; <b>Share</b> &rsaquo; <b>Copy link</b>. Check that Mr. Livingston can open it.</p></div></li>
+        <li><div><h5>Paste it in the spreadsheet</h5><p>Open the class <b>spreadsheet</b> from the daily document. Find your period and team, paste the link. That link is the hand-in.</p></div></li>
+      </ol>
+      <div class="note warn" style="margin-top:16px;"><strong>Check before you drop.</strong> Wrong names means
+        the whole team is late.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= EXTRA POINTS ========================= -->
+
+
+
 
 </main>
 
@@ -1410,12 +1445,12 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
       <li data-k="c3"><span class="box"></span><span>Both checks done</span></li>
       <li data-k="c4"><span class="box"></span><span>Saved <b>all three</b> files &mdash; PDF, PNG, JPEG</span></li>
       <li data-k="c5"><span class="box"></span><span>Renamed all three <span class="mono" id="chkName">First_Team_Mission2</span></span></li>
-      <li data-k="c6"><span class="box"></span><span>Made my first-name folder, and <b>Mission 2 Data</b> inside it</span></li>
+      <li data-k="c6"><span class="box"></span><span>Made my own <span class="mono">Student#_Name</span> folder in the team folder</span></li>
       <li data-k="c7"><span class="box"></span><span>Uploaded all three, refreshed, and opened each one</span></li>
       <li class="head" data-head="Organizer only &mdash; the student who submits"></li>
       <li data-k="o1"><span class="box"></span><span>Made <span class="mono" id="chkFolder">Period1_Alpha</span> and shared it with my team as <b>Editor</b></span></li>
       <li data-k="o2"><span class="box"></span><span>Checked every teammate's folder: three files, named right, they open</span></li>
-      <li data-k="o3"><span class="box"></span><span>Shared the folder with Mr. Livingston's account from the daily document</span></li>
+      <li data-k="o3"><span class="box"></span><span>Pasted the team folder link into the class spreadsheet</span></li>
     </ul>
   </div>
   <div class="modal-foot">
@@ -1532,19 +1567,13 @@ const BASE_BUDGET = 20;
 const CREDIT_CAP  = 8;
 
 const STANDARDS = [
-  { bok:"Programming and Software Engineering", idea:"Develop Code Segments to Solve a Problem",
-    text:"Index selected items within a list.", stages:["indexing"] },
-  { bok:"Programming and Software Engineering", idea:"Develop Code Segments to Solve a Problem",
-    text:"Identify the types of operations that can be performed on different data types.", stages:["indexing"] },
-  { bok:"Computing Components", idea:"Implement Foundational Computer Literacy Fluency",
-    text:"Identify multiple file format types.", stages:["files"] },
-  { bok:"Emerging Technologies", idea:"Identify Characteristics of Robots",
-    text:"Describe how humans and machines interact to accomplish tasks that neither can accomplish alone.", stages:["build"] },
-  { bok:"Communication and Collaboration", idea:"Apply Information Collected Using Digital Resources",
-    text:"Create a digital product individually and collaboratively.", stages:["submit"] },
+  "Identify basic computer parts",
+  "Identify multiple file format types",
+  "Index selected items within a list",
+  "Identify the types of operations that can be performed on different data types",
+  "Create a digital product individually and collaboratively",
 ];
 
-const STAGE_LABEL = { briefing:"01", build:"02", files:"2.5", indexing:"2.5", submit:"03" };
 
 const CATEGORIES = [
   { key:"ram", hue:"mem", tag:"Memory", name:"Memory (RAM)",
@@ -1604,7 +1633,13 @@ const RANKS = [
 const CREW = ["Alpha","Beta","Charlie","Delta","Echo"];
 
 /* Section chiefs — the chassis no group drafted, put to work running a section. */
-const CHIEFS = { ram:"Delta", storagetype:"Beta", storagecap:"Alpha", ports:"Echo", capability:"Charlie" };
+const CHIEFS = {
+  ram:         { bot:"Delta",   role:"Memory expert",     story:"Delta remembers everything you are doing right now — and forgets it all the second the power drops." },
+  storagetype: { bot:"Beta",    role:"Storage type",      story:"Beta times how long a save takes. Spinning drives make Beta impatient." },
+  storagecap:  { bot:"Alpha",   role:"Storage capacity",  story:"Alpha counts what fits. Alpha has never once said \u201cthat is enough space.\u201d" },
+  ports:       { bot:"Echo",    role:"Ports",             story:"Echo guards the doors. Nothing plugs in without Echo knowing about it." },
+  capability:  { bot:"Charlie", role:"Special function",  story:"Charlie handles the superpower — the sensing, the deciding, the showing off." },
+};
 
 /* Team colour: the plate behind every bot, and the band on the report. */
 const DEFAULT_COLOR = "#FCEF8A";
@@ -1737,6 +1772,14 @@ const PY_QUESTIONS = [
     prompt:'<code>word = "PYTHON"</code><br>What is <code>word[3]</code>?',
     opts:['"T"','"H"','"O"','"P"'], correct:1,
     why:'Letters have spots too: P=0, Y=1, T=2, <b>H=3</b>.' },
+  { id:"p13", tag:"Index math", code:true,
+    prompt:'<code>i = 1</code><br>Same crew list. What is <code>crew[i + 1]</code>?',
+    opts:['"Beta"','"Charlie"','"Alpha"','IndexError'], correct:1,
+    why:'Python does the math first: <code>1 + 1 = 2</code>, and <code>crew[2]</code> is <b>"Charlie"</b>.' },
+  { id:"p14", tag:"Index math", code:true,
+    prompt:'Same list of 5 bots. What does <code>crew[len(crew) - 1]</code> give you?',
+    opts:['"Alpha"','"Delta"','"Echo"','IndexError'], correct:2,
+    why:'<code>len(crew)</code> is 5, so this is <code>crew[4]</code> &mdash; the last bot, <b>"Echo"</b>. That is the safe way to grab the end.' },
   { id:"p11", tag:"Data types", code:false,
     prompt:'What data type is the value <code>3.14</code>?',
     opts:['int','float','str','bool'], correct:1,
@@ -1865,20 +1908,10 @@ function renderColorControl(){
    STANDARDS
    ============================================================ */
 function renderStandards(){
-  const tb = $("#stdTable tbody");
-  tb.innerHTML = STANDARDS.map(s => `
-    <tr>
-      <td class="code">${s.bok}</td>
-      <td>${s.idea}</td>
-      <td>${s.text}</td>
-      <td class="where">${s.stages.map(x=>STAGE_LABEL[x]).join(", ")}</td>
-    </tr>`).join("");
-
-  $$("[data-chips]").forEach(box=>{
-    const stage = box.getAttribute("data-chips");
-    const mine  = STANDARDS.filter(s => s.stages.includes(stage));
-    box.innerHTML = mine.map(s => `<span class="std-chip"><b>${STAGE_LABEL[stage]}</b> &middot; ${s.text}</span>`).join("");
-  });
+  const list = STANDARDS.map(t => `<li>${t}</li>`).join("");
+  $("#stdList").innerHTML = list;
+  $("#rStdList").innerHTML = list;
+  $$("[data-chips]").forEach(box => box.remove());
 }
 
 /* ============================================================
@@ -1894,7 +1927,12 @@ function renderCategories(){
     el.style.setProperty("--cat-s", `var(--c-${cat.hue}-s)`);
     const chief = CHIEFS[cat.key];
     el.innerHTML = `
-      ${chief ? `<div class="chief"><span class="plate">${plateHTML(chief)}</span><b>${chief}</b></div>` : ""}
+      ${chief ? `<div class="chief">
+          <span class="plate">${plateHTML(chief.bot)}</span>
+          <b>${chief.bot}</b>
+          <em>${chief.role}</em>
+          <span class="story">${chief.story}</span>
+        </div>` : ""}
       <div class="cat-main">
         <div class="cat-head">
           <p class="cat-tag">${cat.tag}</p>
@@ -2063,7 +2101,7 @@ function plateHTML(name){
 /* No chassis until a team picks one — that is what the waving Beta is for. */
 function hasBot(){ return BOTS.includes(state.bot); }
 function currentBot(){ return state.bot || BOTS[0]; }
-function teamTag(){ return state.bot || "TEAM"; }
+function teamTag(){ return state.bot || "India"; }
 function introHTML(){
   return INTRO_GIF
     ? `<img src="${INTRO_GIF}" alt="A bot waving hello while you pick your team">`
@@ -2332,19 +2370,31 @@ function renderExporter(){
   sel.value = String(state.exporter || 0);
 }
 
+function studentFolder(i){ return `Student${i+1}_${firstNameOf(i)}`; }
+function fileFor(i){ return `${firstNameOf(i)}_${teamTag()}_Mission2`; }
+
 function updateFilename(){
   renderExporter();
+
+  /* The whole structure, drawn from what the team actually typed in. */
+  const rows = [[teamFolder(), "the organizer makes this"]];
+  state.crew.forEach((_, i) => {
+    rows.push([` ├─ ${studentFolder(i)}`, i === 0 ? "one folder per student" : ""]);
+    ["pdf","png","jpg"].forEach(ext => rows.push([` │    ${fileFor(i)}.${ext}`, ""]));
+  });
+  const col = Math.max(...rows.map(r => r[0].length)) + 4;
+  $("#folderTree").innerHTML = rows.map(([line, note]) =>
+    note ? `${line}${" ".repeat(col - line.length)}<span class="c">&larr; ${note}</span>` : line
+  ).join("\n");
+
   const base = fileBase();
-  const notes = ["the organizer makes this one", "your own first-name folder", "your three files go in here"];
-  const plain = [teamFolder(), ` └─ ${exporterName()}`, `     └─ Mission 2 Data`];
-  const col = Math.max(...plain.map(l => l.length)) + 4;
-  $("#folderTree").innerHTML = plain
-    .map((l,i) => `${l}${" ".repeat(col - l.length)}<span class="c">&larr; ${notes[i]}</span>`)
-    .join("\n");
-  $("#fileTree").textContent = `${base}.pdf\n${base}.png\n${base}.jpg`;
-  $("#chkName").textContent  = base;
+  $("#fileTree").textContent  = `${base}.pdf\n${base}.png\n${base}.jpg`;
+  $("#chkName").textContent   = base;
   $("#chkFolder").textContent = teamFolder();
   $("#orgFolder").textContent = teamFolder();
+  const mine = studentFolder(state.exporter || 0);
+  $("#myFolder").textContent  = mine;
+  $("#myFolder2").textContent = mine;
 }
 
 /* ============================================================
@@ -2402,13 +2452,7 @@ function buildReport(){
   }
   $("#rNote").innerHTML = note;
 
-  const active = {
-    build: true, submit: true,
-    indexing: PY_QUESTIONS.some(q => state.answers[q.id] !== undefined),
-    files:    FD_QUESTIONS.some(q => state.answers[q.id] !== undefined),
-  };
-  const shown = STANDARDS.filter(s => s.stages.some(st => active[st]));
-  $("#rStd tbody").innerHTML = shown.map(s=>`<tr><td class="code">${s.idea}</td><td>${s.text}</td></tr>`).join("");
+  $("#rStdList").innerHTML = STANDARDS.map(t => `<li>${t}</li>`).join("");
 
   state.assessed = true;
   $("#report").classList.add("show");
@@ -2594,30 +2638,38 @@ $("#typesDone").addEventListener("click", ()=> $("#typesModal").close());
   if(img) img.addEventListener("error", ()=> img.remove());
 })();
 
-/* The PNG card carries a bot with a transparent background. Drag it around and
+/* The PNG card carries a bot with a transparent background. Drag it anywhere and
    the checkerboard keeps showing through — that is the whole point of PNG. */
 (function pngDemo(){
-  const pad = $("#pngSwatch"), bot = $("#pngBot");
+  const pad = $("#pngSwatch"), bot = $("#pngBot"), swap = $("#pngSwap");
   if(!pad || !bot) return;
-  bot.src = BOT_IMG["Yankee"] || BOT_IMG["Alpha"] || "";
-  let x = 0.5, dragging = false;
+  let which = 0;
+  const pool = BOTS.filter(n => BOT_IMG[n]);
+  const show = ()=>{ bot.src = BOT_IMG[pool[which % pool.length]] || ""; };
+  let x = 0.5, y = 0.5, dragging = false;
   const place = ()=>{
-    const w = pad.clientWidth, bw = bot.offsetWidth || 60;
-    bot.style.left = Math.round(x * (w - bw)) + "px";
-    bot.style.transform = "none";
+    const w = pad.clientWidth - bot.offsetWidth, h = pad.clientHeight - bot.offsetHeight;
+    bot.style.left = Math.round(x * Math.max(0, w)) + "px";
+    bot.style.top  = Math.round(y * Math.max(0, h)) + "px";
   };
   const move = e =>{
     if(!dragging) return;
-    const r = pad.getBoundingClientRect(), bw = bot.offsetWidth || 60;
-    x = Math.min(1, Math.max(0, (e.clientX - r.left - bw / 2) / (r.width - bw)));
+    const r = pad.getBoundingClientRect();
+    const w = r.width - bot.offsetWidth, h = r.height - bot.offsetHeight;
+    x = Math.min(1, Math.max(0, (e.clientX - r.left - bot.offsetWidth / 2) / (w || 1)));
+    y = Math.min(1, Math.max(0, (e.clientY - r.top  - bot.offsetHeight / 2) / (h || 1)));
     place();
   };
-  pad.addEventListener("pointerdown", e =>{ dragging = true; pad.setPointerCapture(e.pointerId); move(e); });
+  pad.addEventListener("pointerdown", e =>{
+    if(e.target === swap) return;
+    dragging = true; pad.setPointerCapture(e.pointerId); move(e);
+  });
   pad.addEventListener("pointermove", move);
   ["pointerup","pointercancel"].forEach(ev => pad.addEventListener(ev, ()=>{ dragging = false; }));
+  if(swap) swap.addEventListener("click", ()=>{ which++; show(); });
   bot.addEventListener("load", place);
   window.addEventListener("resize", place);
-  place();
+  show(); place();
 })();
 
 /* chassis picker */
