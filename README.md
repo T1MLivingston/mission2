@@ -52,6 +52,22 @@ Side quests are not turned in here either; those use the links in the daily docu
 The report carries the team name, the bot's name and call sign, its portrait, all four students with the
 uploader marked, the five specs with stars, the rank, the training score, and the skills demonstrated.
 
+## The three file-type demos
+
+Section A teaches by letting students break things rather than by describing them:
+
+- **JPEG** — a quality slider re-encodes the picture live and prints the size, so *lossy* is something you
+  watch happen. It loads the landscape photo at `PHOTO_SRC`; that needs CORS to re-encode, so where the host
+  refuses it, a drawn scene stands in and the slider still works. Drop a local copy of the photo in and point
+  `PHOTO_SRC` at it to have the real one everywhere.
+- **PNG** — a bot on a checkerboard that drags, resizes and swaps. Nothing ever covers the background.
+- **PDF** — the same report rendered twice, as a web page and as a PDF. Switch Laptop / Tablet / Phone: the
+  web page reflows, the PDF only gets smaller.
+
+**Hidden round:** triple-tap the *B · Python indexing* heading to unlock four slicing questions. They raise
+the point ceiling from 8 to 12 rather than sharing it. (Triple-tapping the *A · File types* heading still
+opens the Extension Vault.)
+
 ## The bots
 
 26 chassis, one per call sign (Alpha → Zulu), used for team selection, the masthead, and the report portrait.

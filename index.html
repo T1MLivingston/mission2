@@ -185,9 +185,24 @@ p:last-child{margin-bottom:0;}
 
 /* section chiefs — the bots nobody drafted */
 .chief{display:flex;flex-direction:column;align-items:center;gap:4px;width:66px;flex:none;}
-.role-bot{display:flex;align-items:center;gap:10px;}
-.role-bot .plate{width:56px;height:56px;flex:none;}
-.role-bot b{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);}
+.panel.roled{display:grid;grid-template-columns:186px 1fr;overflow:hidden;}
+.panel.roled > .chief{
+  width:auto;background:var(--chief-bg);border-right:2px solid var(--stroke);padding:14px 12px;
+  gap:8px;justify-content:flex-start;
+}
+.panel.roled > .chief .plate{width:100%;height:auto;aspect-ratio:1;background:transparent;border:0;border-radius:0;}
+.panel.roled > .chief em{
+  font-style:normal;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;
+  text-transform:uppercase;color:var(--stroke);text-align:center;line-height:1.1;
+  border-bottom:2px solid var(--stroke);padding-bottom:6px;width:100%;
+}
+.panel.roled > .chief b{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:#5A6B77;}
+@media (max-width:640px){
+  .panel.roled{grid-template-columns:1fr;}
+  .panel.roled > .chief{flex-direction:row;align-items:center;border-right:0;border-bottom:2px solid var(--stroke);}
+  .panel.roled > .chief .plate{width:66px;height:66px;flex:none;}
+  .panel.roled > .chief em{border-bottom:0;width:auto;font-size:15px;}
+}
 .chief .plate{width:66px;height:66px;border-radius:8px;}
 .chief b{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cat-c,var(--amber));font-weight:600;}
 .stage-head .chief b{color:var(--stage-c,var(--amber));}
@@ -384,10 +399,11 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
   padding:14px 12px;gap:8px;justify-content:center;
 }
 .cat > .chief .plate{width:100%;height:auto;aspect-ratio:1;background:transparent;border:0;border-radius:0;}
-.cat > .chief b{font-size:13px;color:var(--stroke);}
+.cat > .chief b{font-size:11px;color:#5A6B77;letter-spacing:.1em;}
 .cat > .chief em{
-  font-style:normal;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:13px;
-  color:var(--stroke);text-align:center;line-height:1.2;
+  font-style:normal;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--stroke);text-align:center;line-height:1.1;
+  border-bottom:2px solid var(--stroke);padding-bottom:6px;width:100%;
 }
 @media (max-width:640px){
   .cat{grid-template-columns:1fr;}
@@ -540,7 +556,28 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
 .ftype .good{color:var(--teal);font-weight:600;}
 .ftype .bad{color:var(--flare);font-weight:600;}
 .swatch{height:74px;border-radius:6px;border:1px solid var(--rule);overflow:hidden;position:relative;background:var(--panel);}
-.swatch.photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.jpeg-stage{background:#0E2431;display:grid;place-items:center;}
+.jpeg-stage canvas{width:100%;height:100%;display:block;image-rendering:auto;}
+.pdf-stage{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:var(--panel-2);align-items:start;}
+.mini{border:2px solid var(--stroke);border-radius:6px;background:#F7F8F9;overflow:hidden;transition:width .3s ease;width:100%;margin:0 auto;}
+.mini-tag{
+  display:block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--num-bg);color:var(--num-fg);padding:2px 6px;
+}
+.mini-body{padding:7px 8px;color:#16232B;}
+.mini-body b{display:block;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;margin-bottom:3px;}
+.mini-body p{font-size:8.5px;line-height:1.35;margin:0 0 3px;}
+.mini.pdf .mini-body{transform-origin:top center;}
+.dev-row{display:flex;gap:6px;}
+.dev-row button{
+  flex:1;border:2px solid var(--stroke);border-radius:6px;background:var(--panel-2);color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;padding:5px 4px;cursor:pointer;
+}
+.dev-row button.on{background:var(--num-bg);color:var(--num-fg);}
+.jpeg-size{
+  position:absolute;right:7px;bottom:7px;background:var(--num-bg);color:var(--num-fg);border:2px solid var(--stroke);
+  border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;
+}
 .swatch.checker{
   background-image:linear-gradient(45deg,var(--rule-soft) 25%,transparent 25%),linear-gradient(-45deg,var(--rule-soft) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--rule-soft) 75%),linear-gradient(-45deg,transparent 75%,var(--rule-soft) 75%);
   background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;cursor:grab;touch-action:none;
@@ -588,6 +625,7 @@ table.cmp td:first-child{font-family:'IBM Plex Mono',monospace;font-size:13px;}
 .drive-ui{
   border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--panel);font-size:13px;
 }
+.mark{width:1.05em;height:1.05em;vertical-align:-.14em;margin-right:.35em;color:var(--num-fg);}
 .drive-link{
   display:flex;align-items:center;gap:13px;text-decoration:none;border:2px solid var(--stroke);
   border-radius:9px;padding:12px 16px;background:var(--num-bg);color:#fff;box-shadow:0 3px 0 var(--stroke);
@@ -800,6 +838,10 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
 .seat span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;}
 .seat input{width:100%;background:var(--panel);border:1px solid var(--rule);color:var(--ink);border-radius:5px;padding:9px 11px;font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;}
 .seat input:focus{outline:2px solid var(--amber);outline-offset:1px;}
+/* Empty required fields wear the mission yellow until someone fills them in. */
+.needed{background:var(--y-soft) !important;border-color:var(--y) !important;box-shadow:0 0 0 3px var(--y-soft);}
+.seat.needs{border-left-color:var(--y);}
+.seat.needs span::after{content:" \2190 type it";color:var(--y);letter-spacing:0;text-transform:none;}
 .rcrew{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin-bottom:20px;}
 .rseat{border:1px solid var(--rule);border-left:4px solid var(--g3);border-radius:7px;background:var(--panel-2);padding:9px 12px;}
 .rseat .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);}
@@ -1050,24 +1092,28 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
         <p class="strip-label" style="margin-bottom:4px;">Points earned</p>
         <p style="margin:0;font-size:14px;color:var(--ink-2);">Spend them in Step 2.</p>
       </div>
-      <div class="scorebig"><b id="extraCount">+0</b><span>of 8</span></div>
+      <div class="scorebig"><b id="extraCount">+0</b><span id="extraCap">of 8</span></div>
     </div>
   </div>
 
   <h3 id="fileTypesHead" style="font-size:24px;margin:26px 0 14px;">A &middot; File types &mdash; JPEG, PNG, PDF</h3>
 <div class="grid3">
     <div class="ftype">
-      <div class="swatch photo" aria-hidden="true" style="background:linear-gradient(135deg,#2a6f97,#e8a33d 45%,#c2472b);">
-        <img id="jpegSample" src="https://photographyproject.uk/wp-content/uploads/2024/03/public-domain-images-bailey-zindel.jpg"
-             alt="A photograph — the kind of picture JPEG was built for" loading="lazy">
+      <div class="swatch tall jpeg-stage">
+        <canvas id="jpegCanvas" width="300" height="190" aria-label="The same picture, squeezed by JPEG"></canvas>
+        <span class="jpeg-size mono" id="jpegSize">&mdash;</span>
       </div>
+      <label class="size-row">
+        <span>Quality</span>
+        <input type="range" id="jpegQuality" min="1" max="100" value="92" aria-label="JPEG quality">
+      </label>
       <h4>.jpg / .jpeg</h4>
       <p class="full">Joint Photographic Experts Group</p>
       <p>The photo format.</p>
       <ul>
         <li><span class="good">Use for:</span> photos</li>
         <li><span class="bad">Not for:</span> screenshots or text</li>
-        <li><b>Lossy</b> &mdash; throws away detail to get small. It never comes back.</li>
+        <li><b>Lossy</b> &mdash; drag <b>Quality</b> down. Watch the edges break and the KB drop. That detail never comes back.</li>
       </ul>
     </div>
 
@@ -1091,10 +1137,28 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     </div>
 
     <div class="ftype">
-      <div class="swatch" aria-hidden="true" style="background:var(--panel-2);display:grid;align-content:center;gap:6px;padding:14px;">
-        <span style="height:6px;background:var(--rule);border-radius:3px;width:80%;"></span>
-        <span style="height:6px;background:var(--rule-soft);border-radius:3px;"></span>
-        <span style="height:6px;background:var(--rule-soft);border-radius:3px;width:64%;"></span>
+      <div class="swatch tall pdf-stage" aria-hidden="true">
+        <div class="mini web" id="pdfWeb">
+          <span class="mini-tag">Web page</span>
+          <div class="mini-body">
+            <b>Mission 2 Report</b>
+            <p>Team India — Rustbucket. Memory 16 GB. Storage SATA SSD.</p>
+            <p>Ports + HDMI. Specialty camera array.</p>
+          </div>
+        </div>
+        <div class="mini pdf" id="pdfDoc">
+          <span class="mini-tag">PDF</span>
+          <div class="mini-body">
+            <b>Mission 2 Report</b>
+            <p>Team India — Rustbucket. Memory 16 GB. Storage SATA SSD.</p>
+            <p>Ports + HDMI. Specialty camera array.</p>
+          </div>
+        </div>
+      </div>
+      <div class="dev-row" id="pdfDevices">
+        <button type="button" data-w="100" class="on">Laptop</button>
+        <button type="button" data-w="62">Tablet</button>
+        <button type="button" data-w="38">Phone</button>
       </div>
       <h4>.pdf</h4>
       <p class="full">Portable Document Format</p>
@@ -1102,7 +1166,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
       <ul>
         <li><span class="good">Use for:</span> anything graded</li>
         <li><span class="bad">Not for:</span> work someone must edit</li>
-        <li>Locks the page. Same on every device.</li>
+        <li>Locks the page. Change the device &mdash; the web page reflows, the PDF does not.</li>
       </ul>
     </div>
   </div>
@@ -1124,7 +1188,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
   </div>
 
   <div class="panel">
-    <div class="panel-head"><h3>Understanding Google Drive</h3><span class="q-tag">Where your files live</span></div>
+    <div class="panel-head"><h3><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8.5A3.5 3.5 0 0 1 6.5 5H10l1.6 2H18a2.5 2.5 0 0 1 2.5 2.5V16A2.5 2.5 0 0 1 18 18.5H6A3 3 0 0 1 3 15.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 13.5h8M8 16h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Understanding Google Drive</h3><span class="q-tag">Where your files live</span></div>
     <div class="panel-body">
       <div class="grid2">
         <div>
@@ -1170,7 +1234,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     </div>
   </div>
 
-  <h3 style="font-size:24px;margin:32px 0 14px;">B &middot; Python indexing</h3>
+  <h3 id="pyHead" style="font-size:24px;margin:32px 0 14px;"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7 4 12l5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg> B &middot; Python indexing</h3>
 <div class="grid2" style="align-items:start;">
     <div>
       <details class="lesson" open>
@@ -1254,6 +1318,30 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
       </div>
     </div>
   </div>
+  <div class="panel" id="slicePanel" hidden style="border-top:5px solid var(--y);margin-bottom:18px;">
+    <div class="panel-head">
+      <h3>Slicing bonus &mdash; unlocked</h3>
+      <div class="quiz-status"><span id="slStatus">not started</span>
+        <span class="bar" style="width:120px;flex:none;"><i id="slBar"></i></span></div>
+    </div>
+    <div class="panel-body">
+      <div class="check">
+        <div class="check-left">
+          <div class="check-dial" id="slDial">0/4</div>
+          <div>
+            <h4>Four slicing questions</h4>
+            <p>You found the hidden round. These are worth <strong>+1 point each</strong> on top of the 8.</p>
+          </div>
+        </div>
+        <button class="btn primary" id="slStart" type="button">Test yourself</button>
+      </div>
+      <details style="margin-top:16px;" id="slReviewWrap" hidden>
+        <summary class="strip-label" style="cursor:pointer;">Review my answers</summary>
+        <div class="quiz" id="slQuiz" style="margin-top:12px;"></div>
+      </details>
+    </div>
+  </div>
+
   <h3 style="font-size:24px;margin:32px 0 14px;">C &middot; Take the checks &mdash; earn your points</h3>
   <div class="panel">
     <div class="panel-head">
@@ -1396,8 +1484,10 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
   </div>
 
 
-  <div class="panel" style="border-top:5px solid var(--amber);">
-    <div class="panel-head"><div class="role-bot" data-role="organizer"></div><div><h3>First: the organizer</h3><p class="q-tag" style="margin:2px 0 0;">One student &mdash; the one who submits</p></div></div>
+  <div class="panel roled" style="border-top:5px solid var(--amber);">
+    <div class="chief" data-role="organizer"></div>
+    <div class="cat-main">
+    <div class="panel-head"><h3>First: the organizer</h3><span class="q-tag">One student &mdash; the one who submits</span></div>
     <div class="panel-body">
       <p class="small" style="margin-bottom:14px;"><b>Student 1 runs this.</b> Do steps 1 and 2 first &mdash;
         nobody else can start until the folder is shared.</p>
@@ -1411,10 +1501,13 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
       <div class="note warn" style="margin-top:16px;"><strong>Check before you drop.</strong> Wrong names means
         the whole team is late.</div>
     </div>
+    </div>
   </div>
 
-  <div class="panel">
-    <div class="panel-head"><div class="role-bot" data-role="everyone"></div><div><h3>Then: everyone else</h3><p class="q-tag" style="margin:2px 0 0;">All four students, including the organizer</p></div></div>
+  <div class="panel roled">
+    <div class="chief" data-role="everyone"></div>
+    <div class="cat-main">
+    <div class="panel-head"><h3>Then: everyone else</h3><span class="q-tag">All four students</span></div>
     <div class="panel-body">
       <ol class="steps">
         <li><div><h5>Save your three files</h5><p><b>PDF</b>, <b>PNG</b>, <b>JPEG</b> &mdash; all three.</p></div></li>
@@ -1423,6 +1516,7 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
         <li><div><h5>Make your folder</h5><p>Inside the team folder: <b>+ New &rsaquo; Folder</b>, named <span class="mono" id="myFolder2">Student1_Ada</span>.</p></div></li>
         <li><div><h5>Upload all three there</h5><p><b>+ New &rsaquo; File upload</b>. Refresh, then click each file to be sure it opens.</p></div></li>
       </ol>
+    </div>
     </div>
   </div>
 </section>
@@ -1664,7 +1758,10 @@ const CHIEFS = {
 };
 
 /* Two more bots front the Step 3 directions. */
-const ROLE_BOTS = { organizer:"Oscar", everyone:"Golf" };
+const ROLE_BOTS = {
+  organizer: { bot:"Oscar", role:"Organizer" },
+  everyone:  { bot:"Golf",  role:"Everyone" },
+};
 
 /* Team colour: the plate behind every bot, and the band on the report. */
 const DEFAULT_COLOR = "#FCEF8A";
@@ -1850,13 +1947,33 @@ const FD_QUESTIONS = [
     why:'Sharing is tied to your <b>school account</b>. Signed into personal Gmail, Drive has no idea the class folder exists. Check the account circle top-right.' },
 ];
 
+/* Hidden round. Triple-tap the "B · Python indexing" heading to unlock it. */
+const SLICE_QUESTIONS = [
+  { id:"s1", tag:"Slicing", code:true,
+    prompt:'<code>crew = ["Alpha", "Beta", "Charlie", "Delta", "Echo"]</code><br>What is <code>crew[2:4]</code>?',
+    opts:['["Charlie", "Delta"]','["Charlie", "Delta", "Echo"]','["Beta", "Charlie"]','["Delta"]'], correct:0,
+    why:'Starts at 2, stops just before 4 &mdash; so index 4 is left out: <b>["Charlie", "Delta"]</b>.' },
+  { id:"s2", tag:"Slicing", code:true,
+    prompt:'What does <code>crew[:]</code> give you?',
+    opts:['An empty list','The whole list','Just "Alpha"','IndexError'], correct:1,
+    why:'No start and no stop means from the beginning to the end &mdash; <b>the whole list</b>.' },
+  { id:"s3", tag:"Slicing", code:true,
+    prompt:'What is <code>crew[-2:]</code>?',
+    opts:['["Delta", "Echo"]','["Echo"]','["Alpha", "Beta"]','An empty list'], correct:0,
+    why:'Start two from the end, run to the end: <b>["Delta", "Echo"]</b>. That is how you grab the last few.' },
+  { id:"s4", tag:"Slicing", code:true,
+    prompt:'What is <code>crew[3:1]</code>?',
+    opts:['["Delta", "Beta"]','["Beta", "Charlie"]','An empty list','IndexError'], correct:2,
+    why:'The start is past the stop, so there is nothing between them &mdash; you get an <b>empty list</b>, not an error.' },
+];
+
 const ALL_Q = PY_QUESTIONS.concat(FD_QUESTIONS);
 
 /* ============================================================
    STATE + PERSISTENCE
    ============================================================ */
 const SAVE_KEY = "mission02-speccheck-v1";
-let state = { color:DEFAULT_COLOR, robot:"", bot:"", period:"1", crew:["","","",""], submitter:0, exporter:0, selections:{}, answers:{}, checks:{}, theme:"auto", assessed:false };
+let state = { color:DEFAULT_COLOR, robot:"", bot:"", period:"1", crew:["","","",""], submitter:0, exporter:0, slicing:false, selections:{}, answers:{}, checks:{}, theme:"auto", assessed:false };
 
 function save(){
   try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }catch(e){ /* storage blocked — page still works */ }
@@ -1874,7 +1991,9 @@ const $  = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 const correctCount = () => ALL_Q.filter(q => state.answers[q.id] === q.correct).length;
-const credits      = () => Math.min(CREDIT_CAP, correctCount());
+const sliceCount   = () => SLICE_QUESTIONS.filter(q => state.answers[q.id] === q.correct).length;
+/* The hidden slicing round raises the ceiling rather than sharing it. */
+const credits      = () => Math.min(CREDIT_CAP, correctCount()) + (state.slicing ? sliceCount() : 0);
 const budget       = () => BASE_BUDGET + credits();
 const totalCost    = () => CATEGORIES.reduce((s,c)=> s + (state.selections[c.key]!==undefined ? c.options[state.selections[c.key]].cost : 0), 0);
 const allSelected  = () => CATEGORIES.every(c => state.selections[c.key] !== undefined);
@@ -1953,9 +2072,9 @@ function renderCategories(){
     const chief = CHIEFS[cat.key];
     el.innerHTML = `
       ${chief ? `<div class="chief">
+          <em>${chief.role}</em>
           <span class="plate">${plateHTML(chief.bot)}</span>
           <b>${chief.bot}</b>
-          <em>${chief.role}</em>
         </div>` : ""}
       <div class="cat-main">
         <div class="cat-head">
@@ -2034,6 +2153,7 @@ function refresh(){
 
   $("#railCredits").textContent = "+" + credits();
   $("#extraCount").textContent = "+" + credits();
+  $("#extraCap").textContent = state.slicing ? "of 12" : "of 8";
   updateFilename();
   updateChecks();
   updateMarkers();
@@ -2147,8 +2267,8 @@ function renderChiefs(){
     el.innerHTML = `<span class="plate">${plateHTML(name)}</span><b>${name}</b>`;
   });
   $$("[data-role]").forEach(el=>{
-    const name = ROLE_BOTS[el.dataset.role];
-    el.innerHTML = `<span class="plate">${plateHTML(name)}</span><b>${name}</b>`;
+    const r = ROLE_BOTS[el.dataset.role];
+    el.innerHTML = `<em>${r.role}</em><span class="plate">${plateHTML(r.bot)}</span><b>${r.bot}</b>`;
   });
 }
 function renderTeamPicker(){
@@ -2174,6 +2294,8 @@ function paintBots(){
    TRAINING CHECKS — read inline, tested in a pop-up
    ============================================================ */
 const QUIZZES = {
+  sl: { qs:SLICE_QUESTIONS, kicker:"Hidden round · Slicing", title:"Slicing Bonus",
+        dial:"#slDial", mount:"#slQuiz", wrap:"#slReviewWrap", status:"#slStatus", bar:"#slBar" },
   py: { qs:PY_QUESTIONS, kicker:"Step 2.5 · Python indexing", title:"Indexing Check",
         dial:"#pyDial", mount:"#pyQuiz", wrap:"#pyReviewWrap", status:"#pyStatus", bar:"#pyBar" },
   fd: { qs:FD_QUESTIONS, kicker:"Step 2.5 · File types", title:"File Types Check",
@@ -2189,7 +2311,8 @@ function updateChecks(){
       ? "not started"
       : `${got} / ${cfg.qs.length} correct` + (done < cfg.qs.length ? ` · ${cfg.qs.length - done} left` : " · complete");
     $(cfg.bar).style.width = (got / cfg.qs.length * 100) + "%";
-    const btn = document.querySelector(cfg === QUIZZES.py ? "#pyStart" : "#fdStart");
+    const btn = document.querySelector(cfg === QUIZZES.py ? "#pyStart" : cfg === QUIZZES.sl ? "#slStart" : "#fdStart");
+    if(!btn) return;
     btn.textContent = done === 0 ? "Test yourself" : done < cfg.qs.length ? "Continue the test" : "See my results";
     renderReview(cfg);
   });
@@ -2384,7 +2507,7 @@ function scrollSpy(){
 function clean(s){ return String(s || "").replace(/[^A-Za-z0-9]/g, ""); }
 
 /* Every name students have to type, generated from what they entered. */
-function firstNameOf(i){ return clean(state.crew[i]) || "Name"; }
+function firstNameOf(i){ return clean(state.crew[i]) || "YourName"; }
 function exporterName(){ return firstNameOf(state.exporter || 0); }
 function teamFolder(){ return `Period${clean(state.period) || "1"}_${teamTag()}`; }
 function fileBase(){ return `${exporterName()}_${teamTag()}_Mission2`; }
@@ -2401,8 +2524,21 @@ function renderExporter(){
 function studentFolder(i){ return `Student${i+1}_${firstNameOf(i)}`; }
 function fileFor(i){ return `${firstNameOf(i)}_${teamTag()}_Mission2`; }
 
+/* Yellow until filled: the fields the report and the folder names depend on. */
+function markNeeded(){
+  const flag = (el, empty) => { if(el) el.classList.toggle("needed", empty); };
+  flag($("#teamName"), !hasBot());
+  flag($("#robotName"), !state.robot.trim());
+  [1,2,3,4].forEach(n=>{
+    const input = $("#s" + n), empty = !(state.crew[n-1] || "").trim();
+    flag(input, empty);
+    if(input) input.closest(".seat").classList.toggle("needs", empty);
+  });
+}
+
 function updateFilename(){
   renderExporter();
+  markNeeded();
 
   /* The whole structure, drawn from what the team actually typed in. */
   const rows = [[teamFolder(), "the organizer makes this"]];
@@ -2655,15 +2791,92 @@ $("#sliceDone").addEventListener("click", ()=> $("#sliceModal").close());
 $$("#sliceModal .stepper button").forEach(b=>{
   b.addEventListener("click", ()=> nudgeSlice(b.dataset.s === "start" ? "start" : "stop", parseInt(b.dataset.d,10)));
 });
+$("#slStart").addEventListener("click", ()=> openTest("sl"));
+
+/* Triple-tap the B heading to unlock slicing for extra points. */
+function unlockSlicing(announce){
+  state.slicing = true;
+  save();
+  const mark = $("#pyHead").querySelector(".mark");
+  $("#pyHead").innerHTML = (mark ? mark.outerHTML + " " : "") +
+    "B &middot; Python indexing <span style=\"color:var(--y);\">and slicing</span>";
+  $("#slicePanel").hidden = false;
+  updateChecks();
+  refresh();
+  if(announce) $("#slicePanel").scrollIntoView({ behavior:"smooth", block:"center" });
+}
+(function sliceEgg(){
+  const head = $("#pyHead");
+  if(!head) return;
+  let taps = 0, last = 0;
+  head.addEventListener("click", ()=>{
+    const now = Date.now();
+    taps = (now - last < 700) ? taps + 1 : 1;
+    last = now;
+    if(taps >= 3 && !state.slicing){ taps = 0; unlockSlicing(true); }
+  });
+})();
+
 $("#typesBtn").addEventListener("click", ()=> $("#typesModal").showModal());
 $("#typesClose").addEventListener("click", ()=> $("#typesModal").close());
 $("#typesDone").addEventListener("click", ()=> $("#typesModal").close());
 
-/* The JPEG card shows a real photograph. If the network or the host blocks it,
-   drop the img and let the gradient behind it stand in. */
-(function jpegSample(){
-  const img = $("#jpegSample");
-  if(img) img.addEventListener("error", ()=> img.remove());
+/* JPEG, demonstrated rather than described: re-encode the same photograph at the
+   chosen quality and show what it costs.
+
+   The landscape loads from the web, which needs CORS to re-encode — where that
+   is refused (or the host blocks outside images) we fall back to a drawn scene
+   so the slider still teaches the same thing. Drop a local copy in and set
+   PHOTO_SRC to it and the real photo works everywhere. */
+const PHOTO_SRC = "https://photographyproject.uk/wp-content/uploads/2024/03/public-domain-images-bailey-zindel.jpg";
+(function jpegDemo(){
+  const cv = $("#jpegCanvas"), slider = $("#jpegQuality"), size = $("#jpegSize");
+  if(!cv || !slider) return;
+  const ctx = cv.getContext("2d");
+  let photo = null;
+
+  const scene = pctx =>{
+    if(photo){
+      const scale = Math.max(cv.width / photo.naturalWidth, cv.height / photo.naturalHeight);
+      const w = photo.naturalWidth * scale, h = photo.naturalHeight * scale;
+      pctx.drawImage(photo, (cv.width - w) / 2, (cv.height - h) / 2, w, h);
+    }else{
+      const g = pctx.createLinearGradient(0, 0, cv.width, cv.height);
+      g.addColorStop(0, "#2A6F97"); g.addColorStop(.45, "#E8A33D"); g.addColorStop(1, "#C2472B");
+      pctx.fillStyle = g; pctx.fillRect(0, 0, cv.width, cv.height);
+      pctx.fillStyle = "rgba(16,32,43,.55)";
+      pctx.beginPath(); pctx.moveTo(0, 150); pctx.lineTo(80, 70); pctx.lineTo(150, 150); pctx.closePath(); pctx.fill();
+      pctx.beginPath(); pctx.moveTo(110, 150); pctx.lineTo(200, 55); pctx.lineTo(300, 150); pctx.closePath(); pctx.fill();
+    }
+    pctx.fillStyle = "#0F1B24";
+    pctx.fillRect(0, cv.height - 30, cv.width, 30);
+    pctx.fillStyle = "#FFFFFF";
+    pctx.font = "700 20px 'IBM Plex Sans Condensed', sans-serif";
+    pctx.fillText("SHARP TEXT", 10, cv.height - 9);
+  };
+
+  const draw = ()=>{
+    const q = slider.value / 100;
+    const pad = document.createElement("canvas");
+    pad.width = cv.width; pad.height = cv.height;
+    scene(pad.getContext("2d"));
+    let url;
+    try{ url = pad.toDataURL("image/jpeg", q); }
+    catch(err){ photo = null; scene(pad.getContext("2d")); url = pad.toDataURL("image/jpeg", q); }
+    const out = new Image();
+    out.onload = ()=>{ ctx.clearRect(0,0,cv.width,cv.height); ctx.drawImage(out, 0, 0, cv.width, cv.height); };
+    out.src = url;
+    size.textContent = `${slider.value}%  ·  ${Math.round((url.length * 3 / 4) / 1024)} KB`;
+  };
+
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.onload  = ()=>{ photo = img; draw(); };
+  img.onerror = ()=> draw();
+  img.src = PHOTO_SRC;
+
+  slider.addEventListener("input", draw);
+  draw();
 })();
 
 /* The PNG card carries a bot with a transparent background. Drag it anywhere and
@@ -2702,6 +2915,26 @@ $("#typesDone").addEventListener("click", ()=> $("#typesModal").close());
   show(); place();
 })();
 
+/* PDF, demonstrated: shrink the screen and only one of these two keeps its
+   layout. The web page rewraps; the PDF just gets smaller. */
+(function pdfDemo(){
+  const row = $("#pdfDevices"), web = $("#pdfWeb"), doc = $("#pdfDoc");
+  if(!row || !web || !doc) return;
+  const set = pct =>{
+    web.style.width = pct + "%";
+    doc.style.width = pct + "%";
+    doc.querySelector(".mini-body").style.transform = `scale(${Math.max(0.55, pct / 100)})`;
+    doc.querySelector(".mini-body").style.width = (100 / Math.max(0.55, pct / 100)) + "%";
+  };
+  row.addEventListener("click", e =>{
+    const btn = e.target.closest("button");
+    if(!btn) return;
+    $$("#pdfDevices button").forEach(b => b.classList.toggle("on", b === btn));
+    set(parseInt(btn.dataset.w, 10));
+  });
+  set(100);
+})();
+
 /* chassis picker */
 $("#botPrev").addEventListener("click", ()=> stepBot(-1));
 $("#botNext").addEventListener("click", ()=> stepBot(1));
@@ -2725,7 +2958,7 @@ $("#exprInput").addEventListener("keydown", e => { if(e.key === "Enter") runExpr
 
 $("#resetAll").addEventListener("click", ()=>{
   if(!confirm("Clear your build, your check answers, and your checklist on this device? This cannot be undone.")) return;
-  state = { color:DEFAULT_COLOR, robot:"", bot:"", period:"1", crew:["","","",""], submitter:0, exporter:0, selections:{}, answers:{}, checks:{}, theme:state.theme, assessed:false };
+  state = { color:DEFAULT_COLOR, robot:"", bot:"", period:"1", crew:["","","",""], submitter:0, exporter:0, slicing:false, selections:{}, answers:{}, checks:{}, theme:state.theme, assessed:false };
   save();
   location.reload();
 });
@@ -2755,6 +2988,7 @@ renderStrip();
 renderTries();
 paintBots();
 renderChecklist();
+if(state.slicing) unlockSlicing(false);
 refresh();
 scrollSpy();
 if(state.assessed && allSelected()) buildReport();
