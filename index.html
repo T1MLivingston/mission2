@@ -915,7 +915,7 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     <span class="marker" data-marker="briefing">Step 1</span>
     <div>
       <p class="eyebrow">Start here</p>
-      <h2>Three steps. One file at the end.</h2>
+      <h2>Three steps. Start by naming your team.</h2>
     </div>
   </div>
 
@@ -935,6 +935,40 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     <div class="step-card" data-step="submit">
       <span class="n">STEP 3</span><h4>Turn it in</h4>
       <p>Save, rename, upload, send the link.</p>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-bottom:18px;border-top:5px solid var(--amber);">
+    <div class="panel-head"><h3>Your team</h3><span class="q-tag">All of this goes on your report</span></div>
+    <div class="panel-body">
+      <div class="idfields" style="margin-bottom:18px;">
+        <label class="field"><span>Your bot's name</span><input id="robotName" type="text" placeholder="the name you gave it in Mission 1" autocomplete="off"></label>
+        <label class="field"><span>Class period</span>
+          <select id="period">
+            <option value="1">Period 1</option><option value="2">Period 2</option>
+            <option value="3">Period 3</option><option value="4">Period 4</option>
+            <option value="5">Period 5</option><option value="6">Period 6</option>
+            <option value="7">Period 7</option><option value="8">Period 8</option>
+          </select>
+        </label>
+      </div>
+      <p class="strip-label">Crew &mdash; who is who</p>
+      <div class="crew">
+        <label class="seat"><span>Student 1</span><input id="s1" type="text" placeholder="Name" autocomplete="off"></label>
+        <label class="seat"><span>Student 2</span><input id="s2" type="text" placeholder="Name" autocomplete="off"></label>
+        <label class="seat"><span>Student 3</span><input id="s3" type="text" placeholder="Name" autocomplete="off"></label>
+        <label class="seat"><span>Student 4</span><input id="s4" type="text" placeholder="Name" autocomplete="off"></label>
+      </div>
+      <label class="field" style="display:block;margin-top:16px;">
+        <span>Who uploads the file? (Student 1 unless you swap it)</span>
+        <select id="submitter">
+          <option value="0">Student 1</option>
+          <option value="1">Student 2</option>
+          <option value="2">Student 3</option>
+          <option value="3">Student 4</option>
+        </select>
+      </label>
+      <p class="small" style="margin-top:10px;">Side quests are turned in from the daily document, not here.</p>
     </div>
   </div>
 
@@ -968,39 +1002,6 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     </div>
   </div>
 
-  <div class="panel" style="margin-bottom:18px;border-top:5px solid var(--amber);">
-    <div class="panel-head"><h3>Your crew</h3><span class="q-tag">All of this goes on your report</span></div>
-    <div class="panel-body">
-      <div class="idfields" style="margin-bottom:18px;">
-        <label class="field"><span>Your bot's name</span><input id="robotName" type="text" placeholder="the name you gave it in Mission 1" autocomplete="off"></label>
-        <label class="field"><span>Class period</span>
-          <select id="period">
-            <option value="1">Period 1</option><option value="2">Period 2</option>
-            <option value="3">Period 3</option><option value="4">Period 4</option>
-            <option value="5">Period 5</option><option value="6">Period 6</option>
-            <option value="7">Period 7</option><option value="8">Period 8</option>
-          </select>
-        </label>
-      </div>
-      <p class="strip-label">Crew &mdash; who is who</p>
-      <div class="crew">
-        <label class="seat"><span>Student 1</span><input id="s1" type="text" placeholder="Name" autocomplete="off"></label>
-        <label class="seat"><span>Student 2</span><input id="s2" type="text" placeholder="Name" autocomplete="off"></label>
-        <label class="seat"><span>Student 3</span><input id="s3" type="text" placeholder="Name" autocomplete="off"></label>
-        <label class="seat"><span>Student 4</span><input id="s4" type="text" placeholder="Name" autocomplete="off"></label>
-      </div>
-      <label class="field" style="display:block;margin-top:16px;">
-        <span>Who uploads the file? (Student 1 unless you swap it)</span>
-        <select id="submitter">
-          <option value="0">Student 1</option>
-          <option value="1">Student 2</option>
-          <option value="2">Student 3</option>
-          <option value="3">Student 4</option>
-        </select>
-      </label>
-      <p class="small" style="margin-top:10px;">Side quests are turned in from the daily document, not here.</p>
-    </div>
-  </div>
 
   <div class="budget" id="budgetBar">
     <span class="budget-label">Build budget<span id="creditNote" style="color:var(--teal);"></span></span>

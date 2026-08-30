@@ -10,8 +10,8 @@ and the image-export library.
 
 | Step | What happens |
 | --- | --- |
-| **1 Start here** | Four step cards and the standards table |
-| **2 Build** | Team, bot, crew, period, and who uploads — then a 20-point budget across five spec boxes, each hosted by one of the crew bots |
+| **1 Start here** | The four step cards, the team form — team, bot, period, Students 1–4, who uploads — and the skills list |
+| **2 Build** | A 20-point budget across five spec boxes, each hosted by one of the crew bots |
 | **2.5 Extra points** | File types (JPEG/PNG/PDF + Drive), Python indexing (Index Lab, Slicing lab, index math, Data types), and both pop-up checks |
 | **3 Turn it in** | The report, PDF/PNG/JPEG export, the exact folder and file names, and two sets of directions — one for every student, one for the organizer |
 
