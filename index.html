@@ -185,6 +185,9 @@ p:last-child{margin-bottom:0;}
 
 /* section chiefs — the bots nobody drafted */
 .chief{display:flex;flex-direction:column;align-items:center;gap:4px;width:66px;flex:none;}
+.role-bot{display:flex;align-items:center;gap:10px;}
+.role-bot .plate{width:56px;height:56px;flex:none;}
+.role-bot b{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);}
 .chief .plate{width:66px;height:66px;border-radius:8px;}
 .chief b{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cat-c,var(--amber));font-weight:600;}
 .stage-head .chief b{color:var(--stage-c,var(--amber));}
@@ -386,8 +389,6 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
   font-style:normal;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:13px;
   color:var(--stroke);text-align:center;line-height:1.2;
 }
-.cat > .chief .story{font-size:11.5px;line-height:1.4;color:#4A5A66;text-align:center;}
-@media (max-width:640px){ .cat > .chief .story{display:none;} }
 @media (max-width:640px){
   .cat{grid-template-columns:1fr;}
   .cat > .chief{flex-direction:row;align-items:center;border-right:0;border-bottom:2px solid var(--stroke);padding:10px 14px;}
@@ -556,6 +557,9 @@ main{max-width:1120px;margin:0 auto;padding:0 20px 90px;}
   font-weight:700;padding:4px 9px;cursor:pointer;
 }
 .swap-bot:hover{filter:brightness(1.15);}
+.size-row{display:flex;align-items:center;gap:10px;margin-top:-2px;}
+.size-row span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);}
+.size-row input{flex:1;accent-color:var(--amber);cursor:pointer;}
 .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:7px;}
 table.cmp{border-collapse:collapse;width:100%;min-width:520px;font-size:14px;}
 table.cmp th,table.cmp td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--rule-soft);}
@@ -584,6 +588,14 @@ table.cmp td:first-child{font-family:'IBM Plex Mono',monospace;font-size:13px;}
 .drive-ui{
   border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--panel);font-size:13px;
 }
+.drive-link{
+  display:flex;align-items:center;gap:13px;text-decoration:none;border:2px solid var(--stroke);
+  border-radius:9px;padding:12px 16px;background:var(--num-bg);color:#fff;box-shadow:0 3px 0 var(--stroke);
+}
+.drive-link:hover{filter:brightness(1.12);}
+.drive-link .dl-mark{font-size:19px;color:var(--num-fg);}
+.drive-link b{display:block;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:16px;}
+.drive-link em{font-style:normal;font-size:12.5px;color:#B9CBDA;}
 .drive-bar{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--panel-2);border-bottom:1px solid var(--rule);}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--rule);}
 .urlbar{
@@ -1064,13 +1076,17 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
         <img id="pngBot" alt="A bot with a transparent background you can drag" draggable="false">
         <button class="swap-bot" id="pngSwap" type="button">Swap bot</button>
       </div>
+      <label class="size-row">
+        <span>Size</span>
+        <input type="range" id="pngSize" min="44" max="170" value="104" aria-label="Bot size">
+      </label>
       <h4>.png</h4>
       <p class="full">Portable Network Graphics</p>
       <p>The screenshot format.</p>
       <ul>
         <li><span class="good">Use for:</span> screenshots, text, logos</li>
         <li><span class="bad">Not for:</span> huge photos</li>
-        <li><b>Lossless</b>, and see-through. Drag the bot &mdash; the checkers keep showing.</li>
+        <li><b>Lossless</b>, and see-through. Drag it, resize it, swap it &mdash; the checkers keep showing.</li>
       </ul>
     </div>
 
@@ -1122,11 +1138,15 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
         </div>
         <div>
           <p class="strip-label">Make a folder and share it</p>
-          <ul class="objectives" style="margin-bottom:14px;">
-            <li data-n="A"><span>Go to <code>drive.google.com</code> and sign in with your <b>school account</b>.</span></li>
-            <li data-n="B"><span><b>+ New &rsaquo; Folder</b>. Name it, click <b>Create</b>.</span></li>
-            <li data-n="C"><span>Right-click it &rsaquo; <b>Share</b>. Type a classmate's school email, set them to <b>Editor</b>, send.</span></li>
-            <li data-n="D"><span>They can now open it and add files. That is how a team works in one place.</span></li>
+          <a class="drive-link" href="https://drive.google.com" target="_blank" rel="noopener">
+            <span class="dl-mark">&#9633;&#9654;</span>
+            <span><b>Open my Google Drive</b><em>Opens in a new tab &mdash; use your school account</em></span>
+          </a>
+          <ul class="objectives" style="margin:14px 0;">
+            <li data-n="A"><span><b>+ New &rsaquo; Folder</b>. Name it, click <b>Create</b>.</span></li>
+            <li data-n="B"><span>Open it and make a folder for <b>every person on your team</b>.</span></li>
+            <li data-n="C"><span>Right-click the big folder &rsaquo; <b>Share</b>. Add your teammates by school email as <b>Editor</b>.</span></li>
+            <li data-n="D"><span>Now they can open it and drop their own files into their own folder.</span></li>
           </ul>
           <div class="drive-ui" aria-hidden="true">
             <div class="drive-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="urlbar">drive.google.com</span></div>
@@ -1375,21 +1395,9 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
     </div>
   </div>
 
-  <div class="panel">
-    <div class="panel-head"><h3>Everyone on the team does this</h3><span class="q-tag">All four students</span></div>
-    <div class="panel-body">
-      <ol class="steps">
-        <li><div><h5>Save your three files</h5><p><b>PDF</b>, <b>PNG</b>, <b>JPEG</b> &mdash; all three.</p></div></li>
-        <li><div><h5>Rename all three</h5><p>Files app &rsaquo; Downloads &rsaquo; right-click &rsaquo; Rename. Copy the names above.</p></div></li>
-        <li><div><h5>Open the team folder</h5><p><b>Shared with me</b> &rsaquo; your team folder. Cannot see it? Ask your organizer.</p></div></li>
-        <li><div><h5>Make your folder</h5><p>Inside the team folder: <b>+ New &rsaquo; Folder</b>, named <span class="mono" id="myFolder2">Student1_Ada</span>.</p></div></li>
-        <li><div><h5>Upload all three there</h5><p><b>+ New &rsaquo; File upload</b>. Refresh, then click each file to be sure it opens.</p></div></li>
-      </ol>
-    </div>
-  </div>
 
   <div class="panel" style="border-top:5px solid var(--amber);">
-    <div class="panel-head"><h3>The organizer does this</h3><span class="q-tag">One student &mdash; the one who submits</span></div>
+    <div class="panel-head"><div class="role-bot" data-role="organizer"></div><div><h3>First: the organizer</h3><p class="q-tag" style="margin:2px 0 0;">One student &mdash; the one who submits</p></div></div>
     <div class="panel-body">
       <p class="small" style="margin-bottom:14px;"><b>Student 1 runs this.</b> Do steps 1 and 2 first &mdash;
         nobody else can start until the folder is shared.</p>
@@ -1402,6 +1410,19 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
       </ol>
       <div class="note warn" style="margin-top:16px;"><strong>Check before you drop.</strong> Wrong names means
         the whole team is late.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><div class="role-bot" data-role="everyone"></div><div><h3>Then: everyone else</h3><p class="q-tag" style="margin:2px 0 0;">All four students, including the organizer</p></div></div>
+    <div class="panel-body">
+      <ol class="steps">
+        <li><div><h5>Save your three files</h5><p><b>PDF</b>, <b>PNG</b>, <b>JPEG</b> &mdash; all three.</p></div></li>
+        <li><div><h5>Rename all three</h5><p>Files app &rsaquo; Downloads &rsaquo; right-click &rsaquo; Rename. Copy the names above.</p></div></li>
+        <li><div><h5>Open the team folder</h5><p><b>Shared with me</b> &rsaquo; your team folder. Cannot see it? Ask your organizer.</p></div></li>
+        <li><div><h5>Make your folder</h5><p>Inside the team folder: <b>+ New &rsaquo; Folder</b>, named <span class="mono" id="myFolder2">Student1_Ada</span>.</p></div></li>
+        <li><div><h5>Upload all three there</h5><p><b>+ New &rsaquo; File upload</b>. Refresh, then click each file to be sure it opens.</p></div></li>
+      </ol>
     </div>
   </div>
 </section>
@@ -1635,12 +1656,15 @@ const CREW = ["Alpha","Beta","Charlie","Delta","Echo"];
 
 /* Section chiefs — the chassis no group drafted, put to work running a section. */
 const CHIEFS = {
-  ram:         { bot:"Delta",   role:"Memory expert",     story:"Delta remembers everything you are doing right now — and forgets it all the second the power drops." },
-  storagetype: { bot:"Beta",    role:"Storage type",      story:"Beta times how long a save takes. Spinning drives make Beta impatient." },
-  storagecap:  { bot:"Alpha",   role:"Storage capacity",  story:"Alpha counts what fits. Alpha has never once said \u201cthat is enough space.\u201d" },
-  ports:       { bot:"Echo",    role:"Ports",             story:"Echo guards the doors. Nothing plugs in without Echo knowing about it." },
-  capability:  { bot:"Charlie", role:"Special function",  story:"Charlie handles the superpower — the sensing, the deciding, the showing off." },
+  ram:         { bot:"Delta",   role:"Memory" },
+  storagetype: { bot:"Beta",    role:"Storage type" },
+  storagecap:  { bot:"Alpha",   role:"Storage capacity" },
+  ports:       { bot:"Echo",    role:"Ports" },
+  capability:  { bot:"Charlie", role:"Specialty function" },
 };
+
+/* Two more bots front the Step 3 directions. */
+const ROLE_BOTS = { organizer:"Oscar", everyone:"Golf" };
 
 /* Team colour: the plate behind every bot, and the band on the report. */
 const DEFAULT_COLOR = "#FCEF8A";
@@ -1932,7 +1956,6 @@ function renderCategories(){
           <span class="plate">${plateHTML(chief.bot)}</span>
           <b>${chief.bot}</b>
           <em>${chief.role}</em>
-          <span class="story">${chief.story}</span>
         </div>` : ""}
       <div class="cat-main">
         <div class="cat-head">
@@ -2121,6 +2144,10 @@ function stepBot(delta){
 function renderChiefs(){
   $$("[data-chief]").forEach(el=>{
     const name = el.dataset.chief;
+    el.innerHTML = `<span class="plate">${plateHTML(name)}</span><b>${name}</b>`;
+  });
+  $$("[data-role]").forEach(el=>{
+    const name = ROLE_BOTS[el.dataset.role];
     el.innerHTML = `<span class="plate">${plateHTML(name)}</span><b>${name}</b>`;
   });
 }
@@ -2357,7 +2384,7 @@ function scrollSpy(){
 function clean(s){ return String(s || "").replace(/[^A-Za-z0-9]/g, ""); }
 
 /* Every name students have to type, generated from what they entered. */
-function firstNameOf(i){ return clean(state.crew[i]) || `Student${i+1}`; }
+function firstNameOf(i){ return clean(state.crew[i]) || "Name"; }
 function exporterName(){ return firstNameOf(state.exporter || 0); }
 function teamFolder(){ return `Period${clean(state.period) || "1"}_${teamTag()}`; }
 function fileBase(){ return `${exporterName()}_${teamTag()}_Mission2`; }
@@ -2648,6 +2675,8 @@ $("#typesDone").addEventListener("click", ()=> $("#typesModal").close());
   const pool = BOTS.filter(n => BOT_IMG[n]);
   const show = ()=>{ bot.src = BOT_IMG[pool[which % pool.length]] || ""; };
   let x = 0.5, y = 0.5, dragging = false;
+  const size = $("#pngSize");
+  if(size) size.addEventListener("input", ()=>{ bot.style.height = size.value + "px"; place(); });
   const place = ()=>{
     const w = pad.clientWidth - bot.offsetWidth, h = pad.clientHeight - bot.offsetHeight;
     bot.style.left = Math.round(x * Math.max(0, w)) + "px";

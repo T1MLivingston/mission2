@@ -80,7 +80,8 @@ Everything a teacher would want to change sits in named arrays at the top of the
 - `BASE_BUDGET` / `CREDIT_CAP` — the 20-point budget and the 8-credit cap
 - `PY_QUESTIONS` / `FD_QUESTIONS` — the two tests (prompt, options, correct index, explanation)
 - `CREW` — the five bots used in the indexing lesson and lab
-- `CHIEFS` — which chassis hosts each spec box, plus its job title and one-line story
+- `CHIEFS` — which chassis hosts each spec box, and its job title
+- `ROLE_BOTS` — the two bots fronting the Step 3 directions (Oscar the organizer, Golf for everyone)
 - `DEFAULT_COLOR` — the starting team color, `#FAE74C`
 - `--g1` … `--g5` — the grey spectrum, light to dark, that runs the five spec boxes
 - `--num-bg` / `--num-fg` / `--stroke` — the orange-on-blue number chips and the black outline they share
