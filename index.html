@@ -242,6 +242,52 @@ p:last-child{margin-bottom:0;}
 .rail-btn b{color:var(--c-por);}
 /* Pick your job and read only your job.  Two sets of directions on screen at
    once is two chances to follow the wrong one. */
+/* Picture size, and what it costs.  The numbers are the lesson. */
+.res-pick{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.res-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-right:2px;position:relative;cursor:help;border-bottom:1px dotted var(--ink-2);}
+.res-pick button{
+  border:2px solid var(--stroke);border-radius:6px;background:var(--panel-2);color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;padding:5px 10px;cursor:pointer;
+}
+.res-pick button.on{background:var(--num-bg);color:var(--num-fg);}
+.res-px{font-size:11.5px;color:var(--ink-2);}
+.hint{
+  position:absolute;left:0;top:calc(100% + 8px);z-index:40;width:min(280px,72vw);
+  border:2px solid var(--stroke);border-radius:8px;background:var(--panel);color:var(--ink);
+  padding:10px 12px;font:400 12.5px/1.45 'IBM Plex Sans',sans-serif;letter-spacing:normal;text-transform:none;
+  white-space:normal;text-align:left;
+  box-shadow:0 6px 0 rgba(11,16,21,.14);opacity:0;visibility:hidden;transition:opacity .14s ease;pointer-events:none;
+}
+.res-label:hover .hint,.res-label:focus-visible .hint,
+.btn:hover > .hint,.btn:focus-visible > .hint{opacity:1;visibility:visible;}
+#zipBtn{position:relative;}
+.sizes{display:none;margin-top:14px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;}
+.sizes.show{display:block;}
+.sizes .row{display:flex;justify-content:space-between;gap:12px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;border-bottom:1px solid var(--rule-soft);}
+.sizes .row:last-child{border-bottom:0;}
+.sizes .row.tot{background:var(--panel-2);font-weight:700;}
+.sizes .row.cap{background:var(--panel-2);color:var(--ink-2);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
+.sizes .row.stale{color:var(--c-por);}
+
+.path{
+  display:flex;flex-wrap:wrap;gap:7px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+}
+.path span{border:1px solid var(--rule);border-radius:6px;padding:5px 9px;background:var(--panel-2);}
+.path span.here{background:var(--num-bg);color:var(--num-fg);border-color:var(--stroke);font-weight:700;}
+.path i{color:var(--ink-2);font-style:normal;}
+.video-cta{
+  display:flex;align-items:center;gap:13px;margin-top:16px;text-decoration:none;color:inherit;
+  border:1px solid var(--rule);border-left:5px solid var(--y);border-radius:9px;padding:12px 16px;background:var(--panel-2);
+}
+a.video-cta:hover{border-color:var(--c-por);}
+.video-cta .vid-play{
+  display:grid;place-items:center;width:32px;height:32px;flex:none;font-size:13px;
+  background:var(--num-bg);color:var(--num-fg);border:2px solid var(--stroke);border-radius:50%;
+}
+.video-cta b{display:block;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:15.5px;}
+.video-cta em{font-style:normal;font-size:12.5px;color:var(--ink-2);}
+.video-cta.off{opacity:.72;}
+
 .role-pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(208px,1fr));gap:10px;margin:0 0 14px;}
 .role-btn{
   text-align:left;border:1px solid var(--rule);border-top:5px solid var(--y-soft);border-radius:9px;
@@ -721,6 +767,7 @@ table.cmp td:first-child{font-family:'IBM Plex Mono',monospace;font-size:13px;}
 .filepreview.show{display:block;}
 .filepreview img{max-width:100%;border:1px solid var(--rule);border-radius:5px;display:block;margin-top:10px;}
 
+
 /* ============================================================
    CHECKLIST + STANDARDS
    ============================================================ */
@@ -1193,53 +1240,6 @@ dialog.modal::backdrop{background:rgba(4,12,18,.66);}
     </div>
   </div>
 
-  <div class="panel">
-    <div class="panel-head"><h3><svg class="mark dr" viewBox="0 0 24 24" aria-hidden="true"><g class="seam"><path d="M12 2.4 1.9 20.6 8.5 17.3 12 11.5Z" fill="#00A94F"/><path d="M12 2.4 22.1 20.6 15.5 17.3 12 11.5Z" fill="#FFC72C"/><path d="M1.9 20.6h20.2l-6.6-3.3H8.5Z" fill="#1E9BF0"/></g></svg> Understanding Google Drive</h3><span class="q-tag">Where your files live</span></div>
-    <div class="panel-body">
-      <div class="grid2">
-        <div>
-          <p>Drive stores your files on <strong>Google's computers, not yours</strong> &mdash; so they open on
-            any device you sign into.</p>
-          <div class="note"><strong>Share a folder</strong> and it lands in that person's <b>Shared with me</b>.
-            That is how your team reaches yours.</div>
-          <div class="note warn" style="margin-top:12px;"><strong>Where it goes.</strong> Your team folder link
-            gets pasted into the class <b>spreadsheet</b> &mdash; it is in the daily document. See
-            <a href="#submit">Step 3</a>.</div>
-        </div>
-        <div>
-          <p class="strip-label">Make a folder and share it</p>
-          <a class="drive-link" href="https://drive.google.com" target="_blank" rel="noopener">
-            <span class="dl-mark"><svg class="mark dr" viewBox="0 0 24 24" aria-hidden="true"><g class="seam"><path d="M12 2.4 1.9 20.6 8.5 17.3 12 11.5Z" fill="#00A94F"/><path d="M12 2.4 22.1 20.6 15.5 17.3 12 11.5Z" fill="#FFC72C"/><path d="M1.9 20.6h20.2l-6.6-3.3H8.5Z" fill="#1E9BF0"/></g></svg></span>
-            <span><b>Open my Google Drive</b><em>Opens in a new tab &mdash; use your school account</em></span>
-          </a>
-          <ul class="objectives" style="margin:14px 0;">
-            <li data-n="A"><span><b>+ New &rsaquo; Folder</b>. Name it, click <b>Create</b>.</span></li>
-            <li data-n="B"><span>Open it and make a folder for <b>every person on your team</b>.</span></li>
-            <li data-n="C"><span>Right-click the big folder &rsaquo; <b>Share</b>. Add your teammates by school email as <b>Editor</b>.</span></li>
-            <li data-n="D"><span>Now they can open it and drop their own files into their own folder.</span></li>
-          </ul>
-          <div class="drive-ui" aria-hidden="true">
-            <div class="drive-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="urlbar">drive.google.com</span></div>
-            <div class="drive-body">
-              <div class="drive-side">
-                <span class="newbtn"><b>+</b> New</span>
-                <a href="#learn" class="here">My Drive</a>
-                <a href="#learn">Recent</a>
-              </div>
-              <div class="drive-main">
-                <div class="menu-pop">
-                  <span class="hi">Folder &nbsp;&larr; start here</span>
-                  <span>File upload</span>
-                  <span>Folder upload</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <h3 id="pyHead" style="font-size:24px;margin:32px 0 14px;"><svg class="mark py" viewBox="0 0 24 24" aria-hidden="true"><rect x="1.6" y="6.2" width="8.6" height="10.6" rx="3.2" fill="#3776AB"/><g class="seam"><rect x="7" y="12.6" width="10.6" height="9.8" rx="3.2" fill="#FFD43B"/><rect x="13.8" y="7.2" width="8.6" height="10.6" rx="3.2" fill="#FFD43B"/></g><rect x="6.4" y="1.6" width="10.6" height="9.8" rx="3.2" fill="#3776AB"/><circle class="eye" cx="9.4" cy="4.9" r="1.1"/><circle class="eye" cx="14.6" cy="19.1" r="1.1"/></svg> B &middot; Python indexing</h3>
 <div class="grid2" style="align-items:start;">
     <div>
@@ -1462,15 +1462,31 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
         <div class="export-row no-print" style="align-items:center;">
           <label class="field" style="margin-right:6px;"><span>Exporting as</span>
             <select id="exporter"></select></label>
+          <div class="res-pick" id="resPick">
+            <span class="res-label">Picture size
+              <span class="hint">Resolution is how many pixels wide your picture is. More pixels means
+                sharper &mdash; and a bigger file. Every one of them has to be stored.</span>
+            </span>
+            <button type="button" data-s="1">1&times;</button>
+            <button type="button" data-s="2">2&times;</button>
+            <button type="button" data-s="3">3&times;</button>
+            <span class="res-px mono" id="resPx"></span>
+          </div>
         </div>
         <div class="export-row no-print">
-          <button class="btn primary" id="pdfBtn" type="button">Save as PDF</button>
+          <button class="btn primary" id="zipBtn" type="button">Download all three &middot; .zip
+            <span class="hint">A <b>.zip</b> is one file with other files packed inside it. This one holds
+              your PDF, your PNG and your JPEG, so it is one download instead of three. Double-click it to
+              get the three files back out.</span>
+          </button>
+          <button class="btn" id="pdfBtn" type="button">Save as PDF</button>
           <button class="btn" id="pngBtn" type="button">Download PNG</button>
           <button class="btn" id="jpgBtn" type="button">Download JPEG</button>
           <button class="btn" id="reassessBtn" type="button">Re-assess</button>
         </div>
         <p class="small no-print" style="margin-top:10px;">
-          You need <b>all three</b>. <b>Save as PDF</b> opens the print box &mdash; set <i>Destination</i> to <b>Save as PDF</b>.</p>
+          You need <b>all three</b>. The <b>.zip</b> is the quick way &mdash; it has all three inside.</p>
+        <div class="sizes no-print" id="sizeTable"></div>
         <div class="filepreview no-print" id="filePreview"></div>
       </section>
     </div>
@@ -1482,7 +1498,7 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
       <p class="small" style="margin-bottom:12px;">Copy it letter for letter.</p>
       <p class="strip-label">The whole team folder</p>
       <div class="pre" id="folderTree"></div>
-      <p class="strip-label" style="margin-top:16px;">Your folder, and the three files in it</p>
+      <p class="strip-label" style="margin-top:16px;">The folder you drop them in, and your three files</p>
       <div class="pre" id="myFolder" style="margin-bottom:6px;"></div>
       <div class="pre" id="fileTree"></div>
       <div class="note warn" style="margin-top:14px;">No spaces. No extra <span class="mono">.pdf</span> on the end.</div>
@@ -1509,6 +1525,47 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
     </div>
     </div>
   </div>
+  <div class="panel roled" id="drivePanel">
+    <div class="chief" data-role="drive"></div>
+    <div class="cat-main">
+    <div class="panel-head"><h3><svg class="mark dr" viewBox="0 0 24 24" aria-hidden="true"><g class="seam"><path d="M12 2.4 1.9 20.6 8.5 17.3 12 11.5Z" fill="#00A94F"/><path d="M12 2.4 22.1 20.6 15.5 17.3 12 11.5Z" fill="#FFC72C"/><path d="M1.9 20.6h20.2l-6.6-3.3H8.5Z" fill="#1E9BF0"/></g></svg> Where your files go</h3><span class="q-tag">One folder, every mission</span></div>
+    <div class="panel-body">
+      <p class="small" style="margin-bottom:14px;">Drive keeps your files on <strong>Google's computers, not
+        yours</strong>, so they open on any device you sign into. Everything for this class lives in
+        <b>one folder</b> &mdash; you walk down into it.</p>
+
+      <a class="drive-link" id="classFolderLink" target="_blank" rel="noopener">
+        <span class="dl-mark"><svg class="mark dr" viewBox="0 0 24 24" aria-hidden="true"><g class="seam"><path d="M12 2.4 1.9 20.6 8.5 17.3 12 11.5Z" fill="#00A94F"/><path d="M12 2.4 22.1 20.6 15.5 17.3 12 11.5Z" fill="#FFC72C"/><path d="M1.9 20.6h20.2l-6.6-3.3H8.5Z" fill="#1E9BF0"/></g></svg></span>
+        <span><b id="classFolderLabel">Open the class folder</b><em id="classFolderNote">Opens in a new tab &mdash; use your school account</em></span>
+      </a>
+
+      <p class="strip-label" style="margin-top:16px;">Walk down to your team</p>
+      <div class="path" id="drivePath">
+        <span>Class folder</span><i>&rsaquo;</i>
+        <span id="pathPeriod">Period 1</span><i>&rsaquo;</i>
+        <span>Mission 2</span><i>&rsaquo;</i>
+        <span class="here" id="pathTeam">Period1_India</span>
+      </div>
+
+      <div class="grid2" style="margin-top:16px;align-items:start;">
+        <div class="note"><strong>Only Student 1 makes a folder.</strong> Everyone else opens the one that is
+          already there and drops their three files in.</div>
+        <div class="note warn"><strong>Access control.</strong> Only people in this class can open that folder.
+          That is a setting somebody chose &mdash; not an accident.</div>
+      </div>
+
+      <div class="video-cta" id="organizerVideo">
+        <span class="vid-play" aria-hidden="true">&#9654;</span>
+        <span><b>Student 1: watch this first</b><em id="organizerVideoNote">How to build the team folder &mdash; 2 minutes</em></span>
+      </div>
+
+      <div class="note" style="margin-top:16px;"><strong>Only download from somewhere you trust.</strong> This
+        folder and the daily document are safe because you know who made them. A file from a search result,
+        a pop-up, or a stranger's link is not.</div>
+    </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- ========================= EXTRA POINTS ========================= -->
@@ -1566,7 +1623,7 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
       <li data-k="c3"><span class="box"></span><span>Both checks done</span></li>
       <li data-k="c4"><span class="box"></span><span>Saved <b>all three</b> files &mdash; PDF, PNG, JPEG</span></li>
       <li data-k="c5"><span class="box"></span><span>Renamed all three <span class="mono" id="chkName">First_Team_Mission2</span></span></li>
-      <li data-k="c6"><span class="box"></span><span>Made my own <span class="mono">Student#_Name</span> folder in the team folder</span></li>
+      <li data-k="c6"><span class="box"></span><span>Found the team folder <span class="mono" id="chkFolder2">Period1_India</span> in the class folder</span></li>
       <li data-k="c7"><span class="box"></span><span>Uploaded all three, refreshed, and opened each one</span></li>
       <li class="head" data-head="Organizer only &mdash; the student who submits"></li>
       <li data-k="o1"><span class="box"></span><span>Made <span class="mono" id="chkFolder">Period1_Alpha</span> and shared it with my team as <b>Editor</b></span></li>
@@ -1690,8 +1747,10 @@ const CREDIT_CAP  = 8;
 const STANDARDS = [
   "Identify basic computer parts",
   "Identify multiple file format types",
-  "Index selected items within a list",
+  "Index selected items within a list in Python",
   "Identify the types of operations that can be performed on different data types",
+  "Illustrate access control, and how to limit access to authorized users",
+  "Discuss the need for downloads to come from trusted sources",
   "Create a digital product individually and collaboratively",
 ];
 
@@ -1764,9 +1823,16 @@ const CHIEFS = {
 
 /* Two more bots front the Step 3 directions. */
 const ROLE_BOTS = {
-  organizer: { bot:"Oscar", role:"Organizer" },
-  everyone:  { bot:"Golf",  role:"Everyone" },
+  organizer: { bot:"Oscar",  role:"Organizer" },
+  everyone:  { bot:"Golf",   role:"Everyone" },
+  drive:     { bot:"Victor", role:"Drive" },
 };
+
+/* The two links a teacher swaps each year.  The class folder is where every
+   mission lives; students never make one of their own, they walk down into it.
+   The video is for the one student per team who does build a folder. */
+const CLASS_DRIVE_FOLDER = "";
+const ORGANIZER_VIDEO    = "";
 
 /* Team colour: the plate behind every bot, and the band on the report. */
 const DEFAULT_COLOR = "#FCEF8A";
@@ -1978,7 +2044,7 @@ const ALL_Q = PY_QUESTIONS.concat(FD_QUESTIONS);
    STATE + PERSISTENCE
    ============================================================ */
 const SAVE_KEY = "mission02-speccheck-v1";
-let state = { color:DEFAULT_COLOR, robot:"", bot:"", period:"1", crew:["","","",""], submitter:0, exporter:0, slicing:false, role:"organizer", selections:{}, answers:{}, checks:{}, theme:"auto", assessed:false };
+let state = { color:DEFAULT_COLOR, robot:"", bot:"", period:"1", crew:["","","",""], submitter:0, exporter:0, slicing:false, role:"organizer", scale:2, selections:{}, answers:{}, checks:{}, theme:"auto", assessed:false };
 
 function save(){
   try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }catch(e){ /* storage blocked — page still works */ }
@@ -2546,10 +2612,12 @@ function updateFilename(){
   markNeeded();
 
   /* The whole structure, drawn from what the team actually typed in. */
-  const rows = [[teamFolder(), "the organizer makes this"]];
+  const rows = [[teamFolder(), "the organizer makes this one"]];
   state.crew.forEach((_, i) => {
-    rows.push([` ├─ ${studentFolder(i)}`, i === 0 ? "one folder per student" : ""]);
-    ["pdf","png","jpg"].forEach(ext => rows.push([` │    ${fileFor(i)}.${ext}`, ""]));
+    ["pdf","png","jpg"].forEach((ext, j) => rows.push([
+      ` ├─ ${fileFor(i)}.${ext}`,
+      (i === 0 && j === 0) ? "everyone drops their three in here" : ""
+    ]));
   });
   const col = Math.max(...rows.map(r => r[0].length)) + 4;
   $("#folderTree").innerHTML = rows.map(([line, note]) =>
@@ -2560,11 +2628,13 @@ function updateFilename(){
   $("#fileTree").textContent  = `${base}.pdf\n${base}.png\n${base}.jpg`;
   $("#chkName").textContent   = base;
   $("#chkFolder").textContent = teamFolder();
-  const mine = studentFolder(state.exporter || 0);
-  $("#myFolder").textContent  = mine;
-  /* these two sit inside whichever set of role directions is showing */
+  $("#myFolder").textContent = teamFolder();
+  /* these sit inside whichever set of role directions is showing */
   const org = $("#orgFolder"); if(org) org.textContent = teamFolder();
-  const me2 = $("#myFolder2"); if(me2) me2.textContent = mine;
+  const me2 = $("#myFolder2"); if(me2) me2.textContent = teamFolder();
+  const pt  = $("#pathTeam");  if(pt)  pt.textContent  = teamFolder();
+  const cf2 = $("#chkFolder2"); if(cf2) cf2.textContent = teamFolder();
+  const pp  = $("#pathPeriod");if(pp)  pp.textContent  = "Period " + (state.period || "1");
 }
 
 /* ============================================================
@@ -2628,6 +2698,7 @@ function buildReport(){
   $("#report").classList.add("show");
   $("#reportEmpty").style.display = "none";
   save();
+  renderRes();          /* the sheet has a size now, so the pixel count is real */
 }
 
 /* ============================================================
@@ -2652,12 +2723,134 @@ function sheetBackground(){
   return (c && c !== "rgba(0, 0, 0, 0)") ? c : "#ffffff";
 }
 
+/* ------------------------------------------------------------------
+   A .zip and a .pdf, built by hand.
+
+   Three separate downloads is three chances for a 6th grader to lose
+   one, so the page packs all three into a single archive.  Both
+   containers are written here rather than pulled from a library: the
+   page has to work off a Chromebook's Downloads folder with no network,
+   and neither format needs much.  ZIP entries are stored uncompressed
+   because PNG and JPEG are already compressed -- deflating them again
+   buys nothing.  The PDF is the report's JPEG wrapped in the smallest
+   legal document that can hold it.
+   ------------------------------------------------------------------ */
+const CRC_TABLE = (()=>{
+  const t = new Uint32Array(256);
+  for(let i = 0; i < 256; i++){
+    let c = i;
+    for(let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[i] = c >>> 0;
+  }
+  return t;
+})();
+function crc32(bytes){
+  let c = 0xFFFFFFFF;
+  for(let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+
+function zipStore(files){
+  const enc = new TextEncoder();
+  const chunks = [], central = [];
+  let offset = 0;
+  files.forEach(f =>{
+    const name = enc.encode(f.name), crc = crc32(f.data), n = f.data.length;
+    const local = new Uint8Array(30 + name.length);
+    const lv = new DataView(local.buffer);
+    lv.setUint32(0, 0x04034b50, true);
+    lv.setUint16(4, 20, true);                 // version needed
+    lv.setUint16(8, 0, true);                  // method 0: stored
+    lv.setUint32(14, crc, true);
+    lv.setUint32(18, n, true);                 // compressed size
+    lv.setUint32(22, n, true);                 // uncompressed size
+    lv.setUint16(26, name.length, true);
+    local.set(name, 30);
+    chunks.push(local, f.data);
+
+    const cd = new Uint8Array(46 + name.length);
+    const cv = new DataView(cd.buffer);
+    cv.setUint32(0, 0x02014b50, true);
+    cv.setUint16(4, 20, true); cv.setUint16(6, 20, true);
+    cv.setUint16(10, 0, true);
+    cv.setUint32(16, crc, true);
+    cv.setUint32(20, n, true); cv.setUint32(24, n, true);
+    cv.setUint16(28, name.length, true);
+    cv.setUint32(42, offset, true);            // where its local header sits
+    cd.set(name, 46);
+    central.push(cd);
+    offset += local.length + n;
+  });
+
+  const cdSize = central.reduce((a, c) => a + c.length, 0);
+  const end = new Uint8Array(22);
+  const ev = new DataView(end.buffer);
+  ev.setUint32(0, 0x06054b50, true);
+  ev.setUint16(8, files.length, true);
+  ev.setUint16(10, files.length, true);
+  ev.setUint32(12, cdSize, true);
+  ev.setUint32(16, offset, true);
+
+  const all = chunks.concat(central, [end]);
+  const out = new Uint8Array(all.reduce((a, c) => a + c.length, 0));
+  let at = 0;
+  all.forEach(c =>{ out.set(c, at); at += c.length; });
+  return out;
+}
+
+function jpegPdf(jpeg, w, h){
+  /* Letter, portrait, image centred with a half-inch of air around it. */
+  const PW = 612, PH = 792, M = 36;
+  const k = Math.min((PW - M * 2) / w, (PH - M * 2) / h);
+  const iw = w * k, ih = h * k;
+  const x = ((PW - iw) / 2).toFixed(2), y = ((PH - ih) / 2).toFixed(2);
+  const content = `q ${iw.toFixed(2)} 0 0 ${ih.toFixed(2)} ${x} ${y} cm /Im0 Do Q`;
+  const enc = new TextEncoder();
+
+  const objs = [
+    enc.encode("<</Type/Catalog/Pages 2 0 R>>"),
+    enc.encode("<</Type/Pages/Kids[3 0 R]/Count 1>>"),
+    enc.encode(`<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${PW} ${PH}]`
+             + `/Resources<</XObject<</Im0 4 0 R>>>>/Contents 5 0 R>>`),
+    { dict: `<</Type/XObject/Subtype/Image/Width ${w}/Height ${h}`
+          + `/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${jpeg.length}>>`,
+      stream: jpeg },
+    { dict: `<</Length ${content.length}>>`, stream: enc.encode(content) }
+  ];
+
+  const parts = [enc.encode("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n")];
+  const starts = [];
+  let at = parts[0].length;
+  objs.forEach((o, i) =>{
+    starts.push(at);
+    const head = enc.encode(`${i + 1} 0 obj\n`);
+    const body = o.stream
+      ? [enc.encode(o.dict + "\nstream\n"), o.stream, enc.encode("\nendstream\n")]
+      : [o, enc.encode("\n")];
+    const tail = enc.encode("endobj\n");
+    [head, ...body, tail].forEach(c =>{ parts.push(c); at += c.length; });
+  });
+
+  let xref = `xref\n0 ${objs.length + 1}\n0000000000 65535 f \n`;
+  starts.forEach(o =>{ xref += String(o).padStart(10, "0") + " 00000 n \n"; });
+  xref += `trailer\n<</Size ${objs.length + 1}/Root 1 0 R>>\nstartxref\n${at}\n%%EOF\n`;
+  parts.push(enc.encode(xref));
+
+  const out = new Uint8Array(parts.reduce((a, c) => a + c.length, 0));
+  let w2 = 0;
+  parts.forEach(c =>{ out.set(c, w2); w2 += c.length; });
+  return out;
+}
+
+const bytesOf = blob => blob.arrayBuffer().then(b => new Uint8Array(b));
+const kb = n => (n < 1024 ? n + " B" : (n / 1024).toFixed(n < 1024 * 100 ? 1 : 0) + " KB");
+
 async function exportImage(type){
   const btn = type === "image/png" ? $("#pngBtn") : $("#jpgBtn");
   const label = btn.textContent;
   btn.disabled = true; btn.textContent = "Rendering…";
   try{
-    const canvas = await html2canvas($("#reportSheet"), { backgroundColor: sheetBackground(), scale: 2, useCORS: true });
+    const canvas = await html2canvas($("#reportSheet"), { backgroundColor: sheetBackground(), scale: state.scale || 2, useCORS: true });
     const ext  = type === "image/png" ? "png" : "jpg";
     const name = `${fileBase()}.${ext}`;
     const dataUrl = canvas.toDataURL(type, 0.92);
@@ -2766,6 +2959,103 @@ $("#reassessBtn").addEventListener("click", ()=>{
   $("#reportSheet").scrollIntoView({ behavior:"smooth", block:"start" });
 });
 $("#pdfBtn").addEventListener("click", ()=> window.print());
+/* ------------------------------------------------------------------
+   Picture size, and the bill that comes with it.
+   ------------------------------------------------------------------ */
+function renderRes(){
+  $$("#resPick button").forEach(b => b.classList.toggle("on", +b.dataset.s === (state.scale || 2)));
+  const sheet = $("#reportSheet");
+  const px = $("#resPx");
+  if(px && sheet) px.textContent =
+    `${Math.round(sheet.offsetWidth * state.scale)} \u00d7 ${Math.round(sheet.offsetHeight * state.scale)} px`;
+}
+$("#resPick").addEventListener("click", e =>{
+  const b = e.target.closest("button");
+  if(!b) return;
+  state.scale = +b.dataset.s; save(); renderRes();
+  const t = $("#sizeTable");
+  if(t.classList.contains("show")){
+    t.querySelector(".stale") ||
+      t.insertAdjacentHTML("beforeend",
+        `<div class="row stale"><span>Picture size changed</span><span>download again to see the new bill</span></div>`);
+  }
+});
+
+function showSizes(rows, caption){
+  const t = $("#sizeTable");
+  t.className = "sizes no-print show";
+  t.innerHTML = `<div class="row cap"><span>${caption}</span><span>What it costs</span></div>` +
+    rows.map(([k, v, cls]) => `<div class="row ${cls || ""}"><span>${k}</span><span>${v}</span></div>`).join("");
+}
+
+async function exportZip(){
+  const btn = $("#zipBtn"), label = btn.innerHTML;
+  btn.disabled = true; btn.textContent = "Packing\u2026";
+  try{
+    const canvas = await html2canvas($("#reportSheet"),
+      { backgroundColor: sheetBackground(), scale: state.scale || 2, useCORS: true });
+    const png  = await bytesOf(await new Promise(r => canvas.toBlob(r, "image/png")));
+    const jpg  = await bytesOf(await new Promise(r => canvas.toBlob(r, "image/jpeg", 0.92)));
+    const pdf  = jpegPdf(jpg, canvas.width, canvas.height);
+
+    const base = fileBase();
+    const zip = zipStore([
+      { name: base + ".pdf", data: pdf },
+      { name: base + ".png", data: png },
+      { name: base + ".jpg", data: jpg }
+    ]);
+    const name = base + ".zip";
+    const blob = new Blob([zip], { type: "application/zip" });
+
+    let note;
+    const saver = await getSaver();
+    if(saver){
+      try{
+        await saver.save({ filename: name, data: blob });
+        note = `<b>${name}</b> &mdash; saved. Look in your <b>Downloads</b> folder, then double-click it to unpack the three files.`;
+      }catch(err){
+        note = (err && err.code === "declined")
+          ? `You closed the save box, so nothing was downloaded. Press the button again.`
+          : `This viewer would not save the file. Use the three separate buttons instead.`;
+      }
+    }else{
+      let started = false;
+      try{
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url; a.download = name;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(()=> URL.revokeObjectURL(url), 4000);
+        started = true;
+      }catch(e){ started = false; }
+      note = started
+        ? `<b>${name}</b> &mdash; check your <b>Downloads</b> folder, then double-click it to unpack the three files.`
+        : `Your browser blocked the download. Use the three separate buttons instead.`;
+    }
+
+    showSizes([
+      [base + ".pdf", kb(pdf.length)],
+      [base + ".png", kb(png.length)],
+      [base + ".jpg", kb(jpg.length)],
+      [name + " \u2014 all three, packed", kb(zip.length), "tot"]
+    ], `${state.scale}\u00d7 \u00b7 ${canvas.width} \u00d7 ${canvas.height} pixels`);
+
+    const prev = $("#filePreview");
+    prev.classList.add("show");
+    prev.innerHTML = `<p class="small">${note}</p>`;
+  }catch(err){
+    console.error(err);
+    const prev = $("#filePreview");
+    prev.classList.add("show");
+    prev.innerHTML = `<p class="small">${(typeof html2canvas === "undefined")
+      ? "The image tool could not load &mdash; this page needs internet access to build the zip."
+      : "That did not work in this browser."} Use <b>Save as PDF</b> instead.</p>`;
+  }finally{
+    btn.disabled = false; btn.innerHTML = label;
+  }
+}
+$("#zipBtn").addEventListener("click", exportZip);
+
 $("#pngBtn").addEventListener("click", ()=> exportImage("image/png"));
 $("#jpgBtn").addEventListener("click", ()=> exportImage("image/jpeg"));
 $("#runBtn").addEventListener("click", runExpr);
@@ -2944,23 +3234,23 @@ const ROLE_DOC = {
     title: "Student 1 &mdash; the organizer",
     tag: "Do this first. Nobody else can start.",
     steps: [
-      ["Make the team folder",
-       "<b>+ New &rsaquo; Folder</b>, named <span class=\"mono\" id=\"orgFolder\">Period1_India</span>. One folder inside for each student."],
-      ["Share it with your team",
-       "Right-click &rsaquo; <b>Share</b>. Add all four by <b>school email</b> as <b>Editor</b>."],
-      ["Paste the link in the spreadsheet",
-       "<b>Share</b> &rsaquo; <b>Copy link</b>, then open the class <b>spreadsheet</b> from the daily document. That link is the hand-in."]
+      ["Open the class folder",
+       "The button at the bottom of this step &rsaquo; <b>your period</b> &rsaquo; <b>Mission 2</b>."],
+      ["Make one folder for your team",
+       "<b>+ New &rsaquo; Folder</b>, named <span class=\"mono\" id=\"orgFolder\">Period1_India</span>. That is the only folder anyone makes."],
+      ["Tell your team it is there",
+       "They cannot drop files into a folder that does not exist yet."]
     ],
     note: "<strong>You still have your own three files to upload.</strong> Switch to the other card and do those three steps too."
   },
   everyone: {
     title: "Students 2, 3 and 4",
-    tag: "Once the organizer shares the folder",
+    tag: "Once Student 1 has made the folder",
     steps: [
       ["Save your three files", "<b>PDF</b>, <b>PNG</b> and <b>JPEG</b> &mdash; all three, from the buttons above."],
       ["Rename all three", "Copy the names above exactly. No spaces."],
-      ["Drop them in your folder",
-       "<b>Shared with me</b> &rsaquo; the team folder &rsaquo; make <span class=\"mono\" id=\"myFolder2\">Student2_Ada</span> &rsaquo; upload all three."]
+      ["Drop them in the team folder",
+       "Class folder &rsaquo; your period &rsaquo; Mission 2 &rsaquo; <span class=\"mono\" id=\"myFolder2\">Period1_India</span>. Do not make a new folder."]
     ],
     note: "<strong>Click each file once it is up.</strong> If it does not open, it did not upload."
   }
@@ -2987,6 +3277,36 @@ $("#rolePick").addEventListener("click", e =>{
   const btn = e.target.closest(".role-btn");
   if(btn) showRole(btn.dataset.r);
 });
+
+/* The class folder and the organizer's video.  Both are one-line swaps at the
+   top of this script; until a link is pasted in, each says where to find it
+   rather than handing a class of 6th graders a dead link. */
+(function driveLinks(){
+  const link = $("#classFolderLink"), note = $("#classFolderNote"), vid = $("#organizerVideo");
+  if(link){
+    if(CLASS_DRIVE_FOLDER){
+      link.href = CLASS_DRIVE_FOLDER;
+    }else{
+      link.removeAttribute("target");
+      link.setAttribute("aria-disabled", "true");
+      link.addEventListener("click", e => e.preventDefault());
+      if(note) note.textContent = "Link is in the daily document";
+    }
+  }
+  if(vid){
+    if(ORGANIZER_VIDEO){
+      const a = document.createElement("a");
+      a.className = vid.className; a.id = vid.id;
+      a.href = ORGANIZER_VIDEO; a.target = "_blank"; a.rel = "noopener";
+      a.innerHTML = vid.innerHTML;
+      vid.replaceWith(a);
+    }else{
+      vid.classList.add("off");
+      const n = $("#organizerVideoNote");
+      if(n) n.textContent = "Video link is in the daily document";
+    }
+  }
+})();
 
 /* The PDF sample: a real document students can open, rather than a picture of
    one.  It ships inside the page (tools/build-pdf.py) so it survives a school
@@ -3087,6 +3407,7 @@ renderStrip();
 renderTries();
 paintBots();
 renderChecklist();
+renderRes();
 if(state.slicing) unlockSlicing(false);
 refresh();
 scrollSpy();

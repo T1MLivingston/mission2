@@ -12,8 +12,8 @@ and the image-export library.
 | --- | --- |
 | **1 Start here** | The four step cards, the team form — team, bot, period, Students 1–4, who uploads — and the skills list |
 | **2 Build** | A 20-point budget across five spec boxes, each hosted by one of the crew bots |
-| **2.5 Extra points** | File types (JPEG/PNG/PDF + Drive), Python indexing (Index Lab, Slicing lab, index math, Data types), and both pop-up checks |
-| **3 Turn it in** | The report, PDF/PNG/JPEG export, the exact folder and file names, and a role picker — three steps for the organizer, three for everyone else |
+| **2.5 Extra points** | File types (JPEG/PNG/PDF), Python indexing (Index Lab, Slicing lab, index math, Data types), and both pop-up checks |
+| **3 Turn it in** | The report, the one-click `.zip`, the exact file names, a role picker (three steps for the organizer, three for everyone else), and where in Drive it all goes |
 
 Three steps carry the mission. 2.5 sits between 2 and 3 because the points it pays out get spent back in 2.
 
@@ -67,6 +67,36 @@ Section A teaches by letting students break things rather than by describing the
 **Hidden round:** triple-tap the *B · Python indexing* heading to unlock four slicing questions. They raise
 the point ceiling from 8 to 12 rather than sharing it. (Triple-tapping the *A · File types* heading still
 opens the Extension Vault.)
+
+## The two links a teacher swaps
+
+Both sit at the top of the `<script>` block, and both fail politely: with nothing pasted in, each says
+*"link is in the daily document"* rather than handing a class of 6th graders a dead link.
+
+```js
+const CLASS_DRIVE_FOLDER = "";   // one Drive folder for every mission
+const ORGANIZER_VIDEO    = "";   // how Student 1 builds the team folder
+const SCHEDULE_PDF_...           // (the sample PDF, see below)
+```
+
+Students never make a folder of their own. They open the class folder, walk down
+**period → Mission 2 → their team's folder**, and drop three files in. Only Student 1 creates anything, and
+the crumb trail in Step 3 tracks whatever period and team are typed in above it.
+
+## One download instead of three
+
+**Download all three · .zip** renders the report once and packs the PDF, PNG and JPEG into a single archive.
+Both containers are written by hand in `index.html` — no library — because the page has to work with no
+network:
+
+- `zipStore()` writes **stored** (uncompressed) entries, since PNG and JPEG are already compressed. Deflating
+  them again buys nothing and costs a dependency.
+- `jpegPdf()` wraps the report's JPEG in the smallest legal PDF that can hold it — catalog, pages, page,
+  image XObject, content stream, xref.
+
+**Picture size** (1× / 2× / 3×) sets the render scale, and the size table underneath prints what each format
+weighs afterwards. That is the resolution lesson: the same report at 3× is roughly double the bytes of 2×,
+and the numbers are right there to compare.
 
 ## The bots
 
