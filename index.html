@@ -1498,7 +1498,7 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
       <p class="small" style="margin-bottom:12px;">Copy it letter for letter.</p>
       <p class="strip-label">The whole team folder</p>
       <div class="pre" id="folderTree"></div>
-      <p class="strip-label" style="margin-top:16px;">The folder you drop them in, and your three files</p>
+      <p class="strip-label" style="margin-top:16px;">Your folder, and the three files in it</p>
       <div class="pre" id="myFolder" style="margin-bottom:6px;"></div>
       <div class="pre" id="fileTree"></div>
       <div class="note warn" style="margin-top:14px;">No spaces. No extra <span class="mono">.pdf</span> on the end.</div>
@@ -1544,12 +1544,13 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
         <span>Class folder</span><i>&rsaquo;</i>
         <span id="pathPeriod">Period 1</span><i>&rsaquo;</i>
         <span>Mission 2</span><i>&rsaquo;</i>
-        <span class="here" id="pathTeam">Period1_India</span>
+        <span id="pathTeam">Period1_India</span><i>&rsaquo;</i>
+        <span class="here" id="pathMine">Student1_YourName</span>
       </div>
 
       <div class="grid2" style="margin-top:16px;align-items:start;">
-        <div class="note"><strong>Only Student 1 makes a folder.</strong> Everyone else opens the one that is
-          already there and drops their three files in.</div>
+        <div class="note"><strong>Student 1 builds every folder.</strong> Everyone else opens the one with
+          their own name on it and drops their three files in.</div>
         <div class="note warn"><strong>Access control.</strong> Only people in this class can open that folder.
           That is a setting somebody chose &mdash; not an accident.</div>
       </div>
@@ -1623,7 +1624,7 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
       <li data-k="c3"><span class="box"></span><span>Both checks done</span></li>
       <li data-k="c4"><span class="box"></span><span>Saved <b>all three</b> files &mdash; PDF, PNG, JPEG</span></li>
       <li data-k="c5"><span class="box"></span><span>Renamed all three <span class="mono" id="chkName">First_Team_Mission2</span></span></li>
-      <li data-k="c6"><span class="box"></span><span>Found the team folder <span class="mono" id="chkFolder2">Period1_India</span> in the class folder</span></li>
+      <li data-k="c6"><span class="box"></span><span>Found my <span class="mono" id="chkFolder2">Student1_Name</span> folder inside the team folder</span></li>
       <li data-k="c7"><span class="box"></span><span>Uploaded all three, refreshed, and opened each one</span></li>
       <li class="head" data-head="Organizer only &mdash; the student who submits"></li>
       <li data-k="o1"><span class="box"></span><span>Made <span class="mono" id="chkFolder">Period1_Alpha</span> and shared it with my team as <b>Editor</b></span></li>
@@ -2612,11 +2613,12 @@ function updateFilename(){
   markNeeded();
 
   /* The whole structure, drawn from what the team actually typed in. */
-  const rows = [[teamFolder(), "the organizer makes this one"]];
+  const rows = [[teamFolder(), "Student 1 makes all of these"]];
   state.crew.forEach((_, i) => {
+    rows.push([` ├─ ${studentFolder(i)}`, i === 0 ? "one folder per person" : ""]);
     ["pdf","png","jpg"].forEach((ext, j) => rows.push([
-      ` ├─ ${fileFor(i)}.${ext}`,
-      (i === 0 && j === 0) ? "everyone drops their three in here" : ""
+      ` │    ${fileFor(i)}.${ext}`,
+      (i === 0 && j === 0) ? "your three files go in yours" : ""
     ]));
   });
   const col = Math.max(...rows.map(r => r[0].length)) + 4;
@@ -2628,12 +2630,14 @@ function updateFilename(){
   $("#fileTree").textContent  = `${base}.pdf\n${base}.png\n${base}.jpg`;
   $("#chkName").textContent   = base;
   $("#chkFolder").textContent = teamFolder();
-  $("#myFolder").textContent = teamFolder();
+  const mine = studentFolder(state.exporter || 0);
+  $("#myFolder").textContent = mine;
   /* these sit inside whichever set of role directions is showing */
   const org = $("#orgFolder"); if(org) org.textContent = teamFolder();
-  const me2 = $("#myFolder2"); if(me2) me2.textContent = teamFolder();
+  const me2 = $("#myFolder2"); if(me2) me2.textContent = mine;
   const pt  = $("#pathTeam");  if(pt)  pt.textContent  = teamFolder();
-  const cf2 = $("#chkFolder2"); if(cf2) cf2.textContent = teamFolder();
+  const pm  = $("#pathMine");  if(pm)  pm.textContent  = mine;
+  const cf2 = $("#chkFolder2"); if(cf2) cf2.textContent = mine;
   const pp  = $("#pathPeriod");if(pp)  pp.textContent  = "Period " + (state.period || "1");
 }
 
@@ -3236,10 +3240,10 @@ const ROLE_DOC = {
     steps: [
       ["Open the class folder",
        "The button at the bottom of this step &rsaquo; <b>your period</b> &rsaquo; <b>Mission 2</b>."],
-      ["Make one folder for your team",
-       "<b>+ New &rsaquo; Folder</b>, named <span class=\"mono\" id=\"orgFolder\">Period1_India</span>. That is the only folder anyone makes."],
-      ["Tell your team it is there",
-       "They cannot drop files into a folder that does not exist yet."]
+      ["Make the team folder",
+       "<b>+ New &rsaquo; Folder</b>, named <span class=\"mono\" id=\"orgFolder\">Period1_India</span>. Watch the video below if you are not sure."],
+      ["Make one folder inside it for each person",
+       "<span class=\"mono\">Student1_</span>, <span class=\"mono\">Student2_</span>, <span class=\"mono\">Student3_</span>, <span class=\"mono\">Student4_</span> and their first names &mdash; copy the picture above. Then tell your team they are ready."]
     ],
     note: "<strong>You still have your own three files to upload.</strong> Switch to the other card and do those three steps too."
   },
@@ -3249,8 +3253,8 @@ const ROLE_DOC = {
     steps: [
       ["Save your three files", "<b>PDF</b>, <b>PNG</b> and <b>JPEG</b> &mdash; all three, from the buttons above."],
       ["Rename all three", "Copy the names above exactly. No spaces."],
-      ["Drop them in the team folder",
-       "Class folder &rsaquo; your period &rsaquo; Mission 2 &rsaquo; <span class=\"mono\" id=\"myFolder2\">Period1_India</span>. Do not make a new folder."]
+      ["Drop them in your folder",
+       "Class folder &rsaquo; your period &rsaquo; Mission 2 &rsaquo; your team &rsaquo; <span class=\"mono\" id=\"myFolder2\">Student2_Ada</span>. Do not make a new folder &mdash; yours is already there."]
     ],
     note: "<strong>Click each file once it is up.</strong> If it does not open, it did not upload."
   }

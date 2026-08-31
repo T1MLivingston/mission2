@@ -79,9 +79,10 @@ const ORGANIZER_VIDEO    = "";   // how Student 1 builds the team folder
 const SCHEDULE_PDF_...           // (the sample PDF, see below)
 ```
 
-Students never make a folder of their own. They open the class folder, walk down
-**period → Mission 2 → their team's folder**, and drop three files in. Only Student 1 creates anything, and
-the crumb trail in Step 3 tracks whatever period and team are typed in above it.
+Only Student 1 creates anything: the team folder, and one `Student#_Name` folder inside it for each
+teammate. Everyone else opens the class folder, walks down **period → Mission 2 → their team → the folder
+with their own name on it**, and drops three files in. The crumb trail in Step 3 tracks whatever period,
+team and student are set above it.
 
 ## One download instead of three
 
