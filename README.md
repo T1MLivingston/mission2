@@ -13,7 +13,7 @@ and the image-export library.
 | **1 Start here** | The four step cards, the team form — team, bot, period, Students 1–4, who uploads — and the skills list |
 | **2 Build** | A 20-point budget across five spec boxes, each hosted by one of the crew bots |
 | **2.5 Extra points** | File types (JPEG/PNG/PDF + Drive), Python indexing (Index Lab, Slicing lab, index math, Data types), and both pop-up checks |
-| **3 Turn it in** | The report, PDF/PNG/JPEG export, the exact folder and file names, and two sets of directions — one for every student, one for the organizer |
+| **3 Turn it in** | The report, PDF/PNG/JPEG export, the exact folder and file names, and a role picker — three steps for the organizer, three for everyone else |
 
 Three steps carry the mission. 2.5 sits between 2 and 3 because the points it pays out get spent back in 2.
 
@@ -61,8 +61,8 @@ Section A teaches by letting students break things rather than by describing the
   The photo travels with the page as a data URI, so it works on a blocked school network and with no assets
   folder. `PHOTO_SRC` is still fetched and used instead when the host allows re-encoding it.
 - **PNG** — a bot on a checkerboard that drags, resizes and swaps. Nothing ever covers the background.
-- **PDF** — the same report rendered twice, as a web page and as a PDF. Switch Laptop / Tablet / Phone: the
-  web page reflows, the PDF only gets smaller.
+- **PDF** — the school calendar, the real one, riding inside the page. The card shows its first page; click
+  to enlarge it, or open the actual PDF in its own tab.
 
 **Hidden round:** triple-tap the *B · Python indexing* heading to unlock four slicing questions. They raise
 the point ceiling from 8 to 12 rather than sharing it. (Triple-tapping the *A · File types* heading still
@@ -97,6 +97,22 @@ broken snow, ripples, film grain.
 ```
 python3 tools/build-photo.py    # needs pillow + numpy
 ```
+
+## The sample PDF
+
+`assets/pdf/school-calendar.pdf` and a JPEG of its first page are both inlined, and
+
+```
+python3 tools/build-pdf.py      # needs pillow
+```
+
+rewrites them between the `/* PDFDOC_START */` and `/* PDFDOC_END */` markers. To use a different document,
+drop it at that path, re-render the preview, and run it again — keep the pair under about 400 KB, because
+whatever it weighs lands in every student's download.
+
+The card and the enlarge view show the **JPEG**, not the PDF: a PDF in an `<iframe>` needs a plugin a
+locked-down Chromebook may not run, and a blank grey box in front of a class is worse than a picture. The
+real PDF is one click further on, where the browser opens it in a tab of its own.
 
 That rewrites `assets/photo/lake.jpg` and the `PHOTO_LOCAL` data URI between the `/* PHOTO_START */` and
 `/* PHOTO_END */` markers. To use a real photograph instead, save it as `assets/photo/lake.jpg`, comment out
