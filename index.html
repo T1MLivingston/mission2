@@ -243,6 +243,10 @@ p:last-child{margin-bottom:0;}
 /* Pick your job and read only your job.  Two sets of directions on screen at
    once is two chances to follow the wrong one. */
 /* Picture size, and what it costs.  The numbers are the lesson. */
+.quiz-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;}
+.quiz-reset{position:relative;}
+.quiz-reset.armed{border-color:var(--c-por);color:var(--c-por);}
+
 .res-pick{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .res-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-right:2px;position:relative;cursor:help;border-bottom:1px dotted var(--ink-2);}
 .res-pick button{
@@ -1339,7 +1343,13 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
             <p>You found the hidden round. These are worth <strong>+1 point each</strong> on top of the 8.</p>
           </div>
         </div>
-        <button class="btn primary" id="slStart" type="button">Test yourself</button>
+        <div class="quiz-actions">
+          <button class="btn primary" id="slStart" type="button">Test yourself</button>
+          <button class="btn quiz-reset" id="slReset" type="button" hidden>Clear and try again
+            <span class="hint">Wipes your answers for this check so you can take the whole thing again.
+              The points those answers earned go with them &mdash; you win them back by answering again.</span>
+          </button>
+        </div>
       </div>
       <details style="margin-top:16px;" id="slReviewWrap" hidden>
         <summary class="strip-label" style="cursor:pointer;">Review my answers</summary>
@@ -1363,10 +1373,16 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
           <div class="check-dial" id="fdDial">0/8</div>
           <div>
             <h4>Eight questions</h4>
-            <p>One try each. Every right answer = <strong>+1 build point</strong>.</p>
+            <p>One try each &mdash; or clear it and take the whole thing again. Every right answer = <strong>+1 build point</strong>.</p>
           </div>
         </div>
-        <button class="btn primary" id="fdStart" type="button">Test yourself</button>
+        <div class="quiz-actions">
+          <button class="btn primary" id="fdStart" type="button">Test yourself</button>
+          <button class="btn quiz-reset" id="fdReset" type="button" hidden>Clear and try again
+            <span class="hint">Wipes your answers for this check so you can take the whole thing again.
+              The points those answers earned go with them &mdash; you win them back by answering again.</span>
+          </button>
+        </div>
       </div>
       <details style="margin-top:16px;" id="fdReviewWrap" hidden>
         <summary class="strip-label" style="cursor:pointer;">Review my answers</summary>
@@ -1389,10 +1405,16 @@ crew[<span class="k">3</span>:]   <span class="c"># ["Delta", "Echo"]</span></di
           <div class="check-dial" id="pyDial">0/14</div>
           <div>
             <h4>Fourteen questions</h4>
-            <p>One try each. Every right answer = <strong>+1 build point</strong> (up to 8 total).</p>
+            <p>One try each &mdash; or clear it and take the whole thing again. Every right answer = <strong>+1 build point</strong> (up to 8 total).</p>
           </div>
         </div>
-        <button class="btn primary" id="pyStart" type="button">Test yourself</button>
+        <div class="quiz-actions">
+          <button class="btn primary" id="pyStart" type="button">Test yourself</button>
+          <button class="btn quiz-reset" id="pyReset" type="button" hidden>Clear and try again
+            <span class="hint">Wipes your answers for this check so you can take the whole thing again.
+              The points those answers earned go with them &mdash; you win them back by answering again.</span>
+          </button>
+        </div>
       </div>
       <details style="margin-top:16px;" id="pyReviewWrap" hidden>
         <summary class="strip-label" style="cursor:pointer;">Review my answers</summary>
@@ -2383,9 +2405,16 @@ function updateChecks(){
       ? "not started"
       : `${got} / ${cfg.qs.length} correct` + (done < cfg.qs.length ? ` · ${cfg.qs.length - done} left` : " · complete");
     $(cfg.bar).style.width = (got / cfg.qs.length * 100) + "%";
-    const btn = document.querySelector(cfg === QUIZZES.py ? "#pyStart" : cfg === QUIZZES.sl ? "#slStart" : "#fdStart");
+    const kind = Object.keys(QUIZZES).find(k => QUIZZES[k] === cfg);
+    const btn = $("#" + kind + "Start");
     if(!btn) return;
     btn.textContent = done === 0 ? "Test yourself" : done < cfg.qs.length ? "Continue the test" : "See my results";
+    /* nothing to clear until something has been answered */
+    const reset = $("#" + kind + "Reset");
+    if(reset){
+      reset.hidden = done === 0;
+      if(reset.hidden) disarmReset(reset);
+    }
     renderReview(cfg);
   });
 }
@@ -2408,6 +2437,53 @@ function renderReview(cfg){
     </div>`;
   }).join("");
 }
+
+/* ---- clearing a check ----------------------------------------------------
+   Answers are one-shot, which is the point: it keeps the questions honest.
+   But a student who rushed the first one deserves another run at it, and a
+   teacher deserves a class set that can be re-taken.  Clearing hands the
+   points back too, so a retake is a real retake rather than a top-up.
+
+   Two taps rather than a confirm() box: an embedded page cannot always open
+   one, and a 6th grader can always tap "no" by tapping somewhere else. */
+function disarmReset(btn){
+  if(!btn) return;
+  clearTimeout(btn._t);
+  btn.classList.remove("armed");
+  const label = btn.firstChild;
+  if(label && label.nodeType === 3) label.textContent = "Clear and try again";
+}
+function armReset(btn, lost){
+  btn.classList.add("armed");
+  const label = btn.firstChild;
+  if(label && label.nodeType === 3)
+    label.textContent = lost ? `Tap again \u2014 you give back ${lost} point${lost === 1 ? "" : "s"}` : "Tap again to clear";
+  clearTimeout(btn._t);
+  btn._t = setTimeout(()=> disarmReset(btn), 5000);
+}
+function clearCheck(kind){
+  const cfg = QUIZZES[kind];
+  cfg.qs.forEach(q =>{ delete state.answers[q.id]; });
+  save();
+  refresh();
+  const wrap = $(cfg.wrap);
+  if(wrap) wrap.open = false;
+}
+Object.keys(QUIZZES).forEach(kind =>{
+  const btn = $("#" + kind + "Reset");
+  if(!btn) return;
+  btn.addEventListener("click", ()=>{
+    if(!btn.classList.contains("armed")){
+      const lost = QUIZZES[kind].qs.filter(q => state.answers[q.id] === q.correct).length;
+      armReset(btn, lost);
+      return;
+    }
+    disarmReset(btn);
+    clearCheck(kind);
+  });
+  /* tapping anywhere else is how you say no */
+  document.addEventListener("click", e =>{ if(!btn.contains(e.target)) disarmReset(btn); }, true);
+});
 
 /* ---- the pop-up test ---- */
 let mq = null;

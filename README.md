@@ -64,6 +64,11 @@ Section A teaches by letting students break things rather than by describing the
 - **PDF** — the school calendar, the real one, riding inside the page. The card shows its first page; click
   to enlarge it, or open the actual PDF in its own tab.
 
+**Retakes:** every check carries a **Clear and try again** button once it has an answer in it. One tap arms
+it (*"Tap again — you give back 3 points"*), a second clears that check's answers, and clicking anywhere else
+calls it off. Clearing hands the points back, so a retake is a retake rather than a top-up. Two taps rather
+than a `confirm()` box because an embedded page cannot always open one.
+
 **Hidden round:** triple-tap the *B · Python indexing* heading to unlock four slicing questions. They raise
 the point ceiling from 8 to 12 rather than sharing it. (Triple-tapping the *A · File types* heading still
 opens the Extension Vault.)
