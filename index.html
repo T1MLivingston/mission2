@@ -166,6 +166,18 @@ ol.timeline{margin:0;padding-left:1.4em;display:grid;gap:6px}
 <script>
 (function(){
 'use strict';
+/* ---------- Game server ----------
+   Paste your Firebase web app config here. These values are meant to be public.
+   Leave projectId empty and the game uses Claude's built-in storage instead. */
+const FIREBASE_CONFIG = {
+  apiKey: '',
+  authDomain: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: '',
+  appId: ''
+};
+const FIREBASE_VERSION = '10.12.2';
 const $ = id => document.getElementById(id);
 function h(tag, attrs, ...kids){
   const e = document.createElement(tag);
@@ -275,6 +287,10 @@ function toast(msg){
 function fail(e){
   console.error(e);
   const c = e && e.code;
+  if (c === 'permission-denied'){ toast('The game server refused that. Its access rules need a look.'); return; }
+  if (c === 'unavailable' || c === 'deadline-exceeded'){ toast('Lost the connection to the game server. Check your internet.'); return; }
+  if (c === 'resource-exhausted'){ toast('The game server hit its free daily limit. Try again tomorrow.'); return; }
+  if (c === 'not-found'){ toast('That room or player is gone. Rejoin with the code.'); return; }
   if (c === 'invalid_argument') toast('This account can watch but can\'t play. The room owner needs to invite you with edit access.');
   else if (c === 'quota_exceeded') toast('The game\'s storage is full. Ask the owner to clear old rooms.');
   else if (c === 'resource_exhausted') toast('Too many moves at once. Wait a few seconds and try again.');
@@ -772,7 +788,9 @@ function render(){
     home.hidden = false; stage.hidden = true; chat.hidden = true; wrap.className = '';
     setSky('Mafia: Shadows', 'Somebody in this town is lying.');
     $('createBtn').disabled = $('joinBtn').disabled = !S.db;
-    if (S.ready && !S.db) setHomeMsg('The game can\'t reach its shared storage here. Open it from Claude while signed in.');
+    if (S.ready && !S.db) setHomeMsg(FIREBASE_CONFIG.projectId
+      ? 'The game can\'t reach its server. Check your connection and reload.'
+      : 'This copy isn\'t connected to a game server yet, so rooms are turned off.');
     return;
   }
   const r = S.room; document.body.dataset.phase = r.phase === 'roles' || r.phase === 'countdown' || r.phase === 'lobby' ? 'night' : r.phase;
@@ -864,11 +882,63 @@ function tick(){
   hostTick();
 }
 
+/* ---------- Storage ---------- */
+function loadScript(src){
+  return new Promise((ok, no) => { const el = document.createElement('script'); el.src = src; el.onload = ok; el.onerror = () => no(new Error('Could not load ' + src)); document.head.append(el); });
+}
+/* Firestore replaces a whole nested map on update. Dotted paths change only the keys named,
+   which is what the game expects: {alive:{p1:false}} becomes {'alive.p1': false}. */
+function flatten(obj, pre, out){
+  out = out || {};
+  for (const k in obj){
+    const v = obj[k], path = pre ? pre + '.' + k : k;
+    if (v === undefined) continue;
+    if (v && typeof v === 'object' && !Array.isArray(v)) flatten(v, path, out);
+    else out[path] = v;
+  }
+  return out;
+}
+function fireDb(fs){
+  const wrapDoc = ref => ({
+    get: () => ref.get(),
+    set: d => ref.set(d),
+    update: d => { const f = flatten(d); return Object.keys(f).length ? ref.update(f) : Promise.resolve(); },
+    delete: () => ref.delete(),
+    onSnapshot: (next, err) => ref.onSnapshot(next, err)
+  });
+  const wrapCol = ref => ({
+    get: () => ref.get(),
+    doc: id => wrapDoc(ref.doc(id)),
+    onSnapshot: (next, err) => ref.onSnapshot(next, err)
+  });
+  return { doc: p => wrapDoc(fs.doc(p)), collection: p => wrapCol(fs.collection(p)) };
+}
+async function connect(){
+  if (FIREBASE_CONFIG.projectId){
+    try {
+      if (!window.firebase){
+        const base = 'https://www.gstatic.com/firebasejs/' + FIREBASE_VERSION + '/';
+        await loadScript(base + 'firebase-app-compat.js');
+        await loadScript(base + 'firebase-firestore-compat.js');
+      }
+      const app = window.firebase.apps.length ? window.firebase.app() : window.firebase.initializeApp(FIREBASE_CONFIG);
+      const fs = app.firestore();
+      try { fs.settings({ignoreUndefinedProperties:true, merge:true}); } catch(e){}
+      S.server = 'firebase';
+      return fireDb(fs);
+    } catch(e){ console.error(e); }
+  }
+  try {
+    const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+    if (db) S.server = 'claude';
+    return db;
+  } catch(e){ return null; }
+}
+
 /* ---------- Boot ---------- */
 async function init(){
   buildHome(); buildChat(); render(); setInterval(tick, 500);
-  let db = null;
-  try { db = window.claude && window.claude.use ? await window.claude.use('db') : null; } catch(e){ db = null; }
+  const db = await connect();
   S.db = db; S.ready = true; render();
   const last = LS.get('ms_code');
   if (db && last && S.name){

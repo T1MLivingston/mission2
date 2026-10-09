@@ -12,9 +12,32 @@ The whole game is one file: `index.html`.
 - Private Crew chat for the Mafia and a Ghosts chat for eliminated players
 - Win check, results screen with a timeline, play again
 
-## Known limit
+## Game server
 
-Multiplayer uses Claude's built-in artifact storage. That storage only exists when the page is opened inside Claude. On GitHub Pages the page loads, but Create a room and Join a room stay disabled. Moving the storage to a hosted database (Firebase is the plan) fixes this.
+Multiplayer needs a shared database. The game supports two:
+
+- **Firebase (Cloud Firestore).** Paste your web app config into `FIREBASE_CONFIG` near the top of the script in `index.html`. With that filled in, the game works from GitHub Pages and anyone with the link can play.
+- **Claude's built-in storage.** Used when `projectId` is empty and the page is opened inside Claude.
+
+With neither, the page loads but Create a room and Join a room stay disabled.
+
+### Firestore rules
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /rooms/{room} {
+      allow read, write: if true;
+      match /{sub}/{doc} {
+        allow read, write: if true;
+      }
+    }
+  }
+}
+```
+
+These rules let anyone with the link read and write game rooms, and nothing else. Roles are hidden by the game screen, not by the server, so a technical player could look them up. Fine for friends. Not built for strangers.
 
 ## Where the old lesson went
 
