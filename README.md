@@ -4,13 +4,18 @@ An online social deduction game for 4 to 15 friends. A few players are the Mafia
 
 The whole game is one file: `index.html`.
 
-## Stage 1 (this version)
+## What's in it
 
-- Room codes, lobby, ready up, host settings, bots to fill seats
-- Seven roles: Citizen, Mafia, Godfather, Detective, Doctor, Sheriff, Jester
-- Night, morning story scene, day chat, vote, verdict
+- Room codes with a QR code. Scan it with a phone to jump straight into the room.
+- Lobby with ready up, host settings, and bots to fill seats
+- Role setup: let the game pick a fair mix, or pick your own. Set how many Mafia, Godfathers, Detectives, Doctors, Sheriffs and Jesters. Citizens fill the rest.
+- Night, morning news report, day chat, vote, verdict
+- Shadow News 6: a little TV that reports what happened, with a ticker
+- A Mafia counter that shows how many Mafia are still in the game
+- Dozens of story lines, headlines and town places, so reports stay fresh
 - Private Crew chat for the Mafia and a Ghosts chat for eliminated players
 - Win check, results screen with a timeline, play again
+- Cleanup: closing a room or the last player leaving deletes its data. Rooms untouched for 6 hours are cleared automatically.
 
 ## Game server
 

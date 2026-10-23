@@ -57,6 +57,10 @@ body[data-phase="day"] #sky .stars,body[data-phase="dawn"] #sky .stars{opacity:.
 
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
 .panel + .panel{margin-top:14px}
+#stage{display:grid;gap:14px;min-width:0}
+#stage > .panel{margin-top:0}
+#wrap > *{min-width:0}
+.tv,.tv-screen,.tv-lower{min-width:0;max-width:100%}
 .panel h2{font-size:1.45rem;margin-bottom:.4em}
 .panel h3{font-family:var(--body);font-weight:700;font-size:1rem;margin:0 0 .5em}
 .muted{color:var(--mist)}
@@ -134,9 +138,60 @@ ol.timeline{margin:0;padding-left:1.4em;display:grid;gap:6px}
 .chatin{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
 .chatin input{flex:1;min-width:0}
 
+/* Mafia counter in the sky */
+#mafiaChip{position:absolute;left:14px;bottom:10px;display:flex;align-items:center;gap:10px;background:rgba(8,11,28,.82);border:2px solid var(--blood);border-radius:12px;padding:6px 12px 6px 10px;box-shadow:0 4px 18px rgba(0,0,0,.5)}
+#mafiaChip .num{font-family:var(--display);font-size:2rem;line-height:1;color:var(--blood)}
+#mafiaChip .lbl{font-weight:700;line-height:1.15;font-size:.9rem}
+#mafiaChip .lbl span{display:block;font-weight:400;color:var(--mist);font-size:.8rem}
+.dia{display:flex;gap:5px;flex-wrap:wrap;max-width:110px}
+.dia i{width:12px;height:12px;background:var(--blood);transform:rotate(45deg);display:block}
+.dia i.gone{background:transparent;border:2px solid #6b5a72}
+#mafiaChip.bump{animation:bump .9s ease}
+@keyframes bump{0%{transform:scale(1)}30%{transform:scale(1.18)}100%{transform:scale(1)}}
+
+/* The news TV */
+.tv{background:linear-gradient(180deg,#3a2a4f,#24193a);border-radius:22px;padding:14px 14px 18px;border:1px solid #5b4580;box-shadow:inset 0 2px 0 rgba(255,255,255,.08),0 10px 30px rgba(0,0,0,.45);position:relative}
+.tv::after{content:"";position:absolute;left:50%;bottom:6px;width:60px;height:5px;border-radius:3px;background:#5b4580;transform:translateX(-50%)}
+.tv-screen{background:radial-gradient(ellipse at 50% 40%,#1d2a5a,#0a0f26 80%);border-radius:14px;overflow:hidden;position:relative;border:3px solid #0b0816}
+.tv-screen::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);z-index:2}
+.tv-top{display:flex;align-items:center;gap:10px;padding:10px 14px 0}
+.tv-live{background:var(--blood);color:#fff;font-weight:700;font-size:.8rem;padding:2px 8px;border-radius:4px;letter-spacing:.06em}
+.tv-chan{font-family:var(--display);color:var(--gold);font-size:1.05rem}
+.tv-body{padding:10px 18px 14px}
+.tv-anchor{color:var(--mist);font-size:.9rem;margin:0 0 .3em}
+.tv-head{font-family:var(--display);font-size:clamp(1.5rem,5.5vw,2.3rem);color:#fff;margin:0 0 .35em;line-height:1.1}
+.tv-body p.line{font-size:1.08rem;margin:.35em 0}
+.tv-body p.line.strong{font-weight:700;color:var(--gold)}
+.tv-lower{display:flex;align-items:stretch;border-top:2px solid var(--gold);background:#0b0816}
+.tv-count{background:var(--blood);color:#fff;font-weight:700;padding:8px 12px;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.tv-count b{font-family:var(--display);font-size:1.35rem;font-weight:400}
+.ticker{overflow:hidden;flex:1;display:flex;align-items:center;min-width:0}
+.ticker span{display:inline-block;white-space:nowrap;padding-left:100%;animation:tick 38s linear infinite;color:var(--bone)}
+@keyframes tick{to{transform:translateX(-100%)}}
+.tv.compact .tv-head{font-size:clamp(1.25rem,4.5vw,1.7rem)}
+
+/* Role setup */
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.setup{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.setup li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--night)}
+.setup .rn{font-weight:700}
+.setup .rd{display:block;color:var(--mist);font-size:.85rem;font-weight:400}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--ink);cursor:pointer;font-size:1.3rem;line-height:1}
+.step button[disabled]{opacity:.35;cursor:not-allowed}
+.step output{min-width:2ch;text-align:center;font-family:var(--display);font-size:1.4rem}
+.setup li.cit{background:transparent;border:1px dashed var(--line)}
+.sum{margin:12px 0 0;font-weight:700}
+
+/* Room code and QR */
+.joinbox{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.qr{background:#fff;border-radius:12px;padding:8px;width:150px;height:150px;flex:none}
+.qr svg{display:block;width:100%;height:100%}
+
 #toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--blood);color:#fff;padding:10px 16px;border-radius:10px;max-width:92vw;z-index:9}
 [hidden]{display:none !important}
-@media (prefers-reduced-motion: reduce){ *{animation:none !important;transition:none !important} }
+@media (prefers-reduced-motion: reduce){ *{animation:none !important;transition:none !important} .ticker span{padding-left:0;white-space:normal} }
+@media (max-width:520px){ #sky{height:210px} #mafiaChip .num{font-size:1.6rem} .qr{width:130px;height:130px} }
 </style>
 </head>
 <body data-phase="home">
@@ -151,6 +206,7 @@ ol.timeline{margin:0;padding-left:1.4em;display:grid;gap:6px}
     <rect class="win" x="996" y="36" width="8" height="8"/>
   </svg>
   <div class="skytext"><h1 id="phaseName">Mafia: Shadows</h1><p id="phaseSub">Somebody in this town is lying.</p></div>
+  <div id="mafiaChip" hidden aria-live="polite"></div>
   <div id="clock" aria-live="off"></div>
 </header>
 
@@ -213,28 +269,138 @@ const ROLES = {
 };
 const TEAM = {town:'Town', mafia:'Mafia', neutral:'On your own'};
 const isMaf = r => r === 'mafia' || r === 'godfather';
-const PLACES = ['the Diner','the Cemetery','the Library','the Hotel','the Warehouse','the Park','the Church','the old Mansion','the Town Square','the Hospital'];
+const PLACES = ['the Diner','the Cemetery','the Library','the Hotel','the Warehouse','the Park','the Church','the old Mansion','the Town Square','the Hospital','the Police Station','the Bakery','the Bowling Alley','the Clock Tower','the Ice Cream Shop','the Laundromat','the Train Station','the Pier','the Movie Theater','the Pet Shop'];
 const BOTS = ['Biscuit','Noodle','Pickles','Waffles','Mothman','Gizmo','Turnip','Sprocket','Bongo','Mittens','Pretzel','Doodle','Nacho','Fidget'];
+const ANCHORS = ['Dana Doorknob','Chip Chester','Rita Rumor','Barry Bulletin','Gwen Gossip','Stan Static','Patty Paperboy','Hank Headline'];
+/* {n} is a player's name, {p} is a place in town */
 const S_KILL = [
-  n => `${n} heard a strange noise and went to check on it. Classic mistake. A shadow in a very nice hat was waiting.`,
-  n => `${n} was found wrapped in forty feet of party streamers, too spooked to speak.`,
-  n => `Someone left ${n} a note that said "boo." It worked far too well. ${n} has left town in a hurry.`,
-  n => `The lights flickered. A door creaked. When the dust settled, ${n} was gone and only a single sock remained.`
+  '{n} heard a strange noise near {p} and went to check on it. Classic mistake. A shadow in a very nice hat was waiting.',
+  '{n} was found at {p} wrapped in forty feet of party streamers, too spooked to speak.',
+  'Someone slipped {n} a note that said "boo." It worked far too well. {n} has left town in a hurry.',
+  'The lights flickered at {p}. A door creaked. When the dust settled, {n} was gone and only a single sock remained.',
+  '{n} answered a knock at midnight. Nobody was there. Just a rubber chicken and a ticket out of town.',
+  'Witnesses say {n} was last seen at {p}, arguing with a man in a trench coat about pizza toppings. {n} lost.',
+  '{n} opened the fridge for a midnight snack and found the Mafia inside. Nobody knows how they all fit.',
+  'A black car with fuzzy dice pulled up outside {p}. {n} got in. The car drove off honking a very sad tune.',
+  'The town woke to find {n}\'s bed full of jelly beans and {n} nowhere to be found.',
+  '{n} followed a trail of cookies to {p}. It was a trap. It is always a trap.',
+  'A pigeon delivered a tiny letter to {n} reading "pack your bags." {n} took the hint and caught the last bus.',
+  '{n} was found at {p}, glued to a park bench with the strongest glitter glue ever made. They\'ll be fine. Eventually.',
+  'Someone replaced every picture in {n}\'s house with photos of the Godfather winking. {n} ran screaming into the night.',
+  'Neighbors heard dramatic violin music coming from {p}. By sunrise, {n} had vanished in a cloud of glitter.',
+  '{n} got a phone call at 3 a.m. The voice just said "the cannoli is ready." {n} has not been seen since.',
+  'The Mafia challenged {n} to a staring contest at {p}. {n} blinked first. Rules are rules.'
 ];
 const S_SAVE = [
   'A shadow crept up on a sleeping neighbor. Then the Doctor burst in wearing bunny slippers and swinging a first aid kit.',
-  'The Mafia made their move. Somebody with a stethoscope and zero fear chased them off with a broom.',
-  'There was a scream, a crash, and then a very calm voice saying "take two of these and lock your door."'
+  'The Mafia made their move at {p}. Somebody with a stethoscope and zero fear chased them off with a broom.',
+  'There was a scream, a crash, and then a very calm voice saying "take two of these and lock your door."',
+  'The Mafia tiptoed into {p} and tripped over a pile of bandages. Somebody had been expecting them.',
+  'A mysterious figure in a lab coat stood guard all night at {p}, sipping cocoa. The Mafia turned right around.',
+  'The Mafia showed up with a plan. The Doctor showed up with a bigger plan and a very loud whistle.',
+  'Someone set up a booby trap of rubber ducks at {p}. The Mafia slipped, squeaked, and ran.',
+  'The Mafia knocked on a door. The Doctor opened it, took their temperature, and told them to go home and rest.',
+  'Sirens wailed near {p}. Not police. Just the Doctor, who got a really loud car horn for a birthday.',
+  'The Mafia\'s target was saved at the last second by a hero armed with a tongue depressor and pure courage.'
 ];
-const S_QUIET = ['The Mafia stayed in tonight. Maybe they had homework.','A quiet night. Suspiciously quiet. Even the owls looked nervous.'];
+const S_QUIET = [
+  'The Mafia stayed in tonight. Maybe they had homework.',
+  'A quiet night. Suspiciously quiet. Even the owls looked nervous.',
+  'The Mafia spent the whole night arguing over who gets the window seat. Nothing else happened.',
+  'Only one thing moved in town last night: a raccoon at {p}. Police say it is not a suspect. Yet.',
+  'The Mafia\'s getaway car got a flat tire outside {p}. They spent all night waiting for a tow truck.',
+  'Not a peep. Not a creak. Somebody is clearly planning something big.',
+  'The Mafia tried to sneak out but got stuck watching a cooking show. Everyone survived the night.',
+  'Fog rolled through {p} so thick nobody could find anybody. The town survives another night.'
+];
 const S_OUT = [
-  n => `The town marched ${n} down the street and handed over a one-way bus ticket.`,
-  n => `After much pointing and shouting, ${n} was politely but firmly shown the edge of town.`,
-  n => `The votes are in. ${n} packs a tiny suitcase and waves goodbye.`
+  'The town marched {n} down the street and handed over a one-way bus ticket.',
+  'After much pointing and shouting, {n} was politely but firmly shown the edge of town.',
+  'The votes are in. {n} packs a tiny suitcase and waves goodbye.',
+  'The town gave {n} a farewell parade of exactly one kazoo. Then they put {n} on a train.',
+  '{n} was escorted to {p} and handed a postcard that says "Wish you were here. Not really."',
+  'With a dramatic gasp, {n} was voted out. Someone in the back slow clapped.',
+  '{n} insists this is all a big misunderstanding. The town insists {n} catch the next ferry.',
+  'The mayor read the results with a megaphone. {n} is out. Somebody threw confetti way too early.',
+  '{n} tried to give a speech. The town tried to listen. Then the town voted {n} out anyway.',
+  '{n} was carried out of {p} on a rocking chair while the town hummed a goodbye song.',
+  'The town has spoken. {n} rides off on a squeaky tricycle into the sunset.',
+  '{n} gets a souvenir mug, a hug from nobody, and a bus ticket. Out of the game.'
 ];
-const S_NONE = ['The town argued, pointed fingers, and voted out nobody. The Mafia is thrilled.','No decision. Everyone goes home grumpy and a little scared.'];
+const S_NONE = [
+  'The town argued, pointed fingers, and voted out nobody. The Mafia is thrilled.',
+  'No decision. Everyone goes home grumpy and a little scared.',
+  'The vote ended in a big shrug. Somewhere, a Mafia member is quietly giggling.',
+  'Too many opinions, not enough votes. The town agrees to disagree, which is exactly what the Mafia wanted.',
+  'The town spent so long arguing that the sun went down. Nobody is going anywhere tonight. Except maybe the Mafia.',
+  'The town meeting at {p} ended with a pie fight and zero decisions.'
+];
+const S_JESTER = [
+  '{n} cackles all the way out of town. That was the Jester, and getting voted out was the whole plan.',
+  '{n} bows, honks a clown horn, and skips away laughing. The Jester wanted this. The town got played.',
+  '{n} pulls off a fake mustache and yells "GOTCHA!" That was the Jester. Nobody likes being fooled this much.'
+];
+const H_KILL = ['Resident vanishes overnight','Spooky night leaves town one short','Mafia strikes again','Another empty house on Elm Street','Town wakes up to bad news','Mystery deepens after midnight visit'];
+const H_SAVE = ['Doctor saves the day!','Close call at midnight','Mafia plan foiled','Hero in slippers stops attack','Nobody hurt after scary night'];
+const H_QUIET = ['Quiet night in town','No news is good news?','Mafia takes the night off','Town sleeps safe. For now.'];
+const H_OUT = ['Town votes, suspect leaves','Big vote at Town Hall','The people have spoken','Goodbye and good luck'];
+const H_NONE = ['Town can\'t decide','Vote ends in a shrug','Nobody leaves town today'];
+const H_JESTER = ['Town fooled by a clown!','Jester gets the last laugh'];
+const BULLETINS = [
+  'Reporters urge everyone to lock their doors and hide their cookies.',
+  'Our helicopter crew spotted three suspicious hats moving downtown.',
+  'Police remind citizens that wearing sunglasses at night is not a crime. It is just weird.',
+  'A cat at the Pet Shop has been staring at the door all night. Experts are concerned.',
+  'If you hear violin music outside your window, do not open it.',
+  'Weather tonight: foggy, with a strong chance of suspicion.',
+  'The bakery reports a missing tray of cannoli. Investigation ongoing.',
+  'Town officials say the Mafia is "probably closer than you think."',
+  'Sources say the Godfather has excellent posture. Watch for good posture.',
+  'Streetlights on Main Street keep flickering. Nobody wants to check why.'
+];
+const TICKER = [
+  'Bake sale at the church moved indoors due to shadows',
+  'Local dog elected honorary sheriff, refuses to comment',
+  'Clock tower now running seven minutes fast. Suspicious.',
+  'Ice cream shop introduces new flavor: Mystery Mint',
+  'Library reminds everyone that alibis are not overdue books',
+  'Bowling alley lost and found now holds 14 fedoras',
+  'Pier reopens after seagull-related incident'
+];
+const fill = (t, n, p) => t.split('{n}').join(n || '').split('{p}').join(p || 'town');
+const pickBy = (arr, seed) => { let h = 0; const s = String(seed); for (let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i)) >>> 0; return arr[h % arr.length]; };
 
-function buildRoles(n){
+/* Roles a host can count in a custom setup, with limits */
+const SETUP = [
+  {k:'mafia', max:7}, {k:'godfather', max:1}, {k:'detective', max:3},
+  {k:'doctor', max:3}, {k:'sheriff', max:3}, {k:'jester', max:2}
+];
+const defaultCounts = () => ({mafia:1, godfather:0, detective:1, doctor:1, sheriff:0, jester:0});
+function suggestCounts(n){
+  const c = {mafia:1, godfather:0, detective:1, doctor:1, sheriff:0, jester:0};
+  const m = n<=6 ? 1 : n<=9 ? 2 : n<=12 ? 3 : 4;
+  if (m >= 2){ c.godfather = 1; c.mafia = m - 1; }
+  if (n >= 8) c.sheriff = 1;
+  if (n >= 9) c.jester = 1;
+  return c;
+}
+function setupProblem(n, c){
+  c = c || {};
+  const maf = (c.mafia||0) + (c.godfather||0);
+  const total = SETUP.reduce((a,x) => a + (c[x.k]||0), 0);
+  if (maf < 1) return 'Add at least 1 Mafia or a Godfather.';
+  if (maf * 2 >= n) return `${maf} Mafia is too many for ${n} players. Keep the Mafia under half the town.`;
+  if (total > n) return `That's ${total} roles for ${n} players. Remove some roles or add players.`;
+  return '';
+}
+function buildRoles(n, st){
+  st = st || {};
+  if (st.mode === 'custom' && !setupProblem(n, st.counts)){
+    const roles = [];
+    SETUP.forEach(x => { for (let i=0;i<(st.counts[x.k]||0);i++) roles.push(x.k); });
+    while (roles.length < n) roles.push('citizen');
+    return shuffle(roles);
+  }
   let m = n<=6 ? 1 : n<=9 ? 2 : n<=12 ? 3 : 4;
   const roles = [];
   if (m >= 3 || (m === 2 && Math.random() < 0.7)){ roles.push('godfather'); m--; }
@@ -250,6 +416,12 @@ function buildRoles(n){
   while (roles.length < n) roles.push('citizen');
   return shuffle(roles.slice(0,n));
 }
+const ORDER = ['godfather','mafia','detective','doctor','sheriff','jester','citizen'];
+function countRoles(list){ const c = {}; list.forEach(k => { c[k] = (c[k]||0)+1; }); return c; }
+function setupText(c){
+  return ORDER.filter(k => c[k]).map(k => c[k] + ' ' + (c[k] > 1 ? plural(k) : ROLES[k].name)).join(', ');
+}
+function plural(k){ return k === 'mafia' ? 'Mafia' : ROLES[k].name + 's'; }
 function checkWin(alive, roles){
   const ids = Object.keys(alive).filter(i => alive[i]);
   const maf = ids.filter(i => isMaf(roles[i])).length;
@@ -317,7 +489,7 @@ function buildHome(){
     const code = codeIn.value.trim().toUpperCase();
     if (!/^[A-Z]{4}$/.test(code)){ toast('Room codes are 4 letters.'); codeIn.focus(); return; }
     S.busyJoin = true;
-    try { await joinRoom(code); } catch(e){ if (e && e.user) toast(e.user); else fail(e); } finally { S.busyJoin = false; }
+    try { await joinRoom(code); try { if (location.search) history.replaceState(null, '', location.pathname); } catch(e){} } catch(e){ if (e && e.user) toast(e.user); else fail(e); } finally { S.busyJoin = false; }
   }
   $('home').append(
     msg,
@@ -334,16 +506,39 @@ function buildHome(){
 function setHomeMsg(t){ const m = $('homeMsg'); m.textContent = t || ''; m.hidden = !t; }
 
 /* ---------- Rooms ---------- */
-const defaults = () => ({night:45, day:90, vote:30, reveal:true, tie:'none'});
+const defaults = () => ({night:45, day:90, vote:30, reveal:true, tie:'none', mode:'auto', counts:defaultCounts()});
+const STALE = 6 * 3600 * 1000;
+const lastTouch = d => (d && (d.touched || d.created)) || 0;
+/* Delete a room and everything under it. The room doc goes first so every open
+   screen sees "That room closed" right away, then players and chat are cleared. */
+async function deleteRoomData(code){
+  try { await S.db.doc('rooms/' + code).delete(); } catch(e){ console.error(e); }
+  for (const sub of ['players','chat']){
+    try {
+      const q = await S.db.collection('rooms/' + code + '/' + sub).get();
+      for (const d of q.docs){ try { await S.db.doc('rooms/' + code + '/' + sub + '/' + d.id).delete(); } catch(e){} }
+    } catch(e){ console.error(e); }
+  }
+}
+/* Clear out rooms nobody has touched in a while */
+async function sweepOldRooms(){
+  try {
+    const q = await S.db.collection('rooms').get();
+    const old = q.docs.filter(d => Date.now() - lastTouch(d.data()) > STALE).map(d => d.id);
+    for (const code of old.slice(0, 20)) await deleteRoomData(code);
+  } catch(e){ console.error(e); }
+}
 async function createRoom(){
   let code = '';
   for (let tries=0; tries<8; tries++){
     code = ''; for (let i=0;i<4;i++) code += rnd('ABCDEFGHJKLMNPQRSTUVWXYZ'.split(''));
     const snap = await S.db.doc('rooms/' + code).get();
-    if (!snap.exists || (Date.now() - ((snap.data()||{}).created||0)) > 864e5) break;
+    if (!snap.exists) break;
+    if (Date.now() - lastTouch(snap.data()) > STALE){ await deleteRoomData(code); break; }
   }
-  await S.db.doc('rooms/' + code).set({host:S.pid, gid:newId(6), created:Date.now(), phase:'lobby', seq:1, dur:0, ends:0, settings:defaults()});
+  await S.db.doc('rooms/' + code).set({host:S.pid, gid:newId(6), created:Date.now(), touched:Date.now(), phase:'lobby', seq:1, dur:0, ends:0, settings:defaults()});
   await joinRoom(code);
+  sweepOldRooms();
 }
 async function joinRoom(code, silent){
   const snap = await S.db.doc('rooms/' + code).get();
@@ -361,6 +556,7 @@ async function joinRoom(code, silent){
     }
     await pref.set({name:S.name, joined:Date.now(), bot:false});
   }
+  S.db.doc('rooms/' + code).update({touched:Date.now()}).catch(() => {});
   enter(code);
 }
 function enter(code){
@@ -369,6 +565,7 @@ function enter(code){
   S.unsub.push(roomRef().onSnapshot(snap => {
     if (!snap.exists){ leaveLocal('That room closed.'); return; }
     const r = snap.data(); S.room = r;
+    if (S.pend){ const c = (r.settings && r.settings.counts) || {}; for (const k in S.pend) if (c[k] === S.pend[k]) delete S.pend[k]; }
     if (r.seq !== S.lastSeq){
       const full = (r.dur||0)*1000; let left = full;
       if (S.lastSeq === null && r.ends){ left = Math.max(0, Math.min(full, r.ends - Date.now())); }
@@ -396,17 +593,22 @@ function leaveLocal(msg){
 }
 async function leaveRoom(){
   const r = S.room; if (!r) return leaveLocal();
+  const code = S.code;
   try {
-    if (r.phase === 'lobby'){
-      if (r.host === S.pid){
-        const next = Object.keys(S.players).find(i => i !== S.pid && !S.players[i].bot);
-        if (next) await roomRef().update({host:next});
-      }
+    if (r.phase === 'lobby' || r.phase === 'end'){
+      const others = Object.keys(S.players).filter(i => i !== S.pid && !S.players[i].bot);
+      if (!others.length){ leaveLocal(); await deleteRoomData(code); return; }
+      if (r.host === S.pid) await roomRef().update({host:others[0]});
       S.seenSelf = false;
       await playersCol().doc(S.pid).delete();
     }
   } catch(e){ console.error(e); }
   leaveLocal();
+}
+async function closeRoom(){
+  const code = S.code; if (!code) return;
+  leaveLocal('You closed the room. Its data was cleared.');
+  await deleteRoomData(code);
 }
 
 /* ---------- Host engine ---------- */
@@ -416,27 +618,35 @@ async function push(patch){
 }
 function phasePatch(phase, dur, extra){
   pendingSeq = (S.room.seq||0)+1;
-  return Object.assign({phase, dur, seq:pendingSeq, ends:Date.now()+dur*1000}, extra||{});
+  return Object.assign({phase, dur, seq:pendingSeq, ends:Date.now()+dur*1000, touched:Date.now()}, extra||{});
 }
 async function startGame(){
   const r = S.room; if (busy) return;
   const list = Object.entries(S.players).sort((a,b) => (a[1].joined||0)-(b[1].joined||0)).map(([id,p]) => ({id, name:p.name, bot:!!p.bot}));
   if (list.length < MIN || list.length > MAX) return;
-  const deal = buildRoles(list.length); const roles = {}, alive = {};
+  const st = Object.assign(defaults(), r.settings||{});
+  if (st.mode === 'custom' && setupProblem(list.length, st.counts)) return;
+  const deal = buildRoles(list.length, st); const roles = {}, alive = {};
   list.forEach((p,i) => { roles[p.id] = deal[i]; alive[p.id] = true; });
   busy = true;
   try {
     await roomRef().set({host:r.host, gid:newId(6), created:r.created||Date.now(), settings:r.settings||defaults(),
       phase:'countdown', seq:(r.seq||0)+1, dur:5, ends:Date.now()+5000, n:1,
+      touched:Date.now(), setup:countRoles(deal),
       roster:list, roles, alive, dead:{}, lastProt:{}, priv:{}, log:[], winner:'', jester:[],
-      scene:{kind:'', place:'', lines:[], ballots:[]}});
+      scene:{kind:'', place:'', headline:'', anchor:'', lines:[], ballots:[]}});
   } catch(e){ fail(e); } finally { busy = false; }
 }
 async function playAgain(){
   const r = S.room; if (busy) return; busy = true;
   try {
-    await roomRef().set({host:r.host, gid:newId(6), created:r.created||Date.now(), phase:'lobby', seq:(r.seq||0)+1, dur:0, ends:0, settings:r.settings||defaults()});
+    await roomRef().set({host:r.host, gid:newId(6), created:r.created||Date.now(), touched:Date.now(), phase:'lobby', seq:(r.seq||0)+1, dur:0, ends:0, settings:r.settings||defaults()});
   } catch(e){ fail(e); } finally { busy = false; }
+  /* Last game's chat is no longer needed */
+  try {
+    const q = await chatCol().get();
+    for (const d of q.docs) await chatCol().doc(d.id).delete();
+  } catch(e){ console.error(e); }
 }
 function humanPick(r, id, field, cands){
   const p = S.players[id]; const a = p && p[field];
@@ -472,12 +682,12 @@ async function resolveNight(){
     target = top.length === 1 ? top[0] : (gf && top.includes(gf) ? gf : rnd(top));
   } else if (crew.some(i => isBot(r,i)) && marks.length) target = rnd(marks);
 
-  const doc = alive.find(i => roles[i] === 'doctor'); let prot = null;
-  if (doc){
-    const c = alive.filter(i => i !== (r.lastProt||{})[doc]);
-    prot = isBot(r,doc) ? rnd(c) : humanPick(r, doc, 'act', c);
-  }
-  const saved = !!target && target === prot;
+  const docs = alive.filter(i => roles[i] === 'doctor'); const prots = {};
+  docs.forEach(d => {
+    const c = alive.filter(i => i !== (r.lastProt||{})[d]);
+    prots[d] = (isBot(r,d) ? rnd(c) : humanPick(r, d, 'act', c)) || '';
+  });
+  const saved = !!target && Object.values(prots).includes(target);
   const killed = target && !saved ? target : null;
 
   const priv = {};
@@ -491,28 +701,33 @@ async function resolveNight(){
     } else if (roles[i] === 'sheriff'){
       const t = humanPick(r, i, 'act', others);
       if (t) note(i, `You checked ${nameOf(t)}. They seem ${(roles[t] === 'mafia' || roles[t] === 'jester') ? 'suspicious' : 'fine'}.`);
-    } else if (roles[i] === 'doctor' && prot){
-      note(i, saved ? `You protected ${nameOf(prot)} and scared off the Mafia.` : `You protected ${nameOf(prot)}. Nobody came for them.`);
+    } else if (roles[i] === 'doctor' && prots[i]){
+      const pr = prots[i];
+      note(i, pr === target ? `You protected ${nameOf(pr)} and scared off the Mafia.` : `You protected ${nameOf(pr)}. Nobody came for them.`);
     }
   });
 
   const newAlive = {}, dead = {}; const log = (r.log||[]).slice(); const lines = [];
+  const place = rnd(PLACES); let headline;
   if (killed){
     newAlive[killed] = false; dead[killed] = {n:r.n, by:'night'};
-    lines.push(rnd(S_KILL)(nameOf(killed)), `${nameOf(killed)} is out of the game.`);
+    headline = rnd(H_KILL);
+    lines.push(fill(rnd(S_KILL), nameOf(killed), place), `${nameOf(killed)} is out of the game.`);
     if (r.settings.reveal) lines.push(`They were the ${ROLES[roles[killed]].name}.`);
     log.push(`Night ${r.n}: The Mafia eliminated ${nameOf(killed)} (${ROLES[roles[killed]].name}).`);
   } else if (saved){
-    lines.push(rnd(S_SAVE), 'Nobody was eliminated.');
+    headline = rnd(H_SAVE);
+    lines.push(fill(rnd(S_SAVE), '', place), 'Nobody was eliminated.');
     log.push(`Night ${r.n}: The Mafia went after ${nameOf(target)}. The Doctor saved them.`);
   } else {
-    lines.push(rnd(S_QUIET), 'Nobody was eliminated.');
+    headline = rnd(H_QUIET);
+    lines.push(fill(rnd(S_QUIET), '', place), 'Nobody was eliminated.');
     log.push(`Night ${r.n}: The Mafia did not pick anyone.`);
   }
-  const lastProt = {}; if (doc) lastProt[doc] = prot || '';
+  const lastProt = {}; docs.forEach(d => { lastProt[d] = prots[d] || ''; });
   const winner = checkWin(Object.assign({}, r.alive, newAlive), roles);
   await push(phasePatch('dawn', 10, {alive:newAlive, dead, priv, log, lastProt, winner,
-    scene:{kind:'dawn', place:rnd(PLACES), lines, ballots:[]}}));
+    scene:{kind:'dawn', place, headline, anchor:rnd(ANCHORS), lines, ballots:[]}}));
 }
 async function resolveVote(){
   const r = S.room, alive = aliveIds(r), roles = r.roles;
@@ -533,24 +748,28 @@ async function resolveVote(){
     else if (r.settings.tie === 'random'){ const c = top.filter(t => t !== 'skip'); out = c.length ? rnd(c) : null; }
   }
   const newAlive = {}, dead = {}; const log = (r.log||[]).slice(); const lines = []; let jester = (r.jester||[]).slice();
+  const place = rnd(PLACES); let headline;
   if (out){
     newAlive[out] = false; dead[out] = {n:r.n, by:'vote'};
     if (roles[out] === 'jester'){
       jester.push(out);
-      lines.push(`${nameOf(out)} cackles all the way out of town. That was the Jester, and getting voted out was the whole plan.`);
+      headline = rnd(H_JESTER);
+      lines.push(fill(rnd(S_JESTER), nameOf(out), place));
       log.push(`Day ${r.n}: The town voted out ${nameOf(out)}, the Jester. The Jester wins.`);
     } else {
-      lines.push(rnd(S_OUT)(nameOf(out)), `${nameOf(out)} is out of the game.`);
+      headline = rnd(H_OUT);
+      lines.push(fill(rnd(S_OUT), nameOf(out), place), `${nameOf(out)} is out of the game.`);
       if (r.settings.reveal) lines.push(`They were the ${ROLES[roles[out]].name}.`);
       log.push(`Day ${r.n}: The town voted out ${nameOf(out)} (${ROLES[roles[out]].name}).`);
     }
   } else {
-    lines.push(rnd(S_NONE));
+    headline = rnd(H_NONE);
+    lines.push(fill(rnd(S_NONE), '', place));
     log.push(`Day ${r.n}: The town voted out nobody.`);
   }
   const winner = checkWin(Object.assign({}, r.alive, newAlive), roles);
   await push(phasePatch('verdict', 10, {alive:newAlive, dead, log, winner, jester,
-    scene:{kind:'verdict', place:rnd(PLACES), lines, ballots}}));
+    scene:{kind:'verdict', place, headline, anchor:rnd(ANCHORS), lines, ballots}}));
 }
 function hostTick(){
   const r = S.room; if (!r || busy || r.host !== S.pid || !S.db) return;
@@ -605,12 +824,43 @@ function rosterBox(showAll){
     ul.append(h('li',{class:alive ? '' : 'out'}, mark(known ? ROLES[role].team : null),
       h('span',{class:'nm'}, p.name + (p.id === S.pid ? ' (you)' : '')), h('span',{class:'tag'}, tag)));
   });
-  return h('div',{class:'panel'}, h('h3',null,'The town'), ul,
+  const nAlive = aliveIds(r).length;
+  return h('div',{class:'panel'}, h('h3',null, showAll ? 'Everyone\'s role' : `The town (${nAlive} still in)`), ul,
     h('p',{class:'muted small',style:'margin:.8em 0 0'}, 'Circle is Town. Diamond is Mafia. Triangle is on their own.'));
 }
-function sceneBox(sc){
+const mafiaLeft = r => aliveIds(r).filter(i => isMaf(r.roles[i])).length;
+const mafiaTotal = r => (r.roster||[]).filter(p => isMaf(r.roles[p.id])).length;
+function diamonds(left, total){
+  const box = h('span',{class:'dia','aria-hidden':'true'});
+  for (let i=0;i<total;i++) box.append(h('i',{class:i < left ? '' : 'gone'}));
+  return box;
+}
+const T0 = Date.now();
+function tv(o){
+  const r = S.room, left = mafiaLeft(r), total = mafiaTotal(r), town = aliveIds(r).length - left;
+  const items = [
+    `Mafia still at large: ${left} of ${total}`,
+    `Players left in town: ${aliveIds(r).length}`,
+    r.setup ? 'This game: ' + setupText(r.setup) : '',
+    pickBy(TICKER, r.gid + r.n + (o.kind||'')),
+    pickBy(TICKER, r.n + r.gid)
+  ].filter(Boolean);
+  const ticker = h('span',{style:`animation-delay:-${((Date.now()-T0)/1000) % 38}s`}, items.join('   ★   '));
+  return h('div',{class:'tv' + (o.compact ? ' compact' : ''), role:'region','aria-label':'Shadow News 6'},
+    h('div',{class:'tv-screen'},
+      h('div',{class:'tv-top'}, h('span',{class:'tv-live'}, 'LIVE'), h('span',{class:'tv-chan'}, 'Shadow News 6')),
+      h('div',{class:'tv-body'},
+        o.anchor ? h('p',{class:'tv-anchor'}, o.anchor) : null,
+        h('h2',{class:'tv-head'}, o.headline),
+        (o.lines||[]).map((l,i) => h('p',{class:'line' + (o.strongFrom != null && i >= o.strongFrom ? ' strong' : '')}, l))),
+      h('div',{class:'tv-lower'},
+        h('div',{class:'tv-count'}, h('b',null, String(left)), left === 1 ? 'Mafia left' : 'Mafia left'),
+        h('div',{class:'ticker'}, ticker))));
+}
+function sceneTv(sc, compact){
   if (!sc || !sc.lines || !sc.lines.length) return null;
-  return h('div',{class:'scene'}, h('div',{class:'place'}, 'At ' + sc.place), sc.lines.map(l => h('p',null,l)));
+  return tv({compact, kind:sc.kind, headline:sc.headline || (sc.kind === 'verdict' ? 'The vote is in' : 'Morning report'),
+    anchor:(sc.anchor || 'Our reporter') + ', live from ' + (sc.place || 'town'), lines:sc.lines, strongFrom:1});
 }
 function takeoverBox(){
   const r = S.room; if (r.host === S.pid) return null;
@@ -623,8 +873,86 @@ function takeoverBox(){
     h('button',{class:'btn gold',onclick:() => push({host:S.pid})}, 'Take over as host'));
 }
 
+const SHORT = {mafia:'Picks a target each night', godfather:'Mafia boss. Looks innocent', detective:'Learns one role a night',
+  doctor:'Protects one player a night', sheriff:'Checks if someone is suspicious', jester:'Wins by getting voted out'};
+function setSetting(o){ roomRef().update({settings:o}).catch(fail); }
+function stepCount(k, v, n){
+  const st = Object.assign(defaults(), S.room.settings||{});
+  S.pend = S.pend || {}; S.pend[k] = v;
+  setSetting({counts:{[k]:v}, countsSet:true});
+  render();
+}
+function setupPanel(r, host, n){
+  const st = Object.assign(defaults(), r.settings||{});
+  const counts = Object.assign(defaultCounts(), st.counts||{}, S.pend||{});
+  const custom = st.mode === 'custom';
+  const nn = Math.max(n, MIN);
+  const modeBtn = (m, label) => h('button',{class:'pick','aria-pressed':String(st.mode === m), disabled:!host,
+    onclick:() => { if (st.mode === m) return;
+      if (m === 'custom' && !st.countsSet){ S.pend = {}; setSetting({mode:'custom', counts:suggestCounts(nn)}); }
+      else setSetting({mode:m}); }}, label);
+  const body = [];
+  if (!custom){
+    const m = nn<=6 ? 1 : nn<=9 ? 2 : nn<=12 ? 3 : 4;
+    body.push(h('p',null, `The game picks a fair mix for ${n} players and changes it every match. Expect about ${m} Mafia.`));
+  } else {
+    const total = SETUP.reduce((a,x) => a + (counts[x.k]||0), 0);
+    const ul = h('ul',{class:'setup'});
+    SETUP.forEach(x => {
+      const c = counts[x.k]||0;
+      ul.append(h('li',null, mark(ROLES[x.k].team),
+        h('span',{class:'rn'}, ROLES[x.k].name, h('span',{class:'rd'}, SHORT[x.k])),
+        host ? h('span',{class:'step'},
+          h('button',{'aria-label':'One less ' + ROLES[x.k].name, disabled:c <= 0, onclick:() => stepCount(x.k, c-1, n)}, '−'),
+          h('output',null, String(c)),
+          h('button',{'aria-label':'One more ' + ROLES[x.k].name, disabled:c >= x.max, onclick:() => stepCount(x.k, c+1, n)}, '+'))
+        : h('span',{class:'step'}, h('output',null, String(c)))));
+    });
+    const cit = Math.max(0, n - total);
+    ul.append(h('li',{class:'cit'}, mark('town'), h('span',{class:'rn'}, 'Citizen', h('span',{class:'rd'}, 'Fills every seat left over')),
+      h('span',{class:'step'}, h('output',null, String(cit)))));
+    body.push(ul);
+    const prob = n >= MIN ? setupProblem(n, counts) : '';
+    const all = Object.assign({}, counts, {citizen:cit});
+    body.push(prob ? h('p',{class:'alert',style:'margin-top:12px'}, prob)
+      : h('p',{class:'sum'}, `${n} players: ${setupText(all) || 'add players'}`));
+    if (host) body.push(h('div',{class:'row',style:'margin-top:10px'},
+      h('button',{class:'btn quiet',onclick:() => { S.pend = {}; setSetting({counts:suggestCounts(nn), countsSet:true}); }}, `Suggest a mix for ${nn} players`)));
+  }
+  return h('div',{class:'panel'},
+    h('h2',null,'Roles'),
+    host ? null : h('p',{class:'muted'},'Only the host can change these.'),
+    h('div',{class:'seg'}, modeBtn('auto','Auto mix'), modeBtn('custom','Pick my own')),
+    body);
+}
+let qrLib = null, qrCache = {};
+function joinUrl(code){
+  const here = /^https?:$/.test(location.protocol) && location.hostname.endsWith('github.io');
+  return (here ? location.origin + location.pathname : 'https://t1mlivingston.github.io/mission2/') + '?room=' + code;
+}
+function qrBox(code){
+  const box = h('div',{class:'qr',role:'img','aria-label':'QR code to join room ' + code});
+  const draw = () => {
+    if (!qrCache[code]){
+      const q = window.qrcode(0, 'M'); q.addData(joinUrl(code)); q.make();
+      const n = q.getModuleCount(); let d = '';
+      for (let y=0;y<n;y++) for (let x=0;x<n;x++) if (q.isDark(y,x)) d += `M${x+2} ${y+2}h1v1h-1z`;
+      qrCache[code] = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n+4} ${n+4}" shape-rendering="crispEdges"><path fill="#080b1c" d="${d}"/></svg>`;
+    }
+    box.innerHTML = qrCache[code];
+  };
+  if (window.qrcode) draw();
+  else {
+    qrLib = qrLib || loadScript('https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js');
+    qrLib.then(() => { if (S.room && S.room.phase === 'lobby') render(); }, () => { box.hidden = true; });
+  }
+  return box;
+}
+function copy(text, ok){
+  try { navigator.clipboard.writeText(text).then(() => toast(ok), () => toast('Copy it by hand: ' + text)); } catch(e){ toast('Copy it by hand: ' + text); }
+}
 function viewLobby(){
-  const r = S.room, host = r.host === S.pid, st = r.settings || defaults();
+  const r = S.room, host = r.host === S.pid, st = Object.assign(defaults(), r.settings||{});
   setSky('The lobby', 'Waiting for the town to gather.');
   const ids = Object.keys(S.players).sort((a,b) => (S.players[a].joined||0)-(S.players[b].joined||0));
   const ul = h('ul',{class:'people'});
@@ -636,22 +964,30 @@ function viewLobby(){
         onclick:() => playersCol().doc(id).delete().catch(fail)}, 'Remove') : null));
   });
   const humansReady = ids.every(id => S.players[id].bot || id === r.host || S.players[id].ready === r.gid);
+  const counts = Object.assign(defaultCounts(), st.counts||{}, S.pend||{});
   let why = '';
   if (ids.length < MIN) why = `You need at least ${MIN} players. Add bots to fill seats.`;
+  else if (st.mode === 'custom' && setupProblem(ids.length, counts)) why = 'Fix the role setup first.';
   else if (!humansReady) why = 'Waiting for everyone to ready up.';
   const meReady = S.players[S.pid] && S.players[S.pid].ready === r.gid;
   const sel = (label, field, opts) => h('label',{class:'field'}, label,
-    h('select',{disabled:!host, onchange:e => { const v = e.target.value; const o = {}; o[field] = isNaN(+v) ? (v === 'true' ? true : v === 'false' ? false : v) : +v; push({settings:o}); }},
+    h('select',{disabled:!host, onchange:e => { const v = e.target.value; const o = {}; o[field] = isNaN(+v) ? (v === 'true' ? true : v === 'false' ? false : v) : +v; setSetting(o); }},
       opts.map(([v,t]) => h('option',{value:String(v),selected:String(st[field]) === String(v)}, t))));
+  const showQr = S.server === 'firebase';
   return [
     takeoverBox(),
     h('div',{class:'panel'},
-      h('p',{class:'muted',style:'margin:0'}, 'Room code'),
-      h('div',{class:'code'}, S.code),
-      h('p',{class:'muted',style:'margin-top:.6em'}, 'Friends open this same page and type the code to join.'),
-      h('div',{class:'row'},
-        h('button',{class:'btn',onclick:() => { try { navigator.clipboard.writeText(S.code).then(() => toast('Code copied.'), () => toast('Copy it by hand: ' + S.code)); } catch(e){ toast('Copy it by hand: ' + S.code); } }}, 'Copy code'),
-        h('button',{class:'btn quiet',onclick:leaveRoom}, 'Leave room'))),
+      h('div',{class:'joinbox'},
+        h('div',null,
+          h('p',{class:'muted',style:'margin:0'}, 'Room code'),
+          h('div',{class:'code'}, S.code),
+          h('p',{class:'muted',style:'margin:.6em 0 0;max-width:34ch'}, showQr ? 'Scan the QR code with a phone camera to jump straight in. Or open the game and type the code.' : 'Friends open this same page and type the code to join.')),
+        showQr ? qrBox(S.code) : null),
+      h('div',{class:'row',style:'margin-top:14px'},
+        h('button',{class:'btn',onclick:() => copy(S.code, 'Code copied.')}, 'Copy code'),
+        showQr ? h('button',{class:'btn',onclick:() => copy(joinUrl(S.code), 'Invite link copied.')}, 'Copy invite link') : null,
+        h('button',{class:'btn quiet',onclick:leaveRoom}, 'Leave room'),
+        host ? h('button',{class:'btn quiet',onclick:closeRoom}, 'Close room for everyone') : null)),
     h('div',{class:'panel'},
       h('h2',null, `Players (${ids.length} of ${MAX})`), ul,
       h('div',{class:'row',style:'margin-top:14px'},
@@ -663,6 +999,7 @@ function viewLobby(){
           }}, 'Add a bot')
         ] : h('button',{class:'btn ' + (meReady ? '' : 'gold'),onclick:() => mine({ready:meReady ? '' : r.gid})}, meReady ? 'Not ready after all' : 'I\'m ready')),
       why ? h('p',{class:'muted',style:'margin:.8em 0 0'}, why) : null),
+    setupPanel(r, host, ids.length),
     h('div',{class:'panel'},
       h('h2',null,'Game settings'),
       host ? null : h('p',{class:'muted'},'Only the host can change these.'),
@@ -690,7 +1027,8 @@ function viewRoles(){
       h('div',null, h('dt',null,'Team'), h('dd',null, h('span',{class:'row',style:'gap:8px'}, mark(R.team), TEAM[R.team]))),
       h('div',null, h('dt',null,'What you can do'), h('dd',null, R.ability)),
       h('div',null, h('dt',null,'How you win'), h('dd',null, R.goal)),
-      isMaf(k) ? h('div',null, h('dt',null,'Your crew'), h('dd',null, crew.length ? crew.join(', ') : 'Just you. Good luck.')) : null));
+      isMaf(k) ? h('div',null, h('dt',null,'Your crew'), h('dd',null, crew.length ? crew.join(', ') : 'Just you. Good luck.')) : null,
+      r.setup ? h('div',null, h('dt',null,'Roles in this game'), h('dd',null, setupText(r.setup))) : null));
 }
 function viewNight(){
   const r = S.room, k = myRole(), alive = aliveIds(r), mineP = S.players[S.pid] || {};
@@ -717,6 +1055,8 @@ function viewNight(){
   } else body = [h('h2',null,'Nothing to do but sleep'), h('p',null,'You have no night move. Stay in bed. Do not check on strange noises.')];
   return [takeoverBox(),
     h('div',{class:'panel'}, body, cur ? h('p',{class:'muted'}, `You picked ${nameOf(cur)}. You can change it until the night ends.`) : null),
+    tv({compact:true, kind:'night', headline:'Late night bulletin', anchor:pickBy(ANCHORS, r.gid + 'night' + r.n) + ', at the news desk',
+      lines:[pickBy(BULLETINS, r.gid + r.n)]}),
     h('div',{class:'panel'}, roleBox(), notesBox() ? h('div',{style:'margin-top:12px'}, notesBox()) : null),
     rosterBox()];
 }
@@ -725,7 +1065,7 @@ function viewScene(){
   setSky(sc.kind === 'verdict' ? 'The verdict' : 'Morning ' + r.n, sc.kind === 'verdict' ? 'The town has spoken.' : 'The sun comes up. Count your neighbors.');
   const ballots = (sc.ballots||[]).map(b => h('li',null, `${nameOf(b.v)} voted ${b.t === 'skip' ? 'to skip' : 'for ' + nameOf(b.t)}.`));
   return [takeoverBox(),
-    h('div',{class:'panel'}, sceneBox(sc)),
+    sceneTv(sc),
     ballots.length ? h('div',{class:'panel'}, h('h3',null,'How the town voted'), h('ul',null,ballots)) : null,
     notesBox() ? h('div',{class:'panel'}, notesBox()) : null];
 }
@@ -735,7 +1075,7 @@ function viewDay(){
   const hs = alive.filter(i => !isBot(r,i)); const yes = hs.filter(i => S.players[i] && S.players[i].skip === k).length;
   const meYes = S.players[S.pid] && S.players[S.pid].skip === k;
   return [takeoverBox(),
-    h('div',{class:'panel'}, h('h3',null,'Last night'), sceneBox(r.scene)),
+    sceneTv(r.scene, true),
     h('div',{class:'panel'},
       h('h2',null,'Discuss in the Town chat'),
       h('p',null,'Share what you know. Or what you want people to think you know. Voting starts when the timer runs out.'),
@@ -751,6 +1091,8 @@ function viewVote(){
   const cur = mineP.vote && mineP.vote.k === k ? mineP.vote.t : null;
   const hs = alive.filter(i => !isBot(r,i)); const inN = hs.filter(i => S.players[i] && S.players[i].vote && S.players[i].vote.k === k).length;
   return [takeoverBox(),
+    tv({compact:true, kind:'vote', headline:'Breaking: the town is voting', anchor:pickBy(ANCHORS, r.gid + 'vote' + r.n) + ', live from Town Hall',
+      lines:[`${inN} of ${hs.length} votes are in. Results right after the timer.`]}),
     h('div',{class:'panel'},
       iAmAlive() ? [h('h2',null,'Who should leave town?'),
         picker(alive.filter(i => i !== S.pid), cur, setVote, 'Skip the vote'),
@@ -770,7 +1112,13 @@ function viewEnd(){
     const won = k === 'jester' ? (r.jester||[]).includes(S.pid) : ((ROLES[k].team === 'town') === townWon);
     me = won ? 'You won this one.' : 'Not your night. Next time.';
   }
+  const jl = r.jester && r.jester.length;
   return [
+    tv({kind:'end', headline: townWon ? 'The Town wins!' : 'The Mafia takes over',
+      anchor:pickBy(ANCHORS, r.gid + 'end') + ', special report',
+      lines:[townWon ? 'Every last member of the Mafia has been run out of town. Neighbors are celebrating with a block party.'
+        : 'The Mafia now runs the town. Expect fancy hats, slow music, and very expensive cannoli.',
+        ...(jl ? ['Also, a Jester got exactly what they wanted.'] : [])]}),
     h('div',{class:'panel'},
       h('h2',null, me || 'Game over'),
       jest.length ? h('p',null, `${jest.join(' and ')} also won as the Jester by getting voted out.`) : null,
@@ -778,13 +1126,14 @@ function viewEnd(){
       takeoverBox()),
     rosterBox(true),
     h('div',{class:'panel'}, h('h2',null,'How it happened'), h('ol',{class:'timeline'}, (r.log||[]).map(l => h('li',null,l)))),
-    h('div',{class:'row'}, h('button',{class:'btn quiet',onclick:() => leaveLocal()}, 'Leave room'))];
+    h('div',{class:'row'}, h('button',{class:'btn quiet',onclick:leaveRoom}, 'Leave room'),
+      host ? h('button',{class:'btn quiet',onclick:closeRoom}, 'Close room for everyone') : null)];
 }
 
 function render(){
   const home = $('home'), stage = $('stage'), chat = $('chat'), wrap = $('wrap');
   if (!S.code || !S.room){
-    document.body.dataset.phase = 'home';
+    document.body.dataset.phase = 'home'; updateChip(null);
     home.hidden = false; stage.hidden = true; chat.hidden = true; wrap.className = '';
     setSky('Mafia: Shadows', 'Somebody in this town is lying.');
     $('createBtn').disabled = $('joinBtn').disabled = !S.db;
@@ -794,6 +1143,7 @@ function render(){
     return;
   }
   const r = S.room; document.body.dataset.phase = r.phase === 'roles' || r.phase === 'countdown' || r.phase === 'lobby' ? 'night' : r.phase;
+  updateChip(r);
   home.hidden = true; stage.hidden = false;
   const noChat = r.phase === 'countdown' || r.phase === 'roles';
   chat.hidden = noChat; wrap.className = noChat ? '' : 'withchat';
@@ -813,6 +1163,18 @@ function render(){
   stage.replaceChildren(...[].concat(v).flat(3).filter(Boolean));
   if (wasOpen){ const d = stage.querySelector('details.myrole'); if (d) d.open = true; }
   updateChat();
+}
+
+let chipLast = null;
+function updateChip(r){
+  const chip = $('mafiaChip');
+  if (!r || !r.roster || ['lobby','countdown'].includes(r.phase)){ chip.hidden = true; chipLast = null; return; }
+  const left = mafiaLeft(r), total = mafiaTotal(r);
+  chip.hidden = false;
+  chip.replaceChildren(h('span',{class:'num'}, String(left)), diamonds(left, total),
+    h('span',{class:'lbl'}, left === 1 ? 'Mafia left' : 'Mafia left', h('span',null, `of ${total} at the start`)));
+  if (chipLast !== null && left < chipLast){ chip.classList.remove('bump'); void chip.offsetWidth; chip.classList.add('bump'); }
+  chipLast = left;
 }
 
 /* ---------- Chat ---------- */
@@ -864,7 +1226,7 @@ function sendChat(){
   const input = $('chatIn'); const x = input.value.trim().slice(0,240);
   if (!x || postRule(S.chan) || !S.room) return;
   input.value = '';
-  S.myMsgs = (S.myMsgs || []).slice(-39).concat([{t:Date.now(), c:S.chan, x, g:S.room.gid}]);
+  S.myMsgs = (S.myMsgs || []).filter(m => m.g === S.room.gid).slice(-39).concat([{t:Date.now(), c:S.chan, x, g:S.room.gid}]);
   const copy = S.myMsgs.slice(); const ref = chatCol().doc(S.pid);
   chatQ = chatQ.then(() => ref.set({m:copy})).catch(fail);
   updateChat();
@@ -940,6 +1302,20 @@ async function init(){
   buildHome(); buildChat(); render(); setInterval(tick, 500);
   const db = await connect();
   S.db = db; S.ready = true; render();
+  let linked = '';
+  try { linked = (new URLSearchParams(location.search).get('room') || '').toUpperCase(); } catch(e){}
+  if (!/^[A-Z]{4}$/.test(linked)) linked = '';
+  const clearLink = () => { try { history.replaceState(null, '', location.pathname); } catch(e){} };
+  if (linked){
+    $('codeIn').value = linked;
+    if (db && S.name){
+      try { await joinRoom(linked); clearLink(); } catch(e){ clearLink(); setHomeMsg((e && e.user) || 'Could not join that room.'); }
+    } else {
+      setHomeMsg(`You're joining room ${linked}. Type your name, then tap Join room.`);
+      $('nameIn').focus();
+    }
+    return;
+  }
   const last = LS.get('ms_code');
   if (db && last && S.name){
     try { await joinRoom(last, true); } catch(e){ LS.del('ms_code'); }
